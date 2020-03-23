@@ -1,1 +1,29 @@
-<p>side-bar works!</p>
+<div fxLayout="row" fxLayoutAlign="start">
+  <a
+    ><img
+      src="../../../assets/logo review ha long.png"
+      alt=""
+      style="max-height: 200px;"
+  /></a>
+</div>
+<div class="main-menu" fxLayout="row" fxLayoutAlign="start">
+  <ul id="navigation">
+    <li>
+      <a>Quản lý Quảng cáo</a>
+    </li>
+    <li>
+      <a>Quản lý Blogs</a>
+    </li>
+    <li>
+      <a>Quản lý Tour</a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['user']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Quản lý user</a
+      >
+    </li>
+  </ul>
+</div>

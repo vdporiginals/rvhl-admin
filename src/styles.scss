@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -19,7 +18,11 @@ $rvhl-admin-accent: mat-palette($mat-pink, A200, A100, A400);
 $rvhl-admin-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$rvhl-admin-theme: mat-light-theme($rvhl-admin-primary, $rvhl-admin-accent, $rvhl-admin-warn);
+$rvhl-admin-theme: mat-light-theme(
+  $rvhl-admin-primary,
+  $rvhl-admin-accent,
+  $rvhl-admin-warn
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -28,5 +31,31 @@ $rvhl-admin-theme: mat-light-theme($rvhl-admin-primary, $rvhl-admin-accent, $rvh
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {
+  font-family: sans-serif; // 2
+  line-height: 1.15; // 3
+  -webkit-text-size-adjust: 100%; // 4
+  -webkit-tap-highlight-color: rgba(#212529, 0); // 5
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+  outline: none;
+}
