@@ -9,13 +9,28 @@
 <div class="main-menu" fxLayout="row" fxLayoutAlign="start">
   <ul id="navigation">
     <li>
-      <a>Quản lý Quảng cáo</a>
+      <a
+        [routerLink]="['advertises']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Quản lý Quảng cáo</a
+      >
     </li>
     <li>
-      <a>Quản lý Blogs</a>
+      <a
+        [routerLink]="['blogs']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Quản lý Blogs</a
+      >
     </li>
     <li>
-      <a>Quản lý Tour</a>
+      <a
+        [routerLink]="['tour']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Quản lý Tour</a
+      >
     </li>
     <li>
       <a

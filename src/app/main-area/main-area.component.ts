@@ -45,11 +45,13 @@ export class MainAreaComponent implements OnInit {
       route.routeConfig && route.routeConfig.data ? route.routeConfig.path : '';
     const lastRoutePart = path.split('/').pop();
     const isDynamicRoute = lastRoutePart.startsWith(':');
+
     if (isDynamicRoute && !!route.snapshot) {
       const paramName = lastRoutePart.split(':')[1];
       path = path.replace(lastRoutePart, route.snapshot.params[paramName]);
       label = route.snapshot.params[paramName];
     }
+
     const nextUrl = path ? `${url}/${path}` : url;
 
     const breadcrumb: IBreadCrumb = {
@@ -60,6 +62,7 @@ export class MainAreaComponent implements OnInit {
     const newBreadcrumbs = breadcrumb.label
       ? [...breadcrumbs, breadcrumb]
       : [...breadcrumbs];
+
     if (route.firstChild) {
       // If we are not on our current path yet,
       // there will be more children to look after, to build our breadcumb

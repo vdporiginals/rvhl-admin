@@ -11,9 +11,6 @@ import { MainAreaComponent } from './main-area/main-area.component';
 import { LayoutComponent } from './layout/layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './main-area/dashboard/dashboard.component';
-import { CrudAdvertiseComponent } from './main-area/crud-advertise/crud-advertise.component';
-import { CrudBlogComponent } from './main-area/crud-blog/crud-blog.component';
-import { CrudUserComponent } from './main-area/crud-user/crud-user.component';
 
 @NgModule({
   declarations: [
@@ -21,10 +18,7 @@ import { CrudUserComponent } from './main-area/crud-user/crud-user.component';
     SideBarComponent,
     MainAreaComponent,
     LayoutComponent,
-    DashboardComponent,
-    CrudAdvertiseComponent,
-    CrudBlogComponent,
-    CrudUserComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

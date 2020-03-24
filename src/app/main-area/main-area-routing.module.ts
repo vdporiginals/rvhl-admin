@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { CrudUserComponent } from './crud-user/crud-user.component';
+import { CrudBlogComponent } from './crud-blog/crud-blog.component';
+import { CrudAdvertiseComponent } from './crud-advertise/crud-advertise.component';
+import { CrudTourComponent } from './crud-tour/crud-tour.component';
 
 const routes: Routes = [
   {
@@ -14,6 +17,54 @@ const routes: Routes = [
       {
         path: ':id',
         component: CrudUserComponent,
+        data: {
+          breadcrumb: ''
+        }
+      }
+    ]
+  },
+  {
+    path: 'blogs',
+    component: CrudBlogComponent,
+    data: {
+      breadcrumb: 'Blogs'
+    },
+    children: [
+      {
+        path: ':id',
+        component: CrudBlogComponent,
+        data: {
+          breadcrumb: ''
+        }
+      }
+    ]
+  },
+  {
+    path: 'advertises',
+    component: CrudAdvertiseComponent,
+    data: {
+      breadcrumb: 'Advertises'
+    },
+    children: [
+      {
+        path: ':id',
+        component: CrudAdvertiseComponent,
+        data: {
+          breadcrumb: ''
+        }
+      }
+    ]
+  },
+  {
+    path: 'tour',
+    component: CrudTourComponent,
+    data: {
+      breadcrumb: 'Tour'
+    },
+    children: [
+      {
+        path: ':id',
+        component: CrudTourComponent,
         data: {
           breadcrumb: ''
         }

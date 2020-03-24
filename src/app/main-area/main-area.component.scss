@@ -2,12 +2,17 @@
   padding: 0 4px;
 }
 
+table {
+  width: 100%;
+}
+
 .breadcrumb {
   background: none;
   font-size: 1.2em;
   margin: 0;
   a,
   span {
+    cursor: pointer;
     color: darkgrey;
   }
   a:hover,

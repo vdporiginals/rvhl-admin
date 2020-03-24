@@ -33,11 +33,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 
 @Component({
-  selector: 'app-crud-blog',
-  templateUrl: './crud-blog.component.html',
-  styleUrls: ['./crud-blog.component.scss']
+  selector: 'app-crud-tour',
+  templateUrl: './crud-tour.component.html',
+  styleUrls: ['./crud-tour.component.scss']
 })
-export class CrudBlogComponent implements OnInit {
+export class CrudTourComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   constructor() {}
