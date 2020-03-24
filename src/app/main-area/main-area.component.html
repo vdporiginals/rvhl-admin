@@ -1,18 +1,21 @@
 <mat-toolbar>abc</mat-toolbar>
-<div>
+<div fxLayout="column">
   <div class="page-titles" fxLayout="row">
     <div fxFlex fxLayout fxLayoutAlign="start">
       <h3 class="text-color">Demo</h3>
     </div>
-    <div fxFlex fxLayout fxLayoutAlign="end">
-      <ol class="breadcrumb">
-        <li>
-          <span>Demo</span>
-        </li>
-      </ol>
-    </div>
+    <ol class="breadcrumb" fxLayoutAlign="end">
+      <li *ngFor="let breadcrumb of breadcrumbs">
+        <span
+          [routerLink]="breadcrumb.url"
+          routerLinkActive="router-link-active"
+        >
+          {{ breadcrumb.label }}
+        </span>
+      </li>
+    </ol>
   </div>
-  <div fxLayout="row">
+  <div>
     <router-outlet></router-outlet>
   </div>
 </div>

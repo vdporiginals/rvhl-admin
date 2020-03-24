@@ -3,7 +3,24 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { CrudUserComponent } from './crud-user/crud-user.component';
 
-const routes: Routes = [{ path: 'user', component: CrudUserComponent }];
+const routes: Routes = [
+  {
+    path: 'user',
+    component: CrudUserComponent,
+    data: {
+      breadcrumb: 'User'
+    },
+    children: [
+      {
+        path: ':id',
+        component: CrudUserComponent,
+        data: {
+          breadcrumb: ''
+        }
+      }
+    ]
+  }
+];
 
 @NgModule({
   declarations: [],

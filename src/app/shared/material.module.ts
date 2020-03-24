@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
 // import {
 //   MatSidenavModule,
 //   MatIconModule,
@@ -33,7 +34,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatListModule,
     MatInputModule,
     MatCardModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTableModule
   ],
   exports: [
     MatTabsModule,
@@ -45,7 +47,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatCardModule,
     MatMenuModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTableModule
   ]
 })
 export class MaterialModule {}
