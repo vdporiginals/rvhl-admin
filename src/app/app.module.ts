@@ -14,6 +14,7 @@ import { DashboardComponent } from './main-area/dashboard/dashboard.component';
 import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { LoginComponent } from './layout/login/login.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ToastrModule } from 'ngx-toastr';
     SideBarComponent,
     MainAreaComponent,
     LayoutComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

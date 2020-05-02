@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../shared/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainAreaRoutingModule } from './main-area-routing.module';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { CrudAdvertiseComponent } from './crud-advertise/crud-advertise.component';
 import { CrudBlogComponent } from './crud-blog/crud-blog.component';
 import { CrudUserComponent } from './crud-user/crud-user.component';
@@ -19,7 +20,8 @@ import { TourDialogComponent } from './crud-tour/detail-dialog/tour-dialog.compo
     ReactiveFormsModule,
     MainAreaRoutingModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    CKEditorModule
   ],
   declarations: [
     CrudAdvertiseComponent,
@@ -28,7 +30,7 @@ import { TourDialogComponent } from './crud-tour/detail-dialog/tour-dialog.compo
     CrudTourComponent,
     AdvertiseDialogComponent,
     BlogDialogComponent,
-    TourDialogComponent
+    TourDialogComponent,
   ],
   exports: [MainAreaRoutingModule, MaterialModule],
   providers: []

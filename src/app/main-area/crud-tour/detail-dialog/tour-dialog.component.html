@@ -1,4 +1,9 @@
-<div class="detail_wrapper" fxLayout="row" fxLayoutAlign="center center">
+<div
+  class="detail_wrapper"
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  [class.overY]="isOverFlow"
+>
   <div class="box">
     <form
       class="detail_form"
@@ -6,46 +11,64 @@
       (ngSubmit)="createOrUpdate()"
     >
       <mat-card-content>
-        <mat-form-field class="detail_full_width">
-          <input matInput formControlName="title" color="warn" placeholder="" />
-        </mat-form-field>
-        <div formGroupName="schedule">
-          <mat-form-field class="detail_full_width">
-            <mat-label>Choose a date</mat-label>
-            <input
-              matInput
-              formControlName="timeStart"
-              [matDatepicker]="timeStart"
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="timeStart"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #timeStart></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field class="detail_full_width">
-            <input
-              matInput
-              formControlName="timeEnd"
-              [matDatepicker]="timeEnd"
-              color="warn"
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="timeEnd"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #timeEnd></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field class="detail_full_width">
-            <input matInput formControlName="location" color="warn" />
-          </mat-form-field>
-          <mat-form-field class="detail_full_width">
-            <input matInput formControlName="service" color="warn" />
-          </mat-form-field>
+        <div formArrayName="schedule">
+          <div *ngFor="let child of formData.controls; let i = index">
+            <h3>Dịch vụ thứ {{ i + 1 }}</h3>
+            <div [formGroupName]="i">
+              <mat-form-field class="detail_full_width">
+                <mat-label>chọn ngày bắt đầu</mat-label>
+                <input
+                  matInput
+                  formControlName="timeStart"
+                  [matDatepicker]="timeStart"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="timeStart"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #timeStart></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="detail_full_width">
+                <mat-label>chọn ngày kết thúc</mat-label>
+                <input
+                  matInput
+                  formControlName="timeEnd"
+                  [matDatepicker]="timeEnd"
+                  color="warn"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="timeEnd"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #timeEnd></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="detail_full_width">
+                <mat-label>chọn địa điểm</mat-label>
+                <input matInput formControlName="location" color="warn" />
+              </mat-form-field>
+              <mat-form-field class="detail_full_width">
+                <mat-label>chọn dịch vụ</mat-label>
+                <input matInput formControlName="service" color="warn" />
+              </mat-form-field>
+            </div>
+          </div>
+          <button (click)="getFormSchedule()">Thêm service</button>
         </div>
-
         <mat-form-field class="detail_full_width">
-          <input matInput type="text" formControlName="phone" placeholder="" />
+          <input
+            matInput
+            formControlName="title"
+            color="warn"
+            placeholder="Thêm tên tour"
+          />
+        </mat-form-field>
+        <mat-form-field class="detail_full_width">
+          <input
+            matInput
+            type="text"
+            formControlName="phone"
+            placeholder="Thêm số điện thoại"
+          />
         </mat-form-field>
         <mat-form-field class="detail_full_width">
           <input
@@ -60,7 +83,7 @@
             matInput
             type="text"
             formControlName="description"
-            placeholder=""
+            placeholder="Thêm mô tả tour"
           />
         </mat-form-field>
         <mat-form-field class="detail_full_width">

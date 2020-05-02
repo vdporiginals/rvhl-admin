@@ -3,7 +3,6 @@
 @import "../../../scss/responsive";
 
 .detail_wrapper {
-  height: 100%;
   .detail_full_width {
     width: 100%;
   }
@@ -81,7 +80,8 @@
 }
 ::ng-deep .mat-dialog-container {
   /*change color of label*/
-  width: 70vw;
+  width: 800px;
+  height: auto;
 }
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/
@@ -92,7 +92,9 @@
   /*change color of underline*/
   background-color: $theme-color !important;
 }
-
+.overY {
+  overflow-y: scroll !important;
+}
 ::ng-deep.mat-form-field-ripple {
   /*change color of underline when focused*/
   background-color: $theme-color !important;
