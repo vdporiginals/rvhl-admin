@@ -4,13 +4,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
+import { MatNativeDateModule } from '@angular/material/core';
 // import {
 //   MatSidenavModule,
 //   MatIconModule,
@@ -35,7 +39,11 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     MatCardModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatTabsModule,
@@ -44,11 +52,14 @@ import { MatTableModule } from '@angular/material/table';
     MatToolbarModule,
     MatButtonModule,
     MatListModule,
+    MatDialogModule,
     MatInputModule,
+    MatDatepickerModule,
     MatCardModule,
     MatMenuModule,
-    MatPaginatorModule,
-    MatTableModule
+    MatPaginatorModule, MatNativeDateModule,
+    MatTableModule,
+    MatProgressSpinnerModule
   ]
 })
-export class MaterialModule {}
+export class MaterialModule { }

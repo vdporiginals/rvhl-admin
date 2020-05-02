@@ -27,14 +27,16 @@ const routes: Routes = [
     path: 'blogs',
     component: CrudBlogComponent,
     data: {
-      breadcrumb: 'Blogs'
+      breadcrumb: 'Blogs',
+      count: ''
     },
     children: [
       {
         path: ':id',
         component: CrudBlogComponent,
         data: {
-          breadcrumb: ''
+          breadcrumb: '',
+          count: ''
         }
       }
     ]
@@ -43,7 +45,8 @@ const routes: Routes = [
     path: 'advertises',
     component: CrudAdvertiseComponent,
     data: {
-      breadcrumb: 'Advertises'
+      breadcrumb: 'Advertises',
+      count: ''
     },
     children: [
       {
@@ -59,7 +62,8 @@ const routes: Routes = [
     path: 'tour',
     component: CrudTourComponent,
     data: {
-      breadcrumb: 'Tour'
+      breadcrumb: 'Tour',
+      count: ''
     },
     children: [
       {
@@ -79,4 +83,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class MainAreaRoutingModule {}
+export class MainAreaRoutingModule { }

@@ -11,6 +11,9 @@ import { MainAreaComponent } from './main-area/main-area.component';
 import { LayoutComponent } from './layout/layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './main-area/dashboard/dashboard.component';
+import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -26,9 +29,14 @@ import { DashboardComponent } from './main-area/dashboard/dashboard.component';
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    MainAreaModule
+    MainAreaModule,
+    ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
