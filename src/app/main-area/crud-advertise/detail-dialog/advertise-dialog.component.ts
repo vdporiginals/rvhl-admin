@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TourDialogComponent } from '../../crud-tour/detail-dialog/tour-dialog.component';
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
@@ -13,23 +13,32 @@ import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 })
 export class AdvertiseDialogComponent implements OnInit {
   detailForm: FormGroup;
+  categorys: any[] = [
+    { name: 'Banner Trang review', val: 'bannerReview' },
+    { name: 'Banner Trang tour', val: 'bannerTour' },
+    { name: 'Banner trang tàu vịnh', val: 'bannerCruise' },
+    { name: 'back ground video', val: 'video' },
+    { name: 'giới thiệu', val: 'about' },
+    { name: 'Slider', val: 'slider' },
+    { name: 'Khác', val: 'other' },
+    { name: 'Vận chuỷen', val: 'bannerTransfer' },
+    { name: 'khách sạn', val: 'bannerHotel' },
+  ];
   constructor(
     private noti: NotificationService,
     private api: ApiService,
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<TourDialogComponent>,
     private sharedData: SharedDataService,
+    @Inject(MAT_DIALOG_DATA) public data,
     public fb: FormBuilder) {
 
     this.detailForm = this.fb.group({
       title: ['', Validators.required],
-      phone: ['', Validators.compose([Validators.required, Validators.minLength(9), Validators.maxLength(20)])],
-      customerNum: [''],
-      content: [''],
+      image: ['', Validators.required],
+      link: [''],
       description: [''],
-      time: [''],
-      price: ['', Validators.compose([Validators.required])],
-      address: ['']
+      category: [''],
     });
   }
 
@@ -37,11 +46,19 @@ export class AdvertiseDialogComponent implements OnInit {
   }
 
   createOrUpdate(val?) {
-    console.log(this.detailForm.value)
-    this.api.postData(this.detailForm.value, 'blogs').subscribe(() => { }, error => {
-      this.noti.showError('Tạo tour thất bại', error.error.error);
-    }, () => {
-      this.noti.showSuccess('Tạo tour Thành công', '');
-    });
+    if (this.data) {
+      this.api.updateData(this.detailForm.value, this.data._id, 'advertises').subscribe(() => { }, (err: any) => {
+        this.noti.showError('Tạo tour thất bại', err.error.error);
+      }, () => {
+        this.noti.showSuccess('Tạo tour Thành công', '');
+      });
+    } else {
+      this.api.postData(this.detailForm.value, 'advertises').subscribe(() => { }, (err: any) => {
+        this.noti.showError('Tạo tour thất bại', err.error.error);
+      }, () => {
+        this.noti.showSuccess('Tạo tour Thành công', '');
+      });
+    }
+
   }
 }

@@ -27,7 +27,7 @@ export class CrudTourComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.tbData = new DataSourceService(this.api);
-    this.tbData.loadDatas(this.apiName, 0, 5, 'title,description,status,createdAt');
+    this.tbData.loadDatas(this.apiName, 0, 5, 'title,description,status,createdAt,images');
     this.tbData._dataSubject.subscribe((data: any) => {
       this.count = data.count;
       this.dataSource = new MatTableDataSource<any>(data.data);
@@ -46,7 +46,7 @@ export class CrudTourComponent implements OnInit, AfterViewInit {
       this.apiName,
       this.paginator.pageIndex,
       this.paginator.pageSize,
-      'title,description,status,createdAt'
+      'title,description,status,createdAt,images'
     );
   }
 
@@ -69,11 +69,16 @@ export class CrudTourComponent implements OnInit, AfterViewInit {
     ).subscribe();
   }
 
-  update(id) {
+  update(val: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
-      id: 1,
-      title: 'Angular For Beginners'
+      id: val._id,
+      title: val.title,
+      phone: val.phone,
+      address: val.address,
+      description: val.description,
+      status: val.status,
+      images: val.images
     };
     this.dialog.open(TourDialogComponent, dialogConfig);
   }

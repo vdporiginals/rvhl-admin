@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { BlogDialogComponent } from './detail-dialog/blog-dialog.component';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-crud-blog',
@@ -19,15 +21,16 @@ export class CrudBlogComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['status', 'title', 'description', 'createdAt', 'actions'];
   tbData: DataSourceService;
   dataSource: any;
+  category: any;
   count: number;
   private apiName = 'blogs';
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private api: ApiService, private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private api: ApiService, private route: ActivatedRoute, private dialog: MatDialog, private http: HttpClient) { }
 
   ngOnInit() {
     this.tbData = new DataSourceService(this.api);
-    this.tbData.loadDatas(this.apiName, 0, 5, 'title,description,status,createdAt');
+    this.tbData.loadDatas(this.apiName, 0, 5, 'title,description,status,createdAt,user');
     this.tbData._dataSubject.subscribe((data: any) => {
       this.count = data.count;
       this.dataSource = new MatTableDataSource<any>(data.data);
@@ -46,7 +49,7 @@ export class CrudBlogComponent implements OnInit, AfterViewInit {
       this.apiName,
       this.paginator.pageIndex,
       this.paginator.pageSize,
-      'title,description,status,createdAt'
+      'title,description,status,createdAt,user'
     );
   }
 
@@ -68,16 +71,21 @@ export class CrudBlogComponent implements OnInit, AfterViewInit {
     ).subscribe();
   }
 
-  update(id) {
+  update(val) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      id: 1,
-      title: 'Angular For Beginners'
-    };
-    this.dialog.open(BlogDialogComponent, dialogConfig);
+
+    this.http.get(`${environment.apiUrl}/blogs/category`).pipe().subscribe(res => {
+      dialogConfig.data = {
+        val,
+        category: res
+      };
+      this.dialog.open(BlogDialogComponent, dialogConfig);
+    });
   }
 
   create() {
-    this.dialog.open(BlogDialogComponent);
+    this.http.get(`${environment.apiUrl}/blogs/category`).pipe().subscribe(res => {
+      this.dialog.open(BlogDialogComponent, res);
+    });
   }
 }

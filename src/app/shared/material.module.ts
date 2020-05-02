@@ -15,6 +15,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatChipsModule } from '@angular/material/chips'; import { MatSelectModule } from '@angular/material/select';
 // import {
 //   MatSidenavModule,
 //   MatIconModule,
@@ -42,6 +43,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatTableModule,
     MatDatepickerModule,
     MatDialogModule,
+    MatChipsModule,
+    MatSelectModule,
     MatProgressSpinnerModule,
     MatNativeDateModule
   ],
@@ -51,12 +54,14 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatIconModule,
     MatToolbarModule,
     MatButtonModule,
+    MatSelectModule,
     MatListModule,
     MatDialogModule,
     MatInputModule,
     MatDatepickerModule,
     MatCardModule,
     MatMenuModule,
+    MatChipsModule,
     MatPaginatorModule, MatNativeDateModule,
     MatTableModule,
     MatProgressSpinnerModule

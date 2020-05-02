@@ -67,12 +67,9 @@ export class CrudAdvertiseComponent implements OnInit, AfterViewInit {
     ).subscribe();
   }
 
-  update(id) {
+  update(val) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      id: 1,
-      title: 'Angular For Beginners'
-    };
+    dialogConfig.data = val;
     this.dialog.open(AdvertiseDialogComponent, dialogConfig);
   }
 

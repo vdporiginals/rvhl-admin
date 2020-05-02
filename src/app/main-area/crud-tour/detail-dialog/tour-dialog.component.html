@@ -1,9 +1,4 @@
-<div
-  class="detail_wrapper"
-  fxLayout="row"
-  fxLayoutAlign="center center"
-  [class.overY]="isOverFlow"
->
+<div class="detail_wrapper" fxLayout="row" fxLayoutAlign="center center">
   <div class="box">
     <form
       class="detail_form"
@@ -62,6 +57,31 @@
             placeholder="Thêm tên tour"
           />
         </mat-form-field>
+        <mat-form-field class="example-chip-list">
+          <mat-chip-list
+            #chipList
+            aria-label="img selection"
+            formControlName="images"
+          >
+            <mat-chip
+              *ngFor="let img of arrImage.value"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="removeImg(img)"
+            >
+              {{ img }}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="nhập vào ảnh"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addImg($event)"
+            />
+          </mat-chip-list>
+        </mat-form-field>
+
         <mat-form-field class="detail_full_width">
           <input
             matInput
