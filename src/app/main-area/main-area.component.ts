@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { IBreadCrumb } from '../shared/breadcrumb.interface';
 import { filter, distinctUntilChanged } from 'rxjs/operators';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-main-area',
@@ -11,7 +12,7 @@ import { filter, distinctUntilChanged } from 'rxjs/operators';
 export class MainAreaComponent implements OnInit {
   public breadcrumbs: IBreadCrumb[];
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private auth: AuthService, private activatedRoute: ActivatedRoute) {
     this.breadcrumbs = this.buildBreadCrumb(this.activatedRoute.root);
   }
 
@@ -24,6 +25,12 @@ export class MainAreaComponent implements OnInit {
       .subscribe(() => {
         this.breadcrumbs = this.buildBreadCrumb(this.activatedRoute.root);
       });
+  }
+
+
+  logout() {
+    this.auth.doLogout();
+    this.router.navigate(['/login']);
   }
 
   /**

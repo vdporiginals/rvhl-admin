@@ -12,8 +12,6 @@ import { NotificationService } from './notification.service';
 
 export class AuthService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  private _currentUser: BehaviorSubject<any> = new BehaviorSubject<any>({});
-  currentUser = this._currentUser.asObservable();
   constructor(
     private noti: NotificationService,
     private http: HttpClient,
@@ -35,8 +33,9 @@ export class AuthService {
     const promise = new Promise((resolve, reject) => {
       this.http.post<any>(`${environment.apiUrl}/auth/login`, user).toPromise().then((res: any) => {
         // Success
-        localStorage.setItem('access_token', JSON.stringify({ token: res.token, user: res.user }));
-        if (localStorage.getItem('access_token') !== null) {
+        console.log(res)
+        localStorage.setItem('rvhl_token', JSON.stringify({ token: res.token, user: res.user }));
+        if (localStorage.getItem('rvhl_token') !== null) {
           this.sharedData.setLogged(true);
         }
         resolve();
@@ -51,18 +50,18 @@ export class AuthService {
   }
 
   getUserToken() {
-    return localStorage.getItem('access_token');
+    return localStorage.getItem('rvhl_token');
   }
 
-  get isLoggedIn(): boolean {
-    const authToken = localStorage.getItem('access_token');
+  public get isLoggedIn(): boolean {
+    const authToken = localStorage.getItem('rvhl_token');
     return (authToken !== null) ? true : false;
   }
 
   doLogout() {
-    const removeToken = localStorage.removeItem('access_token');
+    const removeToken = localStorage.removeItem('rvhl_token');
     if (removeToken == null) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     }
   }
 

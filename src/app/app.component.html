@@ -1,10 +1,20 @@
-<app-layout>
+<!-- <app-layout>
   <mat-sidenav-container class="example-container" fxLayout="row">
     <mat-sidenav mode="side" opened fxFlex="40" class="left-nav">
       <app-side-bar></app-side-bar>
     </mat-sidenav>
     <mat-sidenav-content fxFLex class="side-nav">
       <app-main-area></app-main-area>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</app-layout> -->
+<app-layout>
+  <mat-sidenav-container class="example-container" fxLayout="row">
+    <mat-sidenav mode="side" opened fxFlex="40" class="left-nav">
+      <app-side-bar></app-side-bar>
+    </mat-sidenav>
+    <mat-sidenav-content fxFLex class="side-nav">
+      <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </app-layout>

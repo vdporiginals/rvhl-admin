@@ -7,10 +7,16 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+
   constructor(private router: Router) { }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const authUserToken = localStorage.getItem('access_token');
+  intercept(req: HttpRequest<any>, next: HttpHandler, ) {
+    let authUserToken: string;
+    if (localStorage.getItem('rvhl_token') === null) {
+      authUserToken;
+    } else {
+      authUserToken = JSON.parse(localStorage.getItem('rvhl_token')).token;
+    }
     req = req.clone({
       setHeaders: {
         Authorization: 'Bearer ' + authUserToken

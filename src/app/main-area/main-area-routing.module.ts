@@ -5,82 +5,89 @@ import { CrudUserComponent } from './crud-user/crud-user.component';
 import { CrudBlogComponent } from './crud-blog/crud-blog.component';
 import { CrudAdvertiseComponent } from './crud-advertise/crud-advertise.component';
 import { CrudTourComponent } from './crud-tour/crud-tour.component';
+import { MainAreaComponent } from './main-area.component';
 
 const routes: Routes = [
   {
-    path: 'user',
-    component: CrudUserComponent,
-    data: {
-      breadcrumb: 'User'
-    },
+    path: '',
+    component: MainAreaComponent,
     children: [
       {
-        path: ':id',
+        path: 'user',
         component: CrudUserComponent,
         data: {
-          breadcrumb: ''
-        }
-      }
-    ]
-  },
-  {
-    path: 'blogs',
-    component: CrudBlogComponent,
-    data: {
-      breadcrumb: 'Blogs',
-      count: ''
-    },
-    children: [
+          breadcrumb: 'User'
+        },
+        children: [
+          {
+            path: ':id',
+            component: CrudUserComponent,
+            data: {
+              breadcrumb: ''
+            }
+          }
+        ]
+      },
       {
-        path: ':id',
+        path: 'blogs',
         component: CrudBlogComponent,
         data: {
-          breadcrumb: '',
+          breadcrumb: 'Blogs',
           count: ''
-        }
-      }
-    ]
-  },
-  {
-    path: 'advertises',
-    component: CrudAdvertiseComponent,
-    data: {
-      breadcrumb: 'Advertises',
-      count: ''
-    },
-    children: [
+        },
+        children: [
+          {
+            path: ':id',
+            component: CrudBlogComponent,
+            data: {
+              breadcrumb: '',
+              count: ''
+            }
+          }
+        ]
+      },
       {
-        path: ':id',
+        path: 'advertises',
         component: CrudAdvertiseComponent,
         data: {
-          breadcrumb: ''
-        }
+          breadcrumb: 'Advertises',
+          count: ''
+        },
+        children: [
+          {
+            path: ':id',
+            component: CrudAdvertiseComponent,
+            data: {
+              breadcrumb: ''
+            }
+          }
+        ]
+      },
+      {
+        path: 'tour',
+        component: CrudTourComponent,
+        data: {
+          breadcrumb: 'Tour',
+          count: ''
+        },
+        children: [
+          {
+            path: ':id',
+            component: CrudTourComponent,
+            data: {
+              breadcrumb: ''
+            }
+          }
+        ]
       }
     ]
   },
-  {
-    path: 'tour',
-    component: CrudTourComponent,
-    data: {
-      breadcrumb: 'Tour',
-      count: ''
-    },
-    children: [
-      {
-        path: ':id',
-        component: CrudTourComponent,
-        data: {
-          breadcrumb: ''
-        }
-      }
-    ]
-  }
+
 ];
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, RouterModule.forChild(routes)],
-  exports: [RouterModule],
-  providers: []
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class MainAreaRoutingModule { }
