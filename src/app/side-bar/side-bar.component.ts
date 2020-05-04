@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SideBar } from './side-bar';
 
 @Component({
   selector: 'app-side-bar',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-bar.component.scss']
 })
 export class SideBarComponent implements OnInit {
-
+  navItems = SideBar;
   constructor() { }
 
   ngOnInit(): void {

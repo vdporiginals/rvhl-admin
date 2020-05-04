@@ -4,9 +4,9 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { ApiService } from 'src/app/shared/services/api.service';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DataSourceService } from 'src/app/shared/services/data-source.service';
 @Component({
   selector: 'app-blog-dialog',
@@ -21,9 +21,35 @@ export class BlogDialogComponent implements OnInit {
   arrImage: any;
   tbData: DataSourceService;
   categories: any[];
-  categoryId: any;
+  isEdit = false;
+  dataEdit: any;
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: 'auto',
+    maxHeight: 'auto',
+    width: 'auto',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Thêm nội dung cho reviews',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+    ],
+    customClasses: [],
+    uploadUrl: 'v1/image',
+    uploadWithCredentials: false,
+    sanitize: true,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      ['bold', 'italic'],
+      ['fontSize']
+    ]
+  };
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  public Editor = ClassicEditor;
   constructor(
     private noti: NotificationService,
     private api: ApiService,
@@ -31,14 +57,14 @@ export class BlogDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<BlogDialogComponent>,
     private sharedData: SharedDataService,
     @Inject(MAT_DIALOG_DATA) public data,
-    public fb: FormBuilder) {
-    this.categoryId = new FormControl();
+    public fb: FormBuilder
+  ) {
     this.arrImage = new FormControl([]);
     this.detailForm = this.fb.group({
       title: ['', Validators.required],
       category: [''],
       content: [''],
-      description: [''],
+      description: ['', Validators.required],
       images: this.arrImage,
       address: [''],
       status: [false, Validators.required]
@@ -46,11 +72,18 @@ export class BlogDialogComponent implements OnInit {
   }
   get getImages() { return this.detailForm.get('images') as FormArray; }
   ngOnInit(): void {
-    if (this.data.category) {
+    if (this.data.id) {
       this.categories = this.data.category.data;
+      this.api.getData(this.data.id, 'blogs').subscribe(res => {
+        this.dataEdit = res;
+        console.log(this.dataEdit);
+        this.isEdit = true;
+      });
     } else {
       this.categories = this.data;
     }
+
+    console.log(this.data.id)
   }
 
   addImg(event: MatChipInputEvent): void {
@@ -81,20 +114,24 @@ export class BlogDialogComponent implements OnInit {
   }
 
   createOrUpdate(val?) {
-    if (!this.data.val) {
+    console.log(this.data.id);
+    if (!this.data.id) {
       console.log(this.data);
-      this.api.postData(this.detailForm.value, 'blogs').subscribe(() => { }, (err: any) => {
+      this.api.postData(this.detailForm.value, 'blogs').subscribe((res) => { }, (err: any) => {
         this.noti.showError('Tạo tour thất bại', err.error);
       }, () => {
         this.noti.showSuccess('Tạo tour Thành công', '');
       });
 
     } else {
-      this.api.updateData(this.detailForm.value, this.data.val._id, 'blogs').subscribe(() => {
-      }, (err: any) => {
-        this.noti.showError('Tạo tour thất bại', err.error);
+      console.log(this.detailForm.value)
+      this.api.updateData(this.detailForm.value, this.data.id, 'blogs').subscribe((res) => {
+        return res;
+      }, (err) => {
+        console.log(err);
+        this.noti.showError('Sửa tour thất bại', err.error);
       }, () => {
-        this.noti.showSuccess('Tạo tour Thành công', '');
+        this.noti.showSuccess('Sửa tour Thành công', '');
       });
 
     }

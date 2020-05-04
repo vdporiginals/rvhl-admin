@@ -12,16 +12,16 @@ const routes: Routes = [
     path: '',
     component: MainAreaComponent,
     children: [
-      {
-        path: 'user',
-        component: CrudUserComponent,
-        data: {
-          breadcrumb: 'User'
-        }
-      },
+      // {
+      //   path: 'user',
+      //   component: CrudUserComponent,
+      //   data: {
+      //     breadcrumb: 'User'
+      //   }
+      // },
       {
         path: 'blogs',
-        component: CrudBlogComponent,
+        loadChildren: () => import('./crud-blog/crud-blog.module').then(m => m.CrudBlogModule),
         data: {
           breadcrumb: 'Blogs',
           count: ''
@@ -29,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: 'advertises',
-        component: CrudAdvertiseComponent,
+        loadChildren: () => import('./crud-advertise/crud-advertise.module').then(m => m.CrudAdvertiseModule),
         data: {
           breadcrumb: 'Advertises',
           count: ''
@@ -37,7 +37,7 @@ const routes: Routes = [
       },
       {
         path: 'tour',
-        component: CrudTourComponent,
+        loadChildren: () => import('./crud-tour/crud-tour.module').then(m => m.CrudTourModule),
         data: {
           breadcrumb: 'Tour',
           count: ''

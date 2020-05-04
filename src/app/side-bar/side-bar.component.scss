@@ -1,0 +1,27 @@
+::ng-deep .mat-expansion-indicator {
+  margin-left: 10px;
+}
+
+.active {
+  color: deepskyblue;
+  opacity: 1;
+  transform: scalex(1);
+}
+
+.sidenav {
+  min-width: 14rem;
+  margin: 30px;
+}
+
+::ng-deep .mat-expansion-panel-header {
+  font-size: 18px;
+  height: 20px;
+}
+
+::ng-deep mat-list-item.active .mat-list-item-content {
+  color: deepskyblue;
+}
+
+::ng-deep .mat-nav-list {
+  line-height: 50px;
+}

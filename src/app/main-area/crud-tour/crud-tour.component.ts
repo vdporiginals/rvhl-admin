@@ -69,23 +69,19 @@ export class CrudTourComponent implements OnInit, AfterViewInit {
     ).subscribe();
   }
 
-  update(val: any) {
+  update(id) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      id: val._id,
-      title: val.title,
-      phone: val.phone,
-      address: val.address,
-      description: val.description,
-      status: val.status,
-      images: val.images
-
-    };
-    this.dialog.open(TourDialogComponent, dialogConfig);
+    this.api.getDatas('tours/category', 1, 10, 'name').pipe().subscribe(res => {
+      dialogConfig.data = {
+        id,
+        category: res
+      };
+      this.dialog.open(TourDialogComponent, dialogConfig);
+    });
   }
 
   create() {
-    this.api.getDatas('blogs/category', 1, 10).pipe().subscribe((res: any) => {
+    this.api.getDatas('tours/category', 1, 10).pipe().subscribe((res: any) => {
       this.dialog.open(TourDialogComponent, res);
     });
   }

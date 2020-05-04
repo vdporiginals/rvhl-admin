@@ -22,7 +22,8 @@ export class TourDialogComponent implements OnInit {
   addOnBlur = true;
   arrImage: any;
   categories: any[];
-  categoryId: any;
+  isEdit = false;
+  dataEdit: any;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   constructor(
     private noti: NotificationService,
@@ -62,8 +63,13 @@ export class TourDialogComponent implements OnInit {
   get formData() { return this.detailForm.get('schedule') as FormArray; }
   get getImages() { return this.detailForm.get('images') as FormArray; }
   ngOnInit(): void {
-    if (this.data.category) {
+    if (this.data.id) {
       this.categories = this.data.category.data;
+      this.api.getData(this.data.id, 'blogs').subscribe(res => {
+        this.dataEdit = res;
+        console.log(this.dataEdit);
+        this.isEdit = true;
+      });
     } else {
       this.categories = this.data;
     }
@@ -110,8 +116,8 @@ export class TourDialogComponent implements OnInit {
 
   createOrUpdate(val?) {
     console.log(this.detailForm.value);
-    if (this.data) {
-      this.api.updateData(this.detailForm.value, this.data._id, 'tours').subscribe(() => { }, (err: any) => {
+    if (this.data.id) {
+      this.api.updateData(this.detailForm.value, this.data.id, 'tours').subscribe(() => { }, (err: any) => {
         this.noti.showError('Tạo tour thất bại', err.error);
       }, () => {
         this.noti.showSuccess('Tạo tour Thành công', '');

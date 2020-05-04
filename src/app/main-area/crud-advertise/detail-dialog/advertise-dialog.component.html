@@ -1,62 +1,43 @@
-<div class="detail_wrapper" fxLayout="row" fxLayoutAlign="center center">
-  <div class="box">
-    <form
-      class="detail_form"
-      [formGroup]="detailForm"
-      (ngSubmit)="createOrUpdate()"
-    >
-      <mat-card-content>
-        <mat-form-field class="detail_full_width">
-          <input
-            matInput
-            formControlName="title"
-            color="warn"
-            placeholder="Thêm tên reviews"
-          />
-        </mat-form-field>
-        <mat-form-field class="detail_full_width">
-          <input
-            matInput
-            formControlName="image"
-            color="warn"
-            placeholder="Thêm anh"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Chọn loại quảng cáo</mat-label>
-          <mat-select formControlName="category" required>
-            <mat-option>--</mat-option>
-            <mat-option
-              *ngFor="let category of categories"
-              [value]="category.val"
-            >
-              {{ category.name }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="detailForm.hasError('required')"
-            >Please choose an category</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field class="detail_full_width">
-          <input
-            matInput
-            type="text"
-            formControlName="link"
-            placeholder="Nhập số link qc"
-          />
-        </mat-form-field>
-        <mat-form-field class="detail_full_width">
-          <input
-            matInput
-            type="text"
-            formControlName="description"
-            placeholder="Thêm mô tả"
-          />
-        </mat-form-field>
-      </mat-card-content>
-      <button mat-stroked-button color="warn" class="btn-block">
-        Submit
-      </button>
-    </form>
-  </div>
-</div>
+<form [formGroup]="detailForm" (ngSubmit)="createOrUpdate()">
+  <mat-card-content fxLayout="column" fxLayoutAlign="center">
+    <div class="name_area" fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field class="detail_full_width" fxFlex="50">
+        <input matInput formControlName="title" color="warn" [placeholder]="
+                  isEdit === true ? dataEdit.data.title : 'Thêm tên quảng cáo'
+                " />
+      </mat-form-field>
+      <mat-form-field fxFlex="50">
+        <mat-label>Chọn loại quảng cáo</mat-label>
+        <mat-select formControlName="category" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category.val">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="detailForm.hasError('required')">Please choose an category</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="image" fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field class="detail_full_width" fxFlex="50">
+        <input matInput formControlName="image" color="warn" [placeholder]="
+                  isEdit === true ? dataEdit.data.image : 'Thêm ảnh'
+                " />
+      </mat-form-field>
+      <mat-form-field class="detail_full_width" fxFlex="50">
+        <input matInput type="text" formControlName="link" [placeholder]="
+                  isEdit === true ? dataEdit.data.link : 'Thêm link quảng cáo'
+                " />
+      </mat-form-field>
+    </div>
+    <mat-form-field class="detail_full_width">
+      <input matInput type="text" formControlName="description" [placeholder]="
+                  isEdit === true ? dataEdit.data.description : 'Thêm mô tả'
+                " />
+    </mat-form-field>
+  </mat-card-content>
+  <mat-slide-toggle formControlName="status" [ngModel]="isEdit">
+    Bật/tắt trạng thái</mat-slide-toggle>
+  <button mat-stroked-button color="warn" class="btn-block">
+    Submit
+  </button>
+</form>

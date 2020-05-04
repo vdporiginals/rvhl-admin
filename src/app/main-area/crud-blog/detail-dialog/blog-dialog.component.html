@@ -5,7 +5,7 @@
         matInput
         formControlName="title"
         color="warn"
-        placeholder="Thêm tên reviews"
+        [placeholder]="isEdit === true ? dataEdit.data.title : 'Thêm tiêu đề'"
       />
     </mat-form-field>
   </div>
@@ -40,7 +40,11 @@
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>
         <input
-          placeholder="nhập vào ảnh"
+          [placeholder]="
+            isEdit === true
+              ? (dataEdit.data.images | Overflow: ['10', '...'])
+              : 'Thêm mô tả'
+          "
           [matChipInputFor]="chipList"
           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
           [matChipInputAddOnBlur]="addOnBlur"
@@ -51,7 +55,11 @@
   </div>
 
   <div>
-    <ckeditor formControlName="content" [editor]="Editor"></ckeditor>
+    <angular-editor
+      [ngModel]="dataEdit?.data?.content | sanitizeHtml"
+      formControlName="content"
+      [config]="editorConfig"
+    ></angular-editor>
   </div>
   <div>
     <mat-form-field class="detail_full_width">
@@ -59,7 +67,9 @@
         matInput
         type="text"
         formControlName="description"
-        placeholder="Thêm mô tả reviews"
+        [placeholder]="
+          isEdit === true ? dataEdit.data.description : 'Thêm mô tả'
+        "
       />
     </mat-form-field>
   </div>
@@ -70,16 +80,22 @@
         matInput
         type="text"
         formControlName="address"
-        placeholder="Nhập Địa chỉ"
+        [placeholder]="isEdit === true ? dataEdit.data.address : 'Thêm địa chỉ'"
       />
     </mat-form-field>
   </div>
 
   <div>
-    <mat-slide-toggle formControlName="status">
-      Bật/tắt trạng thái: {{ detailForm.value.status }}</mat-slide-toggle
+    <mat-slide-toggle formControlName="status" [ngModel]="isEdit">
+      Bật/tắt trạng thái</mat-slide-toggle
     >
-    <button type="submit" mat-stroked-button color="warn" class="btn-block">
+    <button
+      type="submit"
+      [disabled]="detailForm.invalid"
+      mat-stroked-button
+      color="warn"
+      class="btn-block"
+    >
       Tạo reviews
     </button>
   </div>

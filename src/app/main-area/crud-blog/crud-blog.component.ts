@@ -71,12 +71,12 @@ export class CrudBlogComponent implements OnInit, AfterViewInit {
     ).subscribe();
   }
 
-  update(val) {
+  update(id) {
     const dialogConfig = new MatDialogConfig();
 
     this.api.getDatas('blogs/category', 1, 10, 'name').pipe().subscribe(res => {
       dialogConfig.data = {
-        val,
+        id,
         category: res
       };
       this.dialog.open(BlogDialogComponent, dialogConfig);

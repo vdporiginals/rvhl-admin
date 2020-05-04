@@ -7,6 +7,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -42,6 +44,8 @@ import { HeaderBreabcrumbComponent } from './header-breabcrumb/header-breabcrumb
     HttpClientModule,
     AppRoutingModule,
     MatToolbarModule,
+    MatListModule,
+    MatExpansionModule,
     MatCardModule,
     MatInputModule,
     BrowserAnimationsModule,

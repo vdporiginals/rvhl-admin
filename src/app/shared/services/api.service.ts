@@ -24,7 +24,9 @@ export class ApiService {
   }
 
   getData(id, apiName) {
-    const data = this.http.get(`${this.apiurl}/${apiName}/${id}`);
+    const data = this.http.get(`${this.apiurl}/${apiName}/${id}`).pipe(
+      map((res: any) => res)
+    );
     return data;
   }
 

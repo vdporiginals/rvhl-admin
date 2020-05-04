@@ -9,7 +9,9 @@
                 matInput
                 formControlName="title"
                 color="warn"
-                placeholder="Thêm tên tour"
+                [placeholder]="
+                  isEdit === true ? dataEdit.data.title : 'Thêm tên tour'
+                "
               />
             </mat-form-field>
             <mat-form-field>
@@ -45,7 +47,11 @@
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
               <input
-                placeholder="nhập vào ảnh"
+                [placeholder]="
+                  isEdit === true
+                    ? (dataEdit.data.images | Overflow: ['10', '...'])
+                    : 'Thêm ảnh'
+                "
                 [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputAddOnBlur]="addOnBlur"
@@ -62,7 +68,9 @@
               matInput
               type="number"
               formControlName="price"
-              placeholder="Nhập giá tour"
+              [placeholder]="
+                isEdit === true ? dataEdit.data.price : 'Thêm giá tour'
+              "
             />
           </mat-form-field>
           <mat-form-field class="detail_full_width">
@@ -72,7 +80,7 @@
               class="phone"
               type="text"
               formControlName="phone"
-              placeholder="Thêm số điện thoại"
+              [placeholder]="isEdit === true ? dataEdit.data.phone : 'Thêm sđt'"
             />
           </mat-form-field>
         </div>
@@ -85,7 +93,9 @@
               type="text"
               class="description"
               formControlName="description"
-              placeholder="Thêm mô tả tour"
+              [placeholder]="
+                isEdit === true ? dataEdit.data.description : 'Thêm mô tả'
+              "
             />
           </mat-form-field>
           <mat-form-field class="detail_full_width">
@@ -94,7 +104,11 @@
               type="text"
               class="customer_num"
               formControlName="customerNum"
-              placeholder="Nhập số lượng khách hàng cho tour"
+              [placeholder]="
+                isEdit === true
+                  ? dataEdit.data.customerNum
+                  : 'Nhập số lượng khác / giá'
+              "
             />
           </mat-form-field>
         </div>
@@ -105,7 +119,9 @@
               type="text"
               class="address"
               formControlName="address"
-              placeholder="Nhập Địa chỉ"
+              [placeholder]="
+                isEdit === true ? dataEdit.data.address : 'Thêm địa chỉ'
+              "
             />
           </mat-form-field>
           <mat-form-field class="detail_full_width">
@@ -114,7 +130,9 @@
               type="text"
               class="time"
               formControlName="time"
-              placeholder="Nhập tổng thời gian của tour"
+              [placeholder]="
+                isEdit === true ? dataEdit.data.time : 'Thêm thời gian tour'
+              "
             />
           </mat-form-field>
         </div>
@@ -146,6 +164,11 @@
                 <mat-label>chọn ngày bắt đầu</mat-label>
                 <input
                   matInput
+                  [placeholder]="
+                    isEdit === true
+                      ? (dataEdit.data.schedule.timeStart | date: 'medium')
+                      : 'Thêm ngày bắt đầu dịch vụ'
+                  "
                   formControlName="timeStart"
                   [matDatepicker]="timeStart"
                 />
@@ -159,6 +182,11 @@
                 <mat-label>chọn ngày kết thúc</mat-label>
                 <input
                   matInput
+                  [placeholder]="
+                    isEdit === true
+                      ? (dataEdit.data.schedule.timeEnd | date: 'medium')
+                      : 'Thêm ngày kết thúc dịch vụ'
+                  "
                   formControlName="timeEnd"
                   [matDatepicker]="timeEnd"
                   color="warn"
@@ -173,19 +201,37 @@
             <div fxFlex fxLayout="column">
               <mat-form-field class="detail_full_width">
                 <mat-label>chọn địa điểm</mat-label>
-                <input matInput formControlName="location" color="warn" />
+                <input
+                  matInput
+                  [placeholder]="
+                    isEdit === true
+                      ? dataEdit.data.schedule.location
+                      : 'Thêm địa điểm dịch vụ'
+                  "
+                  formControlName="location"
+                  color="warn"
+                />
               </mat-form-field>
               <mat-form-field class="detail_full_width">
                 <mat-label>chọn dịch vụ</mat-label>
-                <input matInput formControlName="service" color="warn" />
+                <input
+                  [placeholder]="
+                    isEdit === true
+                      ? dataEdit.data.schedule.service
+                      : 'Thêm dịch vụ'
+                  "
+                  matInput
+                  formControlName="service"
+                  color="warn"
+                />
               </mat-form-field>
             </div>
           </div>
         </div>
       </div>
     </mat-card-content>
-    <mat-slide-toggle formControlName="status">
-      {{ detailForm.value.status }}</mat-slide-toggle
+    <mat-slide-toggle formControlName="status" [ngModel]="isEdit">
+      Bật/tắt trạng thái</mat-slide-toggle
     >
     <button type="submit" mat-stroked-button color="warn" class="btn-block">
       Tạo tour

@@ -22,6 +22,8 @@ export class AdvertiseDialogComponent implements OnInit {
   { name: 'Khác', val: 'other' },
   { name: 'Vận chuỷen', val: 'bannerTransfer' },
   { name: 'khách sạn', val: 'bannerHotel' }];
+  isEdit = false;
+  dataEdit: any;
   constructor(
     private noti: NotificationService,
     private api: ApiService,
@@ -36,15 +38,27 @@ export class AdvertiseDialogComponent implements OnInit {
       link: [''],
       description: [''],
       category: [''],
+      status: [false, Validators.required]
     });
   }
 
   ngOnInit(): void {
+    if (this.data.id) {
+      this.categories = this.data.category.data;
+      this.api.getData(this.data.id, 'blogs').subscribe(res => {
+        this.dataEdit = res;
+        console.log(this.dataEdit);
+        this.isEdit = true;
+      });
+    } else {
+      this.categories = this.data;
+    }
   }
+
   createOrUpdate(val?) {
     console.log(this.detailForm.value);
-    if (this.data) {
-      this.api.updateData(this.detailForm.value, this.data._id, 'advertises').subscribe(() => { }, (err: any) => {
+    if (this.data.id) {
+      this.api.updateData(this.detailForm.value, this.data.id, 'advertises').subscribe(() => { }, (err: any) => {
         this.noti.showError('Tạo advertises thất bại', err.error.error);
       }, () => {
         this.noti.showSuccess('Tạo advertises Thành công', '');
