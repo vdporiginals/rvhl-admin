@@ -46,7 +46,7 @@ export class CrudTourComponent implements OnInit, AfterViewInit {
       this.apiName,
       this.paginator.pageIndex,
       this.paginator.pageSize,
-      'title,description,status,createdAt,images'
+      'title,description,status,createdAt,images,category'
     );
   }
 
@@ -79,12 +79,15 @@ export class CrudTourComponent implements OnInit, AfterViewInit {
       description: val.description,
       status: val.status,
       images: val.images
+
     };
     this.dialog.open(TourDialogComponent, dialogConfig);
   }
 
   create() {
-    this.dialog.open(TourDialogComponent);
+    this.api.getDatas('blogs/category', 1, 10).pipe().subscribe((res: any) => {
+      this.dialog.open(TourDialogComponent, res);
+    });
   }
 
   showDetail() {

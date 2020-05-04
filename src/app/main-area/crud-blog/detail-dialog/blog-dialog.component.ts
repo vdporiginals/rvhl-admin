@@ -40,7 +40,8 @@ export class BlogDialogComponent implements OnInit {
       content: [''],
       description: [''],
       images: this.arrImage,
-      address: ['']
+      address: [''],
+      status: [false, Validators.required]
     });
   }
   get getImages() { return this.detailForm.get('images') as FormArray; }

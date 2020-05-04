@@ -22,13 +22,13 @@
             placeholder="Thêm anh"
           />
         </mat-form-field>
-        <mat-form-field *ngIf="data._id === null">
+        <mat-form-field>
           <mat-label>Chọn loại quảng cáo</mat-label>
           <mat-select formControlName="category" required>
             <mat-option>--</mat-option>
             <mat-option
-              *ngFor="let category of categorys"
-              [value]="category._id"
+              *ngFor="let category of categories"
+              [value]="category.val"
             >
               {{ category.name }}
             </mat-option>

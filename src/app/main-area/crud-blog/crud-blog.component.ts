@@ -74,7 +74,7 @@ export class CrudBlogComponent implements OnInit, AfterViewInit {
   update(val) {
     const dialogConfig = new MatDialogConfig();
 
-    this.http.get(`${environment.apiUrl}/blogs/category`).pipe().subscribe(res => {
+    this.api.getDatas('blogs/category', 1, 10, 'name').pipe().subscribe(res => {
       dialogConfig.data = {
         val,
         category: res
@@ -84,7 +84,7 @@ export class CrudBlogComponent implements OnInit, AfterViewInit {
   }
 
   create() {
-    this.http.get(`${environment.apiUrl}/blogs/category`).pipe().subscribe(res => {
+    this.api.getDatas('blogs/category', 1, 10).pipe().subscribe((res: any) => {
       this.dialog.open(BlogDialogComponent, res);
     });
   }

@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -19,15 +21,19 @@ import { LoginComponent } from './layout/login/login.component';
 import { RegisterComponent } from './layout/register/register.component';
 import { ErrorInterceptor } from './shared/interceptor/error.interceptor';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MainAreaComponent } from './main-area/main-area.component';
+import { HeaderBreabcrumbComponent } from './header-breabcrumb/header-breabcrumb.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SideBarComponent,
     LayoutComponent,
     DashboardComponent,
     LoginComponent,
-    RegisterComponent
+    MainAreaComponent,
+    RegisterComponent,
+    SideBarComponent,
+    HeaderBreabcrumbComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +41,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    MatToolbarModule,
     MatCardModule,
     MatInputModule,
     BrowserAnimationsModule,

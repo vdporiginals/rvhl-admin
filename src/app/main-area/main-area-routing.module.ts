@@ -17,16 +17,7 @@ const routes: Routes = [
         component: CrudUserComponent,
         data: {
           breadcrumb: 'User'
-        },
-        children: [
-          {
-            path: ':id',
-            component: CrudUserComponent,
-            data: {
-              breadcrumb: ''
-            }
-          }
-        ]
+        }
       },
       {
         path: 'blogs',
@@ -34,17 +25,7 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Blogs',
           count: ''
-        },
-        children: [
-          {
-            path: ':id',
-            component: CrudBlogComponent,
-            data: {
-              breadcrumb: '',
-              count: ''
-            }
-          }
-        ]
+        }
       },
       {
         path: 'advertises',
@@ -52,16 +33,7 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Advertises',
           count: ''
-        },
-        children: [
-          {
-            path: ':id',
-            component: CrudAdvertiseComponent,
-            data: {
-              breadcrumb: ''
-            }
-          }
-        ]
+        }
       },
       {
         path: 'tour',
@@ -69,16 +41,7 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Tour',
           count: ''
-        },
-        children: [
-          {
-            path: ':id',
-            component: CrudTourComponent,
-            data: {
-              breadcrumb: ''
-            }
-          }
-        ]
+        }
       }
     ]
   },

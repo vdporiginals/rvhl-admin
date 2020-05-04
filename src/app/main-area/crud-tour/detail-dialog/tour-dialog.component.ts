@@ -5,7 +5,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { Schedule } from './schedule';
+
 import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
@@ -21,6 +21,8 @@ export class TourDialogComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   arrImage: any;
+  categories: any[];
+  categoryId: any;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   constructor(
     private noti: NotificationService,
@@ -50,15 +52,21 @@ export class TourDialogComponent implements OnInit {
       schedule: this.fb.array([]),
       time: [''],
       price: ['', Validators.compose([Validators.required])],
-      address: ['']
+      address: [''],
+      category: '',
+      status: [false, Validators.required]
     });
     this.getFormSchedule();
   }
 
   get formData() { return this.detailForm.get('schedule') as FormArray; }
   get getImages() { return this.detailForm.get('images') as FormArray; }
-
   ngOnInit(): void {
+    if (this.data.category) {
+      this.categories = this.data.category.data;
+    } else {
+      this.categories = this.data;
+    }
   }
 
   getFormSchedule() {
@@ -104,13 +112,13 @@ export class TourDialogComponent implements OnInit {
     console.log(this.detailForm.value);
     if (this.data) {
       this.api.updateData(this.detailForm.value, this.data._id, 'tours').subscribe(() => { }, (err: any) => {
-        this.noti.showError('Tạo tour thất bại', err.error.error);
+        this.noti.showError('Tạo tour thất bại', err.error);
       }, () => {
         this.noti.showSuccess('Tạo tour Thành công', '');
       });
     } else {
       this.api.postData(this.detailForm.value, 'tours').subscribe(() => { }, (err: any) => {
-        this.noti.showError('Tạo tour thất bại', err.error.error);
+        this.noti.showError('Tạo tour thất bại', err.error);
       }, () => {
         this.noti.showSuccess('Tạo tour Thành công', '');
       });

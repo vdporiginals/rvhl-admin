@@ -11,7 +11,7 @@ export class ApiService {
   apiurl = `${environment.apiUrl}`;
   constructor(private http: HttpClient) { }
 
-  getDatas(apiName, page, limit, select?, sort?): Observable<any[]> {
+  getDatas(apiName, page, limit, select = '', sort = ''): Observable<any[]> {
     return this.http.get(`${this.apiurl}/${apiName}`, {
       params: new HttpParams()
         .set('select', select.toString())

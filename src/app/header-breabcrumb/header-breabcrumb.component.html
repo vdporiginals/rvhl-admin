@@ -1,0 +1,13 @@
+<div class="page-titles" fxLayout="row">
+  <div fxFlex fxLayout fxLayoutAlign="start">
+    <h3 class="text-color">Demo</h3>
+  </div>
+  <a href="" (click)="logout()">logout</a>
+  <ol class="breadcrumb" fxLayoutAlign="end">
+    <li *ngFor="let breadcrumb of breadcrumbs">
+      <span [routerLink]="breadcrumb.url" routerLinkActive="router-link-active">
+        {{ breadcrumb.label }}
+      </span>
+    </li>
+  </ol>
+</div>

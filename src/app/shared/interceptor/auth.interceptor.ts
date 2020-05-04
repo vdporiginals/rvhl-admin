@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler, ) {
     let authUserToken: string;
     if (localStorage.getItem('rvhl_token') === null) {
-      authUserToken;
+      authUserToken = '';
     } else {
       authUserToken = JSON.parse(localStorage.getItem('rvhl_token')).token;
     }
