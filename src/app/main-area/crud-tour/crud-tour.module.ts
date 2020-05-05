@@ -18,16 +18,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
+
 import { CrudTourComponent } from './crud-tour.component';
 import { TourDialogComponent } from './detail-dialog/tour-dialog.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const routes: Routes = [
   {
     path: '',
-    component: CrudTourComponent
+    children: [
+      {
+        path: '',
+        component: CrudTourComponent
+      },
+    ]
   },
-
 ];
 
 @NgModule({
@@ -37,6 +43,7 @@ const routes: Routes = [
     RouterModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatCheckboxModule,
     MatToolbarModule,
     MatChipsModule,
     MatSelectModule,
@@ -57,7 +64,7 @@ const routes: Routes = [
   ],
   declarations: [
     CrudTourComponent,
-    TourDialogComponent
+    TourDialogComponent,
   ],
   exports: [FlexLayoutModule, RouterModule],
   providers: []

@@ -49,7 +49,9 @@ export class BlogDialogComponent implements OnInit {
       ['fontSize']
     ]
   };
+
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
   constructor(
     private noti: NotificationService,
     private api: ApiService,
@@ -67,6 +69,8 @@ export class BlogDialogComponent implements OnInit {
       description: ['', Validators.required],
       images: this.arrImage,
       address: [''],
+      isPopular: [false],
+      keywords: [''],
       status: [false, Validators.required]
     });
   }
@@ -118,20 +122,22 @@ export class BlogDialogComponent implements OnInit {
     if (!this.data.id) {
       console.log(this.data);
       this.api.postData(this.detailForm.value, 'blogs').subscribe((res) => { }, (err: any) => {
-        this.noti.showError('Tạo tour thất bại', err.error);
+        this.noti.showError('Tạo reviews thất bại', err);
+        console.log(err);
       }, () => {
-        this.noti.showSuccess('Tạo tour Thành công', '');
+        this.noti.showSuccess('Tạo reviews Thành công', '');
+        this.dialogRef.close();
       });
 
     } else {
       console.log(this.detailForm.value)
       this.api.updateData(this.detailForm.value, this.data.id, 'blogs').subscribe((res) => {
-        return res;
       }, (err) => {
         console.log(err);
-        this.noti.showError('Sửa tour thất bại', err.error);
+        this.noti.showError('Sửa reviews thất bại', err);
       }, () => {
-        this.noti.showSuccess('Sửa tour Thành công', '');
+        this.noti.showSuccess('Sửa reviews Thành công', '');
+        this.dialogRef.close();
       });
 
     }

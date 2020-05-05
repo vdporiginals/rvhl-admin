@@ -1,16 +1,13 @@
 <form [formGroup]="detailForm" (ngSubmit)="createOrUpdate()" fxLayout="column">
   <div>
     <mat-form-field class="detail_full_width">
-      <input
-        matInput
-        formControlName="title"
-        color="warn"
-        [placeholder]="isEdit === true ? dataEdit.data.title : 'Thêm tiêu đề'"
-      />
+      <input matInput formControlName="title" color="warn" [ngModel]="dataEdit?.data?.title"
+        [placeholder]="'Thêm tiêu đề'" />
+      <mat-error *ngIf="detailForm.hasError('required')">Please choose an category</mat-error>
     </mat-form-field>
   </div>
-  <div>
-    <mat-form-field class="detail_full_width">
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field class="detail_full_width" fxFlex="50">
       <mat-label>Chọn loại reviews</mat-label>
       <mat-select formControlName="category" required>
         <mat-option>--</mat-option>
@@ -18,85 +15,54 @@
           {{ category.name }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="detailForm.hasError('required')"
-        >Please choose an category</mat-error
-      >
+      <mat-error *ngIf="detailForm.hasError('required')">Please choose an category</mat-error>
+    </mat-form-field>
+    <mat-form-field class="detail_full_width" fxFlex>
+      <input matInput formControlName="keywords" color="warn" [ngModel]="dataEdit?.data?.keywords"
+        [placeholder]="'Thêm từ khóa'" />
     </mat-form-field>
   </div>
   <div>
     <mat-form-field class="detail_full_width">
-      <mat-chip-list
-        #chipList
-        aria-label="img selection"
-        formControlName="images"
-      >
-        <mat-chip
-          *ngFor="let img of arrImage.value"
-          [selectable]="selectable"
-          [removable]="removable"
-          (removed)="removeImg(img)"
-        >
+      <mat-chip-list #chipList aria-label="img selection" formControlName="images">
+        <mat-chip *ngFor="let img of arrImage.value" [selectable]="selectable" [removable]="removable"
+          (removed)="removeImg(img)">
           {{ img }}
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>
-        <input
-          [placeholder]="
-            isEdit === true
-              ? (dataEdit.data.images | Overflow: ['10', '...'])
-              : 'Thêm mô tả'
-          "
-          [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          [matChipInputAddOnBlur]="addOnBlur"
-          (matChipInputTokenEnd)="addImg($event)"
-        />
+        <input [ngModel]="dataEdit?.data?.images | Overflow: ['10', '...']" [placeholder]="
+           'Thêm mô tả'
+          " [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addImg($event)" />
       </mat-chip-list>
     </mat-form-field>
   </div>
 
   <div>
-    <angular-editor
-      [ngModel]="dataEdit?.data?.content | sanitizeHtml"
-      formControlName="content"
-      [config]="editorConfig"
-    ></angular-editor>
+    <angular-editor [ngModel]="dataEdit?.data?.content | sanitizeHtml" formControlName="content"
+      [config]="editorConfig"></angular-editor>
   </div>
   <div>
     <mat-form-field class="detail_full_width">
-      <input
-        matInput
-        type="text"
-        formControlName="description"
-        [placeholder]="
-          isEdit === true ? dataEdit.data.description : 'Thêm mô tả'
-        "
-      />
+      <input matInput type="text" [ngModel]="dataEdit?.data?.description" formControlName="description"
+        [placeholder]="'Thêm mô tả'" />
+      <mat-error *ngIf="detailForm.hasError('required')">Please choose an category</mat-error>
     </mat-form-field>
   </div>
 
   <div>
     <mat-form-field class="detail_full_width">
-      <input
-        matInput
-        type="text"
-        formControlName="address"
-        [placeholder]="isEdit === true ? dataEdit.data.address : 'Thêm địa chỉ'"
-      />
+      <input matInput type="text" formControlName="address" [ngModel]="dataEdit?.data?.address"
+        [placeholder]="'Thêm địa chỉ'" />
     </mat-form-field>
   </div>
 
-  <div>
-    <mat-slide-toggle formControlName="status" [ngModel]="isEdit">
-      Bật/tắt trạng thái</mat-slide-toggle
-    >
-    <button
-      type="submit"
-      [disabled]="detailForm.invalid"
-      mat-stroked-button
-      color="warn"
-      class="btn-block"
-    >
-      Tạo reviews
+  <div fxLayoutGap="10px">
+    <mat-slide-toggle formControlName="status" [ngModel]="dataEdit?.data?.status">
+      Bật/tắt trạng thái</mat-slide-toggle>
+    <mat-checkbox formControlName="isPopular" [ngModel]="dataEdit?.data?.isPopular">Review nổi bật</mat-checkbox>
+    <button type="submit" [disabled]="detailForm.invalid" mat-stroked-button color="warn" class="btn-block">
+      Submit reviews
     </button>
   </div>
 </form>

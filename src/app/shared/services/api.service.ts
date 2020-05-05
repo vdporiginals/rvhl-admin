@@ -31,10 +31,7 @@ export class ApiService {
   }
 
   postData(data: any, apiName): Observable<any> {
-    return this.http.post(`${this.apiurl}/${apiName}`, data)
-      .pipe(
-        catchError(this.handleError)
-      );
+    return this.http.post(`${this.apiurl}/${apiName}`, data);
   }
 
   updateData(data: any, id, apiName): Observable<any> {
@@ -45,7 +42,6 @@ export class ApiService {
   }
 
   deleteData(id, apiName): Observable<any> {
-    console.log(id, apiName)
     return this.http.delete(`${this.apiurl}/${apiName}/${id}`)
       .pipe(
         catchError(this.handleError)
@@ -54,12 +50,13 @@ export class ApiService {
 
   handleError(error: HttpErrorResponse) {
     let msg = '';
+    console.log(error.message)
     if (error.error instanceof ErrorEvent) {
       // client-side error
       msg = error.error.message;
     } else {
       // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      msg = `Error Code: ${error.status}\nMessage: ${error}`;
     }
     return throwError(msg);
   }

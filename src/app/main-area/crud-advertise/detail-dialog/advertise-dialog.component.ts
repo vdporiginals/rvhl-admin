@@ -13,15 +13,15 @@ import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 })
 export class AdvertiseDialogComponent implements OnInit {
   detailForm: FormGroup;
-  categories: any = [{ name: 'Banner Trang review', val: 'bannerReview' },
-  { name: 'Banner Trang tour', val: 'bannerTour' },
-  { name: 'Banner trang tàu vịnh', val: 'bannerCruise' },
-  { name: 'back ground video', val: 'video' },
-  { name: 'giới thiệu', val: 'about' },
-  { name: 'Slider', val: 'slider' },
-  { name: 'Khác', val: 'other' },
-  { name: 'Vận chuỷen', val: 'bannerTransfer' },
-  { name: 'khách sạn', val: 'bannerHotel' }];
+  positions: any = [{ name: 'Banner tour', value: 'bannerTour' },
+  { name: 'Banner transfer', value: 'bannerTransfer' },
+  { name: 'Banner hotel', value: 'bannerHotel' },
+  { name: 'Banner review', value: 'bannerReview' },
+  { name: 'Trasfer', value: 'transfer' },
+  { name: 'Hotel', value: 'hotel' },
+  { name: 'Tour', value: 'tour' },
+  { name: 'Review', value: 'review' }];
+  categories: any[];
   isEdit = false;
   dataEdit: any;
   constructor(
@@ -38,6 +38,9 @@ export class AdvertiseDialogComponent implements OnInit {
       link: [''],
       description: [''],
       category: [''],
+      position: [''],
+      keywords: [''],
+      isPopular: [false],
       status: [false, Validators.required]
     });
   }
@@ -45,7 +48,7 @@ export class AdvertiseDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.id) {
       this.categories = this.data.category.data;
-      this.api.getData(this.data.id, 'blogs').subscribe(res => {
+      this.api.getData(this.data.id, 'advertise').subscribe(res => {
         this.dataEdit = res;
         console.log(this.dataEdit);
         this.isEdit = true;
@@ -59,15 +62,17 @@ export class AdvertiseDialogComponent implements OnInit {
     console.log(this.detailForm.value);
     if (this.data.id) {
       this.api.updateData(this.detailForm.value, this.data.id, 'advertises').subscribe(() => { }, (err: any) => {
-        this.noti.showError('Tạo advertises thất bại', err.error.error);
+        this.noti.showError('Tạo advertises thất bại', err);
       }, () => {
         this.noti.showSuccess('Tạo advertises Thành công', '');
+        this.dialogRef.close();
       });
     } else {
       this.api.postData(this.detailForm.value, 'advertises').subscribe(() => { }, (err: any) => {
-        this.noti.showError('Tạo advertises thất bại', err.error.error);
+        this.noti.showError('Tạo advertises thất bại', err);
       }, () => {
         this.noti.showSuccess('Tạo advertises Thành công', '');
+        this.dialogRef.close();
       });
     }
   }

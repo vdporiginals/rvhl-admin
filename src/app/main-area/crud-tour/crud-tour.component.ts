@@ -76,13 +76,15 @@ export class CrudTourComponent implements OnInit, AfterViewInit {
         id,
         category: res
       };
-      this.dialog.open(TourDialogComponent, dialogConfig);
+      this.dialog.open(TourDialogComponent, dialogConfig).afterClosed()
+        .subscribe(() => this.loadDatasPage());
     });
   }
 
   create() {
     this.api.getDatas('tours/category', 1, 10).pipe().subscribe((res: any) => {
-      this.dialog.open(TourDialogComponent, res);
+      this.dialog.open(TourDialogComponent, res).afterClosed()
+        .subscribe(() => this.loadDatasPage());
     });
   }
 

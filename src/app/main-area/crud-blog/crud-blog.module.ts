@@ -16,15 +16,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, Routes } from '@angular/router';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 import { CrudBlogComponent } from './crud-blog.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BlogDialogComponent } from './detail-dialog/blog-dialog.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
 const routes: Routes = [
   {
     path: '',
-    component: CrudBlogComponent
+    children: [
+      {
+        path: '',
+        component: CrudBlogComponent,
+      },
+    ]
   },
 
 ];
@@ -36,6 +43,7 @@ const routes: Routes = [
     RouterModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatCheckboxModule,
     MatChipsModule,
     MatToolbarModule,
     MatSidenavModule,

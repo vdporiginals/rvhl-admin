@@ -79,13 +79,15 @@ export class CrudBlogComponent implements OnInit, AfterViewInit {
         id,
         category: res
       };
-      this.dialog.open(BlogDialogComponent, dialogConfig);
+      this.dialog.open(BlogDialogComponent, dialogConfig).afterClosed()
+        .subscribe(() => this.loadDatasPage());
     });
   }
 
   create() {
     this.api.getDatas('blogs/category', 1, 10).pipe().subscribe((res: any) => {
-      this.dialog.open(BlogDialogComponent, res);
+      this.dialog.open(BlogDialogComponent, res).afterClosed()
+        .subscribe(() => this.loadDatasPage());
     });
   }
 }

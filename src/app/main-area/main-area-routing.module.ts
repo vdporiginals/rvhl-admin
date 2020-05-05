@@ -20,7 +20,7 @@ const routes: Routes = [
       //   }
       // },
       {
-        path: 'blogs',
+        path: 'blog',
         loadChildren: () => import('./crud-blog/crud-blog.module').then(m => m.CrudBlogModule),
         data: {
           breadcrumb: 'Blogs',
@@ -28,7 +28,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'advertises',
+        path: 'advertise',
         loadChildren: () => import('./crud-advertise/crud-advertise.module').then(m => m.CrudAdvertiseModule),
         data: {
           breadcrumb: 'Advertises',
@@ -40,6 +40,14 @@ const routes: Routes = [
         loadChildren: () => import('./crud-tour/crud-tour.module').then(m => m.CrudTourModule),
         data: {
           breadcrumb: 'Tour',
+          count: ''
+        }
+      },
+      {
+        path: 'category',
+        loadChildren: () => import('./crud-category/crud-category.module').then(m => m.CrudCategoryModule),
+        data: {
+          breadcrumb: 'Category',
           count: ''
         }
       }

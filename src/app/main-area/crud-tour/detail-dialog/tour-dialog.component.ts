@@ -55,6 +55,8 @@ export class TourDialogComponent implements OnInit {
       price: ['', Validators.compose([Validators.required])],
       address: [''],
       category: '',
+      keywords: [''],
+      isPopular: [false],
       status: [false, Validators.required]
     });
     this.getFormSchedule();

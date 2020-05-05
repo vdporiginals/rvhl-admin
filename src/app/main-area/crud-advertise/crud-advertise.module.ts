@@ -16,13 +16,20 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 import { CrudAdvertiseComponent } from './crud-advertise.component';
 import { AdvertiseDialogComponent } from './detail-dialog/advertise-dialog.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 const routes: Routes = [
   {
     path: '',
-    component: CrudAdvertiseComponent
+    children: [
+      {
+        path: '',
+        component: CrudAdvertiseComponent,
+      },
+    ]
   },
 
 ];
@@ -33,6 +40,7 @@ const routes: Routes = [
     RouterModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatCheckboxModule,
     MatSidenavModule,
     MatSelectModule,
     MatIconModule,

@@ -79,10 +79,14 @@ export class CrudAdvertiseComponent implements OnInit, AfterViewInit {
       image: val.image
     };
     console.log(val);
-    this.dialog.open(AdvertiseDialogComponent, dialogConfig);
+    this.dialog.open(AdvertiseDialogComponent, dialogConfig).afterClosed()
+      .subscribe(() => this.loadDatasPage());
   }
 
   create() {
-    this.dialog.open(AdvertiseDialogComponent);
+    this.api.getDatas('advertises/category', 1, 10).pipe().subscribe((res: any) => {
+      this.dialog.open(AdvertiseDialogComponent, res).afterClosed()
+        .subscribe(() => this.loadDatasPage());
+    });
   }
 }

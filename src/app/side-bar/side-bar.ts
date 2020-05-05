@@ -1,7 +1,7 @@
 export const SideBar = [
     {
         text: 'Quản lý quảng cáo',
-        link: 'advertises'
+        link: 'advertise'
     },
     {
         text: 'Quản lý Tour',
@@ -19,7 +19,7 @@ export const SideBar = [
     },
     {
         text: 'Quản lý Blogs',
-        link: 'blogs',
+        link: 'blog',
         //   subItems: [
         //     {
         //       text: 'Lịch Trình',
@@ -30,6 +30,10 @@ export const SideBar = [
         //       link: 'reviews/an-gi',
         //     }
         //   ]
+    },
+    {
+        text: 'Quản lý danh mục',
+        link: 'category',
     },
     {
         text: 'Quản lý user',
