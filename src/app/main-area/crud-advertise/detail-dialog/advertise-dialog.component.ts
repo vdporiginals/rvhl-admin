@@ -48,7 +48,7 @@ export class AdvertiseDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.id) {
       this.categories = this.data.category.data;
-      this.api.getData(this.data.id, 'advertise').subscribe(res => {
+      this.api.getData(this.data.id, 'blogs').subscribe(res => {
         this.dataEdit = res;
         console.log(this.dataEdit);
         this.isEdit = true;
@@ -62,9 +62,9 @@ export class AdvertiseDialogComponent implements OnInit {
     console.log(this.detailForm.value);
     if (this.data.id) {
       this.api.updateData(this.detailForm.value, this.data.id, 'advertises').subscribe(() => { }, (err: any) => {
-        this.noti.showError('Tạo advertises thất bại', err);
+        this.noti.showError('Sửa advertises thất bại', err);
       }, () => {
-        this.noti.showSuccess('Tạo advertises Thành công', '');
+        this.noti.showSuccess('Sửa advertises Thành công', '');
         this.dialogRef.close();
       });
     } else {

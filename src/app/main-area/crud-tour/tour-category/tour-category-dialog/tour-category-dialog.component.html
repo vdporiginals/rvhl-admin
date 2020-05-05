@@ -1,0 +1,25 @@
+<form [formGroup]="detailForm" (ngSubmit)="createOrUpdate()">
+  <mat-card-content fxLayout="column" fxLayoutAlign="center">
+    <mat-form-field class="detail_full_width">
+      <input matInput formControlName="name" color="warn" [ngModel]="dataEdit?.data?.name" [placeholder]="'Thêm tên quảng cáo'
+                    " />
+    </mat-form-field>
+    <mat-form-field class="detail_full_width">
+      <input matInput type="text" formControlName="description" [ngModel]="dataEdit?.data?.description" [placeholder]="'Thêm mô tả'
+                    " />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Chọn vị trí</mat-label>
+      <mat-select formControlName="position">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let position of positions" [value]="position?.value">
+          {{ position?.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="detailForm.hasError('required')">Please choose an category</mat-error>
+    </mat-form-field>
+  </mat-card-content>
+  <button mat-stroked-button color="warn" class="btn-block">
+    Submit category
+  </button>
+</form>

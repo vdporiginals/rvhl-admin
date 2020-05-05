@@ -6,8 +6,11 @@ import { LoginComponent } from './layout/login/login.component';
 
 const routes: Routes = [
   {
-    path: '', loadChildren: () => import('./main-area/main-area.module').then(m => m.MainAreaModule)
-    , canActivate: [AuthGuard]
+    path: '',
+
+    loadChildren: () => import('./main-area/main-area.module').then(m => m.MainAreaModule),
+
+    canActivate: [AuthGuard]
   },
   { path: 'login', component: LoginComponent }
 ];

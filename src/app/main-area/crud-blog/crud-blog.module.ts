@@ -23,6 +23,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CrudBlogComponent } from './crud-blog.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BlogDialogComponent } from './detail-dialog/blog-dialog.component';
+import { BlogCategoryComponent } from './blog-category/blog-category.component';
+import { BlogCategoryDialogComponent } from './blog-category/blog-category-dialog/blog-category-dialog.component';
 const routes: Routes = [
   {
     path: '',
@@ -30,6 +32,10 @@ const routes: Routes = [
       {
         path: '',
         component: CrudBlogComponent,
+      },
+      {
+        path: 'category',
+        component: BlogCategoryComponent
       },
     ]
   },
@@ -65,6 +71,8 @@ const routes: Routes = [
   declarations: [
     CrudBlogComponent,
     BlogDialogComponent,
+    BlogCategoryComponent,
+    BlogCategoryDialogComponent,
   ],
   exports: [FlexLayoutModule, RouterModule],
   providers: []

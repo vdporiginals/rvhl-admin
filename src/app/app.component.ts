@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'rvhl-admin';
+  isLoggin = localStorage.getItem('rvhl_token');
+
 }

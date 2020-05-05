@@ -59,7 +59,8 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authService.signIn(this.signinForm.value).then(res => {
       this.noti.showSuccess('Đăng nhập Thành công', '');
-      this.router.navigate([this.returnUrl]);
+      this.router.navigate(['']);
+      window.location.reload();
     }).catch(error => {
       console.log(error)
       this.noti.showError('Đăng nhập Thất bại', error.error);

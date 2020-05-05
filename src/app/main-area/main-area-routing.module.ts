@@ -10,8 +10,12 @@ import { MainAreaComponent } from './main-area.component';
 const routes: Routes = [
   {
     path: '',
-    component: MainAreaComponent,
+
     children: [
+      {
+        path: '',
+        component: MainAreaComponent,
+      },
       // {
       //   path: 'user',
       //   component: CrudUserComponent,
@@ -40,14 +44,6 @@ const routes: Routes = [
         loadChildren: () => import('./crud-tour/crud-tour.module').then(m => m.CrudTourModule),
         data: {
           breadcrumb: 'Tour',
-          count: ''
-        }
-      },
-      {
-        path: 'category',
-        loadChildren: () => import('./crud-category/crud-category.module').then(m => m.CrudCategoryModule),
-        data: {
-          breadcrumb: 'Category',
           count: ''
         }
       }

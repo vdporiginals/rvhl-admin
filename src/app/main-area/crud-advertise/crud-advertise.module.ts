@@ -21,6 +21,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { CrudAdvertiseComponent } from './crud-advertise.component';
 import { AdvertiseDialogComponent } from './detail-dialog/advertise-dialog.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AdvertiseCategoryComponent } from './advertise-category/advertise-category.component';
+import { AdvertiseCategoryDialogComponent } from './advertise-category/advertise-category-dialog/advertise-category-dialog.component';
 const routes: Routes = [
   {
     path: '',
@@ -28,6 +30,10 @@ const routes: Routes = [
       {
         path: '',
         component: CrudAdvertiseComponent,
+      },
+      {
+        path: 'category',
+        component: AdvertiseCategoryComponent
       },
     ]
   },
@@ -60,6 +66,8 @@ const routes: Routes = [
   declarations: [
     CrudAdvertiseComponent,
     AdvertiseDialogComponent,
+    AdvertiseCategoryComponent,
+    AdvertiseCategoryDialogComponent,
   ],
   exports: [FlexLayoutModule, RouterModule],
   providers: []

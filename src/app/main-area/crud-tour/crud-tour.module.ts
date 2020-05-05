@@ -23,6 +23,8 @@ import { CrudTourComponent } from './crud-tour.component';
 import { TourDialogComponent } from './detail-dialog/tour-dialog.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { TourCategoryComponent } from './tour-category/tour-category.component';
+import { TourCategoryDialogComponent } from './tour-category/tour-category-dialog/tour-category-dialog.component';
 
 const routes: Routes = [
   {
@@ -31,6 +33,10 @@ const routes: Routes = [
       {
         path: '',
         component: CrudTourComponent
+      },
+      {
+        path: 'category',
+        component: TourCategoryComponent
       },
     ]
   },
@@ -65,6 +71,8 @@ const routes: Routes = [
   declarations: [
     CrudTourComponent,
     TourDialogComponent,
+    TourCategoryComponent,
+    TourCategoryDialogComponent,
   ],
   exports: [FlexLayoutModule, RouterModule],
   providers: []
