@@ -23,7 +23,7 @@ export const SideBar = [
     },
     {
         text: 'Quản lý danh mục',
-        link: '?',
+        link: null,
         subItems: [
             {
                 text: 'Danh mục tour',

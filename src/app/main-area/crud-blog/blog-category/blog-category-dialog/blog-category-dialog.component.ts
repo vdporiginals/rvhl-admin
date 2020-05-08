@@ -29,6 +29,7 @@ export class BlogCategoryDialogComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       position: [''],
+      keywords: ['']
     });
   }
 

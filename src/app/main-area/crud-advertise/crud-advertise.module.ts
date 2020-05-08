@@ -33,7 +33,11 @@ const routes: Routes = [
       },
       {
         path: 'category',
-        component: AdvertiseCategoryComponent
+        component: AdvertiseCategoryComponent,
+        data: {
+          breadcrumb: 'Danh mục',
+          count: ''
+        }
       },
     ]
   },

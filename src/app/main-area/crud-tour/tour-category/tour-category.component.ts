@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { DataSourceService } from 'src/app/shared/services/data-source.service';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { tap } from 'rxjs/operators';
@@ -46,7 +46,7 @@ export class TourCategoryComponent implements OnInit, AfterViewInit {
       this.apiName,
       this.paginator.pageIndex,
       this.paginator.pageSize,
-      'name,description,position,createdAt'
+      'name,description,position,keywords,createdAt'
     );
   }
 
@@ -56,8 +56,12 @@ export class TourCategoryComponent implements OnInit, AfterViewInit {
     ).subscribe();
   }
 
-  update(id: any) {
-    this.dialog.open(TourCategoryDialogComponent, id).afterClosed()
+  update(data: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      data
+    };
+    this.dialog.open(TourCategoryDialogComponent, dialogConfig).afterClosed()
       .subscribe(() => this.loadDatasPage());
   }
 

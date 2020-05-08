@@ -3,7 +3,7 @@
     <mat-spinner></mat-spinner>
   </div>
   <mat-toolbar><button (click)="create()" mat-raised-button color="primary" style="float: right;">
-      Thêm Danh mục quảng cáo
+      Thêm Danh mục tour
     </button></mat-toolbar>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="position">
@@ -34,7 +34,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Thao tác</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button color="warn" (click)="update(element._id)" style="float: left;">
+        <button mat-raised-button color="warn" (click)="update(element)" style="float: left;">
           Sửa
         </button>
         <button mat-raised-button color="error" (click)="delete(element._id)" style="float: left;">

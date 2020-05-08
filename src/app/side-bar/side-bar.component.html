@@ -28,8 +28,7 @@
 
         <mat-expansion-panel class="mat-elevation-z0" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }" #rla="routerLinkActive" [expanded]="rla.isActive">
-          <mat-expansion-panel-header *ngIf="navItem.subItems !== undefined"><a [routerLink]="navItem.link"
-              routerLinkActive="active">
+          <mat-expansion-panel-header *ngIf="navItem.subItems !== undefined"><a routerLinkActive="active">
               {{ navItem.text }}
             </a>
           </mat-expansion-panel-header>

@@ -35,7 +35,11 @@ const routes: Routes = [
       },
       {
         path: 'category',
-        component: BlogCategoryComponent
+        component: BlogCategoryComponent,
+        data: {
+          breadcrumb: 'Danh mục',
+          count: ''
+        }
       },
     ]
   },

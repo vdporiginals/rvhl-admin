@@ -32,11 +32,12 @@ export class AdvertiseCategoryDialogComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       position: [''],
+      keywords: ['']
     });
   }
 
   ngOnInit(): void {
-    if (this.data.id) {
+    if (this.data !== null) {
       this.api.getData(this.data.id, this.apiPath).subscribe(res => {
         this.dataEdit = res;
         console.log(this.dataEdit);
@@ -47,7 +48,7 @@ export class AdvertiseCategoryDialogComponent implements OnInit {
 
   createOrUpdate(val?) {
     console.log(this.detailForm.value);
-    if (this.data.id) {
+    if (this.data !== null) {
       this.api.updateData(this.detailForm.value, this.data.id, this.apiPath).subscribe(() => { }, (err: any) => {
         this.noti.showError('Sửa category thất bại', err);
       }, () => {

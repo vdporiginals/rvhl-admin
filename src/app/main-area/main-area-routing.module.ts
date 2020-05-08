@@ -16,13 +16,13 @@ const routes: Routes = [
         path: '',
         component: MainAreaComponent,
       },
-      // {
-      //   path: 'user',
-      //   component: CrudUserComponent,
-      //   data: {
-      //     breadcrumb: 'User'
-      //   }
-      // },
+      {
+        path: 'user',
+        component: CrudUserComponent,
+        data: {
+          breadcrumb: 'User'
+        }
+      },
       {
         path: 'blog',
         loadChildren: () => import('./crud-blog/crud-blog.module').then(m => m.CrudBlogModule),

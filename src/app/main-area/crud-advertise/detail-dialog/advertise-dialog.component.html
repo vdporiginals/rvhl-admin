@@ -2,7 +2,7 @@
   <mat-card-content fxLayout="column" fxLayoutAlign="center">
     <div class="name_area" fxLayout="row" fxLayoutGap="10px">
       <mat-form-field class="detail_full_width" fxFlex="50">
-        <input matInput formControlName="title" color="warn" [ngModel]="dataEdit?.data?.title" [placeholder]="'Thêm tên quảng cáo'
+        <input matInput formControlName="title" color="warn" [value]="dataEdit?.data?.title" [placeholder]="'Thêm tên quảng cáo'
                 " />
       </mat-form-field>
       <mat-form-field fxFlex="50">
@@ -18,16 +18,16 @@
     </div>
     <div class="image" fxLayout="row" fxLayoutGap="10px">
       <mat-form-field class="detail_full_width" fxFlex="50">
-        <input matInput formControlName="image" color="warn" [ngModel]="dataEdit?.data?.image" [placeholder]="'Thêm ảnh'
+        <input matInput formControlName="image" color="warn" [value]="dataEdit?.data?.image" [placeholder]="'Thêm ảnh'
                 " />
       </mat-form-field>
       <mat-form-field class="detail_full_width" fxFlex="50">
-        <input matInput type="text" formControlName="link" [ngModel]="dataEdit?.data?.link" [placeholder]="'Thêm link quảng cáo'
+        <input matInput type="text" formControlName="link" [value]="dataEdit?.data?.link" [placeholder]="'Thêm link quảng cáo'
                 " />
       </mat-form-field>
     </div>
     <mat-form-field class="detail_full_width">
-      <input matInput type="text" formControlName="description" [ngModel]="dataEdit?.data?.description" [placeholder]="'Thêm mô tả'
+      <input matInput type="text" formControlName="description" [value]="dataEdit?.data?.description" [placeholder]="'Thêm mô tả'
                 " />
     </mat-form-field>
     <div fxLayout="row" fxLayoutGap="10px">
@@ -35,22 +35,22 @@
         <mat-label>Chọn vị trí</mat-label>
         <mat-select formControlName="position">
           <mat-option>--</mat-option>
-          <mat-option *ngFor="let position of positions" [value]="position.value">
+          <mat-option *ngFor="let position of positions">
             {{ position.name }}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="detailForm.hasError('required')">Please choose an category</mat-error>
       </mat-form-field>
       <mat-form-field class="detail_full_width" fxFlex="50">
-        <input matInput formControlName="title" color="warn" [ngModel]="dataEdit?.data?.keywords" [placeholder]="'Thêm từ khóa quảng cáo'
+        <input matInput formControlName="title" color="warn" [value]="dataEdit?.data?.keywords" [placeholder]="'Thêm từ khóa quảng cáo'
                 " />
       </mat-form-field>
     </div>
   </mat-card-content>
   <div fxLayoutGap="10px">
-    <mat-slide-toggle formControlName="status" [ngModel]="dataEdit?.data?.status">
+    <mat-slide-toggle formControlName="status" [checked]="dataEdit?.data?.status">
       Bật/tắt trạng thái</mat-slide-toggle>
-    <mat-checkbox formControlName="isPopular" [ngModel]="dataEdit?.data?.isPopular">Tour nổi bật</mat-checkbox>
+    <mat-checkbox formControlName="isPopular" [checked]="dataEdit?.data?.isPopular">Tour nổi bật</mat-checkbox>
   </div>
   <button mat-stroked-button color="warn" class="btn-block">
     Submit

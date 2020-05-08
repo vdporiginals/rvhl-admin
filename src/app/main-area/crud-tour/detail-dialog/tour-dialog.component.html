@@ -5,12 +5,12 @@
         <div fxFlex="80" fxLayout="column">
           <div fxLayout="row" fxLayoutGap="10px">
             <mat-form-field class="name">
-              <input matInput formControlName="title" [ngModel]="dataEdit?.data?.title" color="warn" [placeholder]="
+              <input matInput formControlName="title" [value]="dataEdit?.data.title" color="warn" [placeholder]="
                 'Thêm tên tour'
                 " />
             </mat-form-field>
             <mat-form-field>
-              <mat-label>Chọn loại tours</mat-label>
+              <mat-label>Chọn loại tours*</mat-label>
               <mat-select formControlName="category" required>
                 <mat-option>--</mat-option>
                 <mat-option *ngFor="let category of categories" [value]="category._id">
@@ -22,8 +22,8 @@
           </div>
           <div fxLayout="row" fxLayoutGap="10px">
             <mat-form-field class="detail_full_width" fxFlex="50">
-              <input OnlyNumber="true" matInput class="phone" type="text" [ngModel]="dataEdit?.data?.keywords"
-                formControlName="keywords" [placeholder]="'Thêm từ khóa'" />
+              <input matInput type="text" formControlName="keywords" [value]="dataEdit?.data?.keywords"
+                [placeholder]="'Thêm từ khóa'" />
             </mat-form-field>
             <mat-form-field class="image detail_full_width" fxFlex>
               <mat-chip-list #chipList aria-label="img selection" formControlName="images">
@@ -32,7 +32,7 @@
                   {{ img | Overflow: ["5", "..."] }}
                   <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
-                <input [ngModel]="dataEdit?.data?.images | Overflow: ['10', '...']" [placeholder]="
+                <input [placeholder]="
           'Thêm ảnh'
         " [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                   [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addImg($event)" />
@@ -43,12 +43,12 @@
         <div fxFlex>
           <mat-form-field class="detail_full_width">
             <input OnlyNumber="true" class="price" matInput type="number" formControlName="price"
-              [ngModel]="dataEdit?.data?.price" [placeholder]="
+              [value]="dataEdit?.data?.price" [placeholder]="
              'Thêm giá tour'
               " />
           </mat-form-field>
           <mat-form-field class="detail_full_width">
-            <input OnlyNumber="true" matInput class="phone" type="text" [ngModel]="dataEdit?.data?.phone"
+            <input OnlyNumber="true" matInput class="phone" type="text" [value]="dataEdit?.data?.phone"
               formControlName="phone" [placeholder]="'Thêm sđt'" />
           </mat-form-field>
 
@@ -57,27 +57,27 @@
       <div class="body_area" fxLayout="row" fxLayoutGap="10px">
         <div fxFlex="50" fxLayout="column">
           <mat-form-field class="detail_full_width">
-            <input matInput type="text" class="description" [ngModel]="dataEdit?.data?.description"
+            <input matInput type="text" class="description" [value]="dataEdit?.data?.description"
               formControlName="description" [placeholder]="
                 'Thêm mô tả'
               " />
           </mat-form-field>
           <mat-form-field class="detail_full_width">
-            <input matInput type="text" class="customer_num" [ngModel]="dataEdit?.data?.customerNum"
+            <input matInput type="text" class="customer_num" [value]="dataEdit?.data?.customerNum"
               formControlName="customerNum" [placeholder]="
-                'Nhập số lượng khác / giá'
+                'Nhập số lượng khách / giá'
               " />
           </mat-form-field>
         </div>
         <div fxFlex="50" fxLayout="column">
           <mat-form-field class="detail_full_width">
-            <input matInput type="text" class="address" formControlName="address" [ngModel]="dataEdit?.data?.address"
+            <input matInput type="text" class="address" formControlName="address" [value]="dataEdit?.data?.address"
               [placeholder]="
               'Thêm địa chỉ'
               " />
           </mat-form-field>
           <mat-form-field class="detail_full_width">
-            <input matInput type="text" class="time" formControlName="time" [ngModel]="dataEdit?.data?.time"
+            <input matInput type="text" class="time" formControlName="time" [value]="dataEdit?.data?.time"
               [placeholder]="
              'Thêm thời gian tour'
               " />
@@ -87,10 +87,10 @@
       <div formArrayName="schedule">
         <div *ngFor="let child of formData.controls; let i = index">
           <h3>
-            Dịch vụ thứ {{ i + 1 }}
+            Lịch trình {{ i + 1 }}
             <button type="button" color="primary" mat-raised-button fxFlexOffset="15px" (click)="getFormSchedule()"
               fxFlex="20">
-              Thêm service
+              Thêm lịch trình mới
             </button>
           </h3>
 
@@ -98,7 +98,7 @@
             <div fxFlex="50" fxLayout="column">
               <mat-form-field>
                 <mat-label>chọn ngày bắt đầu</mat-label>
-                <input matInput [ngModel]="dataEdit?.data?.schedule?.timeStart | date: 'medium'" [placeholder]="
+                <input matInput [placeholder]="
                     'Thêm ngày bắt đầu dịch vụ'
                   " formControlName="timeStart" [matDatepicker]="timeStart" />
                 <mat-datepicker-toggle matSuffix [for]="timeStart"></mat-datepicker-toggle>
@@ -106,7 +106,7 @@
               </mat-form-field>
               <mat-form-field class="detail_full_width">
                 <mat-label>chọn ngày kết thúc</mat-label>
-                <input matInput [ngModel]="dataEdit?.data?.schedule?.timeEnd | date: 'medium'" [placeholder]="
+                <input matInput [placeholder]="
                    'Thêm ngày kết thúc dịch vụ'
                   " formControlName="timeEnd" [matDatepicker]="timeEnd" color="warn" />
                 <mat-datepicker-toggle matSuffix [for]="timeEnd"></mat-datepicker-toggle>
@@ -116,13 +116,13 @@
             <div fxFlex fxLayout="column">
               <mat-form-field class="detail_full_width">
                 <mat-label>chọn địa điểm</mat-label>
-                <input matInput [ngModel]="dataEdit?.data?.schedule?.location" [placeholder]="
+                <input matInput [placeholder]="
                     'Thêm địa điểm dịch vụ'
                   " formControlName="location" color="warn" />
               </mat-form-field>
               <mat-form-field class="detail_full_width">
                 <mat-label>chọn dịch vụ</mat-label>
-                <input [ngModel]="dataEdit?.data?.schedule?.service" [placeholder]="
+                <input [placeholder]="
                      'Thêm dịch vụ'
                   " matInput formControlName="service" color="warn" />
               </mat-form-field>
@@ -132,9 +132,9 @@
       </div>
     </mat-card-content>
     <div fxLayoutGap="10px">
-      <mat-slide-toggle formControlName="status" [ngModel]="dataEdit?.data?.status">
+      <mat-slide-toggle formControlName="status" [checked]="dataEdit?.data?.status">
         Bật/tắt trạng thái</mat-slide-toggle>
-      <mat-checkbox formControlName="isPopular" [ngModel]="dataEdit?.data?.isPopular">Tour nổi bật</mat-checkbox>
+      <mat-checkbox formControlName="isPopular" [checked]="dataEdit?.data?.isPopular">Tour nổi bật</mat-checkbox>
     </div>
     <button type="submit" mat-stroked-button color="warn" class="btn-block">
       Submit tour

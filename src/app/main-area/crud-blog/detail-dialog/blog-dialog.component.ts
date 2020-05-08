@@ -8,6 +8,8 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DataSourceService } from 'src/app/shared/services/data-source.service';
+import { SanitizeHtmlPipe } from 'src/app/shared/pipe/html-sanitize.pipe';
+
 @Component({
   selector: 'app-blog-dialog',
   templateUrl: './blog-dialog.component.html',
@@ -58,6 +60,7 @@ export class BlogDialogComponent implements OnInit {
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<BlogDialogComponent>,
     private sharedData: SharedDataService,
+    private sanitize: SanitizeHtmlPipe,
     @Inject(MAT_DIALOG_DATA) public data,
     public fb: FormBuilder
   ) {
@@ -80,8 +83,15 @@ export class BlogDialogComponent implements OnInit {
       this.categories = this.data.category.data;
       this.api.getData(this.data.id, 'blogs').subscribe(res => {
         this.dataEdit = res;
-        console.log(this.dataEdit);
+        this.arrImage.value = res.data.images;
         this.isEdit = true;
+        this.detailForm.get('title').setValue(res.data.title);
+        this.detailForm.get('content').setValue(this.sanitize.transform(res.data.content));
+        this.detailForm.get('phone').setValue(res.data.phone);
+        this.detailForm.get('description').setValue(res.data.description);
+        this.detailForm.get('address').setValue(res.data.address);
+        this.detailForm.get('isPopular').setValue(res.data.isPopular);
+        this.detailForm.get('status').setValue(res.data.status);
       });
     } else {
       this.categories = this.data;

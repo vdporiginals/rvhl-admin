@@ -59,7 +59,6 @@ export class TourDialogComponent implements OnInit {
       isPopular: [false],
       status: [false, Validators.required]
     });
-    this.getFormSchedule();
   }
 
   get formData() { return this.detailForm.get('schedule') as FormArray; }
@@ -67,13 +66,27 @@ export class TourDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.id) {
       this.categories = this.data.category.data;
-      this.api.getData(this.data.id, 'blogs').subscribe(res => {
+      this.api.getData(this.data.id, 'tours').subscribe(res => {
         this.dataEdit = res;
-        console.log(this.dataEdit);
+        res.data.schedule.forEach(val => {
+          const control = this.detailForm.get('schedule') as FormArray;
+          this.arrImage.value = res.data.images;
+          control.push(this.getScheduleVal(val.timeStart, val.timeEnd, val.location, val.service))
+        });
         this.isEdit = true;
+        this.detailForm.get('title').setValue(res.data.title);
+        this.detailForm.get('price').setValue(res.data.price);
+        this.detailForm.get('phone').setValue(res.data.phone);
+        this.detailForm.get('description').setValue(res.data.description);
+        this.detailForm.get('address').setValue(res.data.address);
+        this.detailForm.get('customerNum').setValue(res.data.customerNum);
+        this.detailForm.get('time').setValue(res.data.time);
+        this.detailForm.get('isPopular').setValue(res.data.isPopular);
+        this.detailForm.get('status').setValue(res.data.status);
       });
     } else {
       this.categories = this.data;
+      this.getFormSchedule();
     }
   }
 
@@ -120,15 +133,17 @@ export class TourDialogComponent implements OnInit {
     console.log(this.detailForm.value);
     if (this.data.id) {
       this.api.updateData(this.detailForm.value, this.data.id, 'tours').subscribe(() => { }, (err: any) => {
-        this.noti.showError('Tạo tour thất bại', err.error);
+        this.noti.showError('Sửa category thất bại', err);
       }, () => {
-        this.noti.showSuccess('Tạo tour Thành công', '');
+        this.noti.showSuccess('Sửa category Thành công', '');
+        this.dialogRef.close();
       });
     } else {
       this.api.postData(this.detailForm.value, 'tours').subscribe(() => { }, (err: any) => {
         this.noti.showError('Tạo tour thất bại', err.error);
       }, () => {
         this.noti.showSuccess('Tạo tour Thành công', '');
+        this.dialogRef.close();
       });
     }
   }

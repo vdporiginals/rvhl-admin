@@ -26,6 +26,7 @@ import { ErrorInterceptor } from './shared/interceptor/error.interceptor';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MainAreaComponent } from './main-area/main-area.component';
 import { HeaderBreabcrumbComponent } from './header-breabcrumb/header-breabcrumb.component';
+import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,9 @@ import { HeaderBreabcrumbComponent } from './header-breabcrumb/header-breabcrumb
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    },],
+    },
+    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
