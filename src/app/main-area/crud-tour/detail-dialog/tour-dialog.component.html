@@ -5,126 +5,226 @@
         <div fxFlex="80" fxLayout="column">
           <div fxLayout="row" fxLayoutGap="10px">
             <mat-form-field class="name">
-              <input matInput formControlName="title" [value]="dataEdit?.data.title" color="warn" [placeholder]="
-                'Thêm tên tour'
-                " />
+              <input
+                matInput
+                formControlName="title"
+                [value]="dataEdit?.data.title"
+                color="warn"
+                [placeholder]="'Thêm tên tour'"
+              />
             </mat-form-field>
             <mat-form-field>
-              <mat-label>Chọn loại tours*</mat-label>
+              <mat-label>Chọn loại tours</mat-label>
               <mat-select formControlName="category" required>
                 <mat-option>--</mat-option>
-                <mat-option *ngFor="let category of categories" [value]="category._id">
+                <mat-option
+                  *ngFor="let category of categories"
+                  [value]="category._id"
+                >
                   {{ category.name }}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="detailForm.hasError('required')">Please choose an category</mat-error>
             </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutGap="10px">
             <mat-form-field class="detail_full_width" fxFlex="50">
-              <input matInput type="text" formControlName="keywords" [value]="dataEdit?.data?.keywords"
-                [placeholder]="'Thêm từ khóa'" />
+              <input
+                matInput
+                type="text"
+                formControlName="keywords"
+                [value]="dataEdit?.data?.keywords"
+                [placeholder]="'Thêm từ khóa'"
+              />
             </mat-form-field>
             <mat-form-field class="image detail_full_width" fxFlex>
-              <mat-chip-list #chipList aria-label="img selection" formControlName="images">
-                <mat-chip *ngFor="let img of arrImage.value" [selectable]="selectable" [removable]="removable"
-                  (removed)="removeImg(img)">
+              <mat-chip-list
+                #chipList
+                aria-label="img selection"
+                formControlName="images"
+              >
+                <mat-chip
+                  *ngFor="let img of arrImage.value"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="removeImg(img)"
+                >
                   {{ img | Overflow: ["5", "..."] }}
                   <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
-                <input [placeholder]="
-          'Thêm ảnh'
-        " [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addImg($event)" />
+                <input
+                  [placeholder]="'Thêm ảnh'"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="addImg($event)"
+                />
               </mat-chip-list>
             </mat-form-field>
           </div>
         </div>
         <div fxFlex>
           <mat-form-field class="detail_full_width">
-            <input OnlyNumber="true" class="price" matInput type="number" formControlName="price"
-              [value]="dataEdit?.data?.price" [placeholder]="
-             'Thêm giá tour'
-              " />
+            <input
+              OnlyNumber="true"
+              class="price"
+              matInput
+              type="number"
+              formControlName="price"
+              [value]="dataEdit?.data?.price"
+              [placeholder]="'Thêm giá tour'"
+            />
           </mat-form-field>
           <mat-form-field class="detail_full_width">
-            <input OnlyNumber="true" matInput class="phone" type="text" [value]="dataEdit?.data?.phone"
-              formControlName="phone" [placeholder]="'Thêm sđt'" />
+            <input
+              OnlyNumber="true"
+              matInput
+              class="phone"
+              type="text"
+              [value]="dataEdit?.data?.phone"
+              formControlName="phone"
+              [placeholder]="'Thêm sđt'"
+            />
           </mat-form-field>
-
         </div>
       </div>
       <div class="body_area" fxLayout="row" fxLayoutGap="10px">
         <div fxFlex="50" fxLayout="column">
           <mat-form-field class="detail_full_width">
-            <input matInput type="text" class="description" [value]="dataEdit?.data?.description"
-              formControlName="description" [placeholder]="
-                'Thêm mô tả'
-              " />
+            <input
+              matInput
+              type="text"
+              class="description"
+              [value]="dataEdit?.data?.description"
+              formControlName="description"
+              [placeholder]="'Thêm mô tả'"
+            />
           </mat-form-field>
           <mat-form-field class="detail_full_width">
-            <input matInput type="text" class="customer_num" [value]="dataEdit?.data?.customerNum"
-              formControlName="customerNum" [placeholder]="
-                'Nhập số lượng khách / giá'
-              " />
+            <input
+              matInput
+              type="text"
+              class="customer_num"
+              [value]="dataEdit?.data?.customerNum"
+              formControlName="customerNum"
+              [placeholder]="'Nhập số lượng khách / giá'"
+            />
           </mat-form-field>
         </div>
         <div fxFlex="50" fxLayout="column">
           <mat-form-field class="detail_full_width">
-            <input matInput type="text" class="address" formControlName="address" [value]="dataEdit?.data?.address"
-              [placeholder]="
-              'Thêm địa chỉ'
-              " />
+            <input
+              matInput
+              type="text"
+              class="address"
+              formControlName="address"
+              [value]="dataEdit?.data?.address"
+              [placeholder]="'Thêm địa chỉ'"
+            />
           </mat-form-field>
           <mat-form-field class="detail_full_width">
-            <input matInput type="text" class="time" formControlName="time" [value]="dataEdit?.data?.time"
-              [placeholder]="
-             'Thêm thời gian tour'
-              " />
+            <input
+              matInput
+              type="text"
+              class="time"
+              formControlName="time"
+              [value]="dataEdit?.data?.time"
+              [placeholder]="'Thêm thời gian tour'"
+            />
           </mat-form-field>
         </div>
+        <mat-form-field>
+          <mat-label *ngIf="!dataEdit?.data.position"
+            >Chọn vị trí tours</mat-label
+          >
+          <mat-label *ngIf="dataEdit?.data.position !== undefined">{{
+            dataEdit?.data.position
+          }}</mat-label>
+          <mat-select formControlName="position" required>
+            <mat-option>--</mat-option>
+            <mat-option
+              *ngFor="let position of positions"
+              [value]="position.val"
+            >
+              {{ position.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <angular-editor formControlName="content" [config]="editorConfig">
+        </angular-editor>
       </div>
       <div formArrayName="schedule">
         <div *ngFor="let child of formData.controls; let i = index">
           <h3>
             Lịch trình {{ i + 1 }}
-            <button type="button" color="primary" mat-raised-button fxFlexOffset="15px" (click)="getFormSchedule()"
-              fxFlex="20">
+            <button
+              type="button"
+              color="primary"
+              mat-raised-button
+              fxFlexOffset="15px"
+              (click)="getFormSchedule()"
+              fxFlex="20"
+            >
               Thêm lịch trình mới
             </button>
           </h3>
 
-          <div [formGroupName]="i" fxLayout="row" fxLayoutGap="10px" class="service_area">
+          <div
+            [formGroupName]="i"
+            fxLayout="row"
+            fxLayoutGap="10px"
+            class="service_area"
+          >
             <div fxFlex="50" fxLayout="column">
               <mat-form-field>
                 <mat-label>chọn ngày bắt đầu</mat-label>
-                <input matInput [placeholder]="
-                    'Thêm ngày bắt đầu dịch vụ'
-                  " formControlName="timeStart" [matDatepicker]="timeStart" />
-                <mat-datepicker-toggle matSuffix [for]="timeStart"></mat-datepicker-toggle>
+                <input
+                  matInput
+                  [placeholder]="'Thêm ngày bắt đầu dịch vụ'"
+                  formControlName="timeStart"
+                  [matDatepicker]="timeStart"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="timeStart"
+                ></mat-datepicker-toggle>
                 <mat-datepicker #timeStart></mat-datepicker>
               </mat-form-field>
               <mat-form-field class="detail_full_width">
                 <mat-label>chọn ngày kết thúc</mat-label>
-                <input matInput [placeholder]="
-                   'Thêm ngày kết thúc dịch vụ'
-                  " formControlName="timeEnd" [matDatepicker]="timeEnd" color="warn" />
-                <mat-datepicker-toggle matSuffix [for]="timeEnd"></mat-datepicker-toggle>
+                <input
+                  matInput
+                  [placeholder]="'Thêm ngày kết thúc dịch vụ'"
+                  formControlName="timeEnd"
+                  [matDatepicker]="timeEnd"
+                  color="warn"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="timeEnd"
+                ></mat-datepicker-toggle>
                 <mat-datepicker #timeEnd></mat-datepicker>
               </mat-form-field>
             </div>
             <div fxFlex fxLayout="column">
               <mat-form-field class="detail_full_width">
                 <mat-label>chọn địa điểm</mat-label>
-                <input matInput [placeholder]="
-                    'Thêm địa điểm dịch vụ'
-                  " formControlName="location" color="warn" />
+                <input
+                  matInput
+                  [placeholder]="'Thêm địa điểm dịch vụ'"
+                  formControlName="location"
+                  color="warn"
+                />
               </mat-form-field>
               <mat-form-field class="detail_full_width">
                 <mat-label>chọn dịch vụ</mat-label>
-                <input [placeholder]="
-                     'Thêm dịch vụ'
-                  " matInput formControlName="service" color="warn" />
+                <input
+                  [placeholder]="'Thêm dịch vụ'"
+                  matInput
+                  formControlName="service"
+                  color="warn"
+                />
               </mat-form-field>
             </div>
           </div>
@@ -132,12 +232,20 @@
       </div>
     </mat-card-content>
     <div fxLayoutGap="10px">
-      <mat-slide-toggle formControlName="status" [checked]="dataEdit?.data?.status">
-        Bật/tắt trạng thái</mat-slide-toggle>
-      <mat-checkbox formControlName="isPopular" [checked]="dataEdit?.data?.isPopular">Tour nổi bật</mat-checkbox>
+      <mat-slide-toggle
+        formControlName="status"
+        [checked]="dataEdit?.data?.status"
+      >
+        Bật/tắt trạng thái</mat-slide-toggle
+      >
+      <mat-checkbox
+        formControlName="isPopular"
+        [checked]="dataEdit?.data?.isPopular"
+        >Tour nổi bật</mat-checkbox
+      >
     </div>
     <button type="submit" mat-stroked-button color="warn" class="btn-block">
-      Submit tour
+      Submit
     </button>
   </form>
 </div>

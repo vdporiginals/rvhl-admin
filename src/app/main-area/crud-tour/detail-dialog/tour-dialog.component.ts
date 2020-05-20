@@ -7,6 +7,8 @@ import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dial
 import { ApiService } from 'src/app/shared/services/api.service';
 
 import { MatChipInputEvent } from '@angular/material/chips';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { SanitizeHtmlPipe } from 'src/app/shared/pipe/html-sanitize.pipe';
 
 @Component({
   selector: 'app-tour-dialog',
@@ -25,12 +27,49 @@ export class TourDialogComponent implements OnInit {
   isEdit = false;
   dataEdit: any;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  positions = [{
+    name: 'Tàu vịnh',
+    val: 'TourCruise'
+  }, {
+    name: 'Trọn gói',
+    val: 'TourAll'
+  }, {
+    name: 'Tour Hạ Long',
+    val: 'TourHaLong'
+  }];
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: 'auto',
+    maxHeight: 'auto',
+    width: 'auto',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Thêm nội dung cho reviews',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+    ],
+    customClasses: [],
+    uploadUrl: 'v1/image',
+    uploadWithCredentials: false,
+    sanitize: true,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      ['bold', 'italic'],
+      ['fontSize']
+    ]
+  };
   constructor(
     private noti: NotificationService,
     private api: ApiService,
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<TourDialogComponent>,
     private sharedData: SharedDataService,
+    private sanitize: SanitizeHtmlPipe,
     @Inject(MAT_DIALOG_DATA) public data,
     public fb: FormBuilder) {
     this.scheduleData = [
@@ -52,9 +91,11 @@ export class TourDialogComponent implements OnInit {
       images: this.arrImage,
       schedule: this.fb.array([]),
       time: [''],
+      content: [''],
       price: ['', Validators.compose([Validators.required])],
       address: [''],
-      category: '',
+      category: [''],
+      position: [''],
       keywords: [''],
       isPopular: [false],
       status: [false, Validators.required]
@@ -71,16 +112,20 @@ export class TourDialogComponent implements OnInit {
         res.data.schedule.forEach(val => {
           const control = this.detailForm.get('schedule') as FormArray;
           this.arrImage.value = res.data.images;
-          control.push(this.getScheduleVal(val.timeStart, val.timeEnd, val.location, val.service))
+          control.push(this.getScheduleVal(val.timeStart, val.timeEnd, val.location, val.service));
         });
         this.isEdit = true;
         this.detailForm.get('title').setValue(res.data.title);
         this.detailForm.get('price').setValue(res.data.price);
         this.detailForm.get('phone').setValue(res.data.phone);
+        this.detailForm.get('content').setValue(this.sanitize.transform(res.data.content));
         this.detailForm.get('description').setValue(res.data.description);
         this.detailForm.get('address').setValue(res.data.address);
         this.detailForm.get('customerNum').setValue(res.data.customerNum);
         this.detailForm.get('time').setValue(res.data.time);
+        this.detailForm.get('category').setValue(res.data.category);
+        this.detailForm.get('position').setValue(res.data.position);
+        this.detailForm.get('keywords').setValue(res.data.keywords);
         this.detailForm.get('isPopular').setValue(res.data.isPopular);
         this.detailForm.get('status').setValue(res.data.status);
       });
@@ -133,9 +178,9 @@ export class TourDialogComponent implements OnInit {
     console.log(this.detailForm.value);
     if (this.data.id) {
       this.api.updateData(this.detailForm.value, this.data.id, 'tours').subscribe(() => { }, (err: any) => {
-        this.noti.showError('Sửa category thất bại', err);
+        this.noti.showError('Sửa tour thất bại', err);
       }, () => {
-        this.noti.showSuccess('Sửa category Thành công', '');
+        this.noti.showSuccess('Sửa tour Thành công', '');
         this.dialogRef.close();
       });
     } else {

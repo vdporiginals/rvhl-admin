@@ -97,7 +97,12 @@
       >Quảng cáo nổi bật</mat-checkbox
     >
   </div>
-  <button mat-stroked-button color="warn" class="btn-block">
+  <button
+    mat-stroked-button
+    color="warn"
+    [disabled]="detailForm.invalid"
+    class="btn-block"
+  >
     Submit
   </button>
 </form>

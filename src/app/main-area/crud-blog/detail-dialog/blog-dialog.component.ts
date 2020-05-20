@@ -25,6 +25,13 @@ export class BlogDialogComponent implements OnInit {
   categories: any[];
   isEdit = false;
   dataEdit: any;
+  positions = [{
+    name: 'Lịch trình',
+    val: 'Schedule'
+  }, {
+    name: 'Ăn uống',
+    val: 'Food'
+  }];
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -69,12 +76,13 @@ export class BlogDialogComponent implements OnInit {
       title: ['', Validators.required],
       category: [''],
       content: [''],
-      description: ['', Validators.required],
+      description: [''],
       images: this.arrImage,
+      position: ['', Validators.required],
       address: [''],
       isPopular: [false],
       keywords: [''],
-      status: [false, Validators.required]
+      status: [false]
     });
   }
   get getImages() { return this.detailForm.get('images') as FormArray; }
@@ -90,14 +98,15 @@ export class BlogDialogComponent implements OnInit {
         this.detailForm.get('phone').setValue(res.data.phone);
         this.detailForm.get('description').setValue(res.data.description);
         this.detailForm.get('address').setValue(res.data.address);
+        this.detailForm.get('category').setValue(res.data.category);
+        this.detailForm.get('position').setValue(res.data.position);
+        this.detailForm.get('keywords').setValue(res.data.keywords);
         this.detailForm.get('isPopular').setValue(res.data.isPopular);
         this.detailForm.get('status').setValue(res.data.status);
       });
     } else {
       this.categories = this.data;
     }
-
-    console.log(this.data.id)
   }
 
   addImg(event: MatChipInputEvent): void {
@@ -130,7 +139,6 @@ export class BlogDialogComponent implements OnInit {
   createOrUpdate(val?) {
     console.log(this.data.id);
     if (!this.data.id) {
-      console.log(this.data);
       this.api.postData(this.detailForm.value, 'blogs').subscribe((res) => { }, (err: any) => {
         this.noti.showError('Tạo reviews thất bại', err);
         console.log(err);
@@ -140,7 +148,7 @@ export class BlogDialogComponent implements OnInit {
       });
 
     } else {
-      console.log(this.detailForm.value)
+      console.log(this.detailForm.value);
       this.api.updateData(this.detailForm.value, this.data.id, 'blogs').subscribe((res) => {
       }, (err) => {
         console.log(err);

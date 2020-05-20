@@ -28,7 +28,6 @@ export class BlogCategoryDialogComponent implements OnInit {
     this.detailForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      position: [''],
       keywords: ['']
     });
   }
@@ -37,7 +36,6 @@ export class BlogCategoryDialogComponent implements OnInit {
     if (this.data !== null) {
       this.api.getData(this.data.id, this.apiPath).subscribe(res => {
         this.dataEdit = res;
-        console.log(this.dataEdit);
         this.isEdit = true;
       });
     } else { }

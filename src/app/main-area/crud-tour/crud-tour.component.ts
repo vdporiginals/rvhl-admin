@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TourDialogComponent } from './detail-dialog/tour-dialog.component';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-crud-tour',
@@ -21,13 +22,12 @@ export class CrudTourComponent implements OnInit, AfterViewInit {
   private apiName = 'tours';
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private api: ApiService, private dialog: MatDialog, private route: ActivatedRoute) {
-    console.log(this.route.snapshot);
+  constructor(private api: ApiService, private dialog: MatDialog, private noti: NotificationService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.tbData = new DataSourceService(this.api);
-    this.tbData.loadDatas(this.apiName, 0, 5, 'title,description,status,createdAt,images');
+    this.tbData.loadDatas(this.apiName, 0, 5, 'title,description,status,createdAt');
     this.tbData._dataSubject.subscribe((data: any) => {
       this.count = data.count;
       this.dataSource = new MatTableDataSource<any>(data.data);
@@ -46,7 +46,7 @@ export class CrudTourComponent implements OnInit, AfterViewInit {
       this.apiName,
       this.paginator.pageIndex,
       this.paginator.pageSize,
-      'title,description,status,createdAt,images,category'
+      'title,description,status,createdAt'
     );
   }
 
@@ -54,11 +54,21 @@ export class CrudTourComponent implements OnInit, AfterViewInit {
     if (val === true) {
       this.api.updateData({ status: false }, id, this.apiName).pipe(
         tap(() => this.loadDatasPage())
-      ).subscribe();
+      ).subscribe(res => {
+        this.noti.showSuccess('', 'Thay đổi trạng thái thành công!');
+
+      }, err => {
+        this.noti.showError(err, 'Thay đổi trạng thái thất bại');
+      });
     } else {
       this.api.updateData({ status: true }, id, this.apiName).pipe(
         tap(() => this.loadDatasPage())
-      ).subscribe();
+      ).subscribe(res => {
+        this.noti.showSuccess('', 'Thay đổi trạng thái thành công!');
+
+      }, err => {
+        this.noti.showError(err, 'Thay đổi trạng thái thất bại');
+      });
     }
   }
 
@@ -66,12 +76,17 @@ export class CrudTourComponent implements OnInit, AfterViewInit {
   delete(id) {
     this.api.deleteData(id, this.apiName).pipe(
       tap(() => this.loadDatasPage())
-    ).subscribe();
+    ).subscribe(res => {
+      this.noti.showSuccess('', 'Xóa bản ghi thành công!');
+
+    }, err => {
+      this.noti.showError(err, 'Xóa bản ghi thất bại');
+    });
   }
 
   update(id) {
     const dialogConfig = new MatDialogConfig();
-    this.api.getDatas('tours/category', 1, 10, 'name').pipe().subscribe(res => {
+    this.api.getDatas('tours/category', 1, 10).pipe().subscribe(res => {
       dialogConfig.data = {
         id,
         category: res

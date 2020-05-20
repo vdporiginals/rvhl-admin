@@ -1,39 +1,64 @@
 <form [formGroup]="detailForm" (ngSubmit)="createOrUpdate()" fxLayout="column">
   <div>
     <mat-form-field class="detail_full_width">
-      <input matInput formControlName="title" color="warn" [value]="dataEdit?.data?.title"
-        [placeholder]="'Thêm tiêu đề'" />
-      <mat-error *ngIf="detailForm.hasError('required')">Please choose an category</mat-error>
+      <input
+        matInput
+        formControlName="title"
+        color="warn"
+        [value]="dataEdit?.data?.title"
+        [placeholder]="'Thêm tiêu đề'"
+      />
+      <mat-error *ngIf="detailForm.hasError('required')"
+        >Please add a title</mat-error
+      >
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field class="detail_full_width" fxFlex="50">
-      <mat-label>Chọn loại reviews</mat-label>
-      <mat-select formControlName="category" required>
+      <mat-label *ngIf="!dataEdit?.data.category.name">Chọn danh mục</mat-label>
+      <mat-label *ngIf="dataEdit?.data.category.name !== undefined">{{
+        dataEdit?.data.category.name
+      }}</mat-label>
+      <mat-select formControlName="category">
         <mat-option>--</mat-option>
         <mat-option *ngFor="let category of categories" [value]="category._id">
           {{ category.name }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="detailForm.hasError('required')">Please choose an category</mat-error>
     </mat-form-field>
     <mat-form-field class="detail_full_width" fxFlex>
-      <input matInput formControlName="keywords" color="warn" [value]="dataEdit?.data?.keywords"
-        [placeholder]="'Thêm từ khóa'" />
+      <input
+        matInput
+        formControlName="keywords"
+        color="warn"
+        [value]="dataEdit?.data?.keywords"
+        [placeholder]="'Thêm từ khóa'"
+      />
     </mat-form-field>
   </div>
   <div>
     <mat-form-field class="detail_full_width">
-      <mat-chip-list #chipList aria-label="img selection" formControlName="images">
-        <mat-chip *ngFor="let img of arrImage.value" [selectable]="selectable" [removable]="removable"
-          (removed)="removeImg(img)">
+      <mat-chip-list
+        #chipList
+        aria-label="img selection"
+        formControlName="images"
+      >
+        <mat-chip
+          *ngFor="let img of arrImage.value"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="removeImg(img)"
+        >
           {{ img | Overflow: ["5", "..."] }}
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>
-        <input [placeholder]="
-           'Thêm list hình ảnh'
-          " [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addImg($event)" />
+        <input
+          [placeholder]="'Thêm list hình ảnh'"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="addImg($event)"
+        />
       </mat-chip-list>
     </mat-form-field>
   </div>
@@ -42,27 +67,62 @@
     <angular-editor formControlName="content" [config]="editorConfig">
     </angular-editor>
   </div>
-  <div>
-    <mat-form-field class="detail_full_width">
-      <input matInput type="text" [value]="dataEdit?.data?.description" formControlName="description"
-        [placeholder]="'Thêm mô tả'" />
-      <mat-error *ngIf="detailForm.hasError('required')">Please choose an category</mat-error>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field class="detail_full_width" fxFlex="70">
+      <input
+        matInput
+        type="text"
+        [value]="dataEdit?.data?.description"
+        formControlName="description"
+        [placeholder]="'Thêm mô tả'"
+      />
+    </mat-form-field>
+    <mat-form-field class="detail_full_width" fxFlex="30">
+      <mat-label *ngIf="!dataEdit?.data.position">Chọn loại reviews</mat-label>
+      <mat-label *ngIf="dataEdit?.data.position !== undefined">{{
+        dataEdit?.data.position
+      }}</mat-label>
+      <mat-select formControlName="position" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let position of positions" [value]="position.val">
+          {{ position.name }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
 
   <div>
     <mat-form-field class="detail_full_width">
-      <input matInput type="text" formControlName="address" [value]="dataEdit?.data?.address"
-        [placeholder]="'Thêm địa chỉ'" />
+      <input
+        matInput
+        type="text"
+        formControlName="address"
+        [value]="dataEdit?.data?.address"
+        [placeholder]="'Thêm địa chỉ'"
+      />
     </mat-form-field>
   </div>
 
   <div fxLayoutGap="10px">
-    <mat-slide-toggle formControlName="status" [checked]="dataEdit?.data?.status">
-      Bật/tắt trạng thái</mat-slide-toggle>
-    <mat-checkbox formControlName="isPopular" [checked]="dataEdit?.data?.isPopular">Review nổi bật</mat-checkbox>
-    <button type="submit" [disabled]="detailForm.invalid" mat-stroked-button color="warn" class="btn-block">
-      Submit reviews
+    <mat-slide-toggle
+      formControlName="status"
+      [checked]="dataEdit?.data?.status"
+    >
+      Bật/tắt trạng thái</mat-slide-toggle
+    >
+    <mat-checkbox
+      formControlName="isPopular"
+      [checked]="dataEdit?.data?.isPopular"
+      >Review nổi bật</mat-checkbox
+    >
+    <button
+      type="submit"
+      [disabled]="detailForm.invalid"
+      mat-stroked-button
+      color="warn"
+      class="btn-block"
+    >
+      Submit
     </button>
   </div>
 </form>

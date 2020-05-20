@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { tap } from 'rxjs/operators';
 import { AdvertiseCategoryDialogComponent } from './advertise-category-dialog/advertise-category-dialog.component';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-advertise-category',
@@ -19,7 +20,7 @@ export class AdvertiseCategoryComponent implements OnInit, AfterViewInit {
   dataSource: any;
   count: number;
   private apiName = 'advertises/category';
-  constructor(private api: ApiService, private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private api: ApiService, private noti: NotificationService, private route: ActivatedRoute, private dialog: MatDialog) { }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -53,7 +54,12 @@ export class AdvertiseCategoryComponent implements OnInit, AfterViewInit {
   delete(id) {
     this.api.deleteData(id, this.apiName).pipe(
       tap(() => this.loadDatasPage())
-    ).subscribe();
+    ).subscribe(res => {
+      this.noti.showSuccess('', 'Xóa bản ghi thành công!');
+
+    }, err => {
+      this.noti.showError(err, 'Xóa bản ghi  thất bại');
+    });
   }
 
   update(id: any) {
@@ -62,7 +68,6 @@ export class AdvertiseCategoryComponent implements OnInit, AfterViewInit {
     dialogConfig.data = {
       id
     };
-    console.log(id)
     this.dialog.open(AdvertiseCategoryDialogComponent, dialogConfig).afterClosed()
       .subscribe(() => this.loadDatasPage());
   }

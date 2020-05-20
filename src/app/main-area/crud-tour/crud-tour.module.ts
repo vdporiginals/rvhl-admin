@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 import { CrudTourComponent } from './crud-tour.component';
 import { TourDialogComponent } from './detail-dialog/tour-dialog.component';
@@ -53,6 +54,7 @@ const routes: Routes = [
     RouterModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    AngularEditorModule,
     MatCheckboxModule,
     MatToolbarModule,
     MatChipsModule,

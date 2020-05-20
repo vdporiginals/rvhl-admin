@@ -55,7 +55,6 @@ export class AdvertiseCategoryDialogComponent implements OnInit {
   }
 
   createOrUpdate(val?) {
-    console.log(this.detailForm.value);
     if (this.data !== null) {
       this.api.updateData(this.detailForm.value, this.data.id, this.apiPath).subscribe(() => { }, (err: any) => {
         this.noti.showError('Sửa category thất bại', err);

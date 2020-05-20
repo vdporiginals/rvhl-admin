@@ -11,6 +11,7 @@ import { BlogDialogComponent } from './detail-dialog/blog-dialog.component';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-crud-blog',
@@ -26,7 +27,8 @@ export class CrudBlogComponent implements OnInit, AfterViewInit {
   private apiName = 'blogs';
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private api: ApiService, private route: ActivatedRoute, private dialog: MatDialog, private http: HttpClient) { }
+  constructor(private api: ApiService, private noti: NotificationService,
+    private route: ActivatedRoute, private dialog: MatDialog, private http: HttpClient) { }
 
   ngOnInit() {
     this.tbData = new DataSourceService(this.api);
@@ -57,18 +59,33 @@ export class CrudBlogComponent implements OnInit, AfterViewInit {
     if (val === true) {
       this.api.updateData({ status: false }, id, this.apiName).pipe(
         tap(() => this.loadDatasPage())
-      ).subscribe();
+      ).subscribe(res => {
+        this.noti.showSuccess('', 'Đổi trạng thái thành công!');
+
+      }, err => {
+        this.noti.showError(err, 'Đổi trạng thái  thất bại');
+      });
     } else {
       this.api.updateData({ status: true }, id, this.apiName).pipe(
         tap(() => this.loadDatasPage())
-      ).subscribe();
+      ).subscribe(res => {
+        this.noti.showSuccess('', 'Đổi trạng thái thành công!');
+
+      }, err => {
+        this.noti.showError(err, 'Đổi trạng thái  thất bại');
+      });
     }
   }
 
   delete(id) {
     this.api.deleteData(id, this.apiName).pipe(
       tap(() => this.loadDatasPage())
-    ).subscribe();
+    ).subscribe(res => {
+      this.noti.showSuccess('', 'Xóa bản ghi thành công!');
+
+    }, err => {
+      this.noti.showError(err, 'Xóa bản ghi thất bại');
+    });
   }
 
   update(id) {
