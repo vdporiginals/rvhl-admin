@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { CrudUserComponent } from './crud-user/crud-user.component';
-import { CrudBlogComponent } from './crud-blog/crud-blog.component';
-import { CrudAdvertiseComponent } from './crud-advertise/crud-advertise.component';
-import { CrudTourComponent } from './crud-tour/crud-tour.component';
 import { MainAreaComponent } from './main-area.component';
 
 const routes: Routes = [
@@ -44,6 +41,22 @@ const routes: Routes = [
         loadChildren: () => import('./crud-tour/crud-tour.module').then(m => m.CrudTourModule),
         data: {
           breadcrumb: 'Tour',
+          count: ''
+        }
+      },
+      {
+        path: 'cho-o',
+        loadChildren: () => import('./crud-estate/estate.module').then(m => m.EstateModule),
+        data: {
+          breadcrumb: 'Chỗ ở',
+          count: ''
+        }
+      },
+      {
+        path: 'customer-request',
+        loadChildren: () => import('./customer-request/customer-request.module').then(m => m.CustomerRequestModule),
+        data: {
+          breadcrumb: 'Yêu cầu khách hàng',
           count: ''
         }
       }

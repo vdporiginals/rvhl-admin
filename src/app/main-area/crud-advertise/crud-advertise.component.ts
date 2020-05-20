@@ -70,7 +70,7 @@ export class CrudAdvertiseComponent implements OnInit, AfterViewInit {
   update(id: any) {
     const dialogConfig = new MatDialogConfig();
 
-    this.api.getDatas('blogs/category', 1, 10, 'name').pipe().subscribe(res => {
+    this.api.getDatas('advertises/category', 1, 10, 'name').pipe().subscribe(res => {
       dialogConfig.data = {
         id,
         category: res

@@ -6,16 +6,6 @@ export const SideBar = [
     {
         text: 'Quản lý Tour',
         link: 'tour',
-        //   subItems: [
-        //     {
-        //       text: 'Lịch Trình',
-        //       link: 'reviews/lich-trinh',
-        //     },
-        //     {
-        //       text: 'Ăn Gì',
-        //       link: 'reviews/an-gi',
-        //     }
-        //   ]
     },
     {
         text: 'Quản lý Blogs',
@@ -36,6 +26,42 @@ export const SideBar = [
             {
                 text: 'Danh mục advertise',
                 link: 'advertise/category',
+            }
+        ]
+    },
+    {
+        text: 'Quản lý Chỗ ở',
+        link: 'cho-o',
+        subItems: [
+            {
+                text: 'Danh mục',
+                link: 'cho-o/category',
+            },
+            {
+                text: 'Khách sạn',
+                link: 'cho-o/hotel',
+            },
+            {
+                text: 'Villa',
+                link: 'cho-o/villa',
+            },
+            {
+                text: 'Homestay',
+                link: 'cho-o/homestay',
+            }
+        ]
+    },
+    {
+        text: 'Quản lý yêu cầu khách hàng',
+        link: 'customer-request',
+        subItems: [
+            {
+                text: 'Quản lý bình luận',
+                link: 'customer-request/comment',
+            },
+            {
+                text: 'Danh mục blog',
+                link: 'customer-request/check-room',
             }
         ]
     },

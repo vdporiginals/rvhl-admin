@@ -13,14 +13,17 @@ import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 })
 export class AdvertiseDialogComponent implements OnInit {
   detailForm: FormGroup;
-  positions: any = [{ name: 'Banner tour', value: 'bannerTour' },
-  { name: 'Banner transfer', value: 'bannerTransfer' },
-  { name: 'Banner hotel', value: 'bannerHotel' },
-  { name: 'Banner review', value: 'bannerReview' },
-  { name: 'Trasfer', value: 'transfer' },
-  { name: 'Hotel', value: 'hotel' },
-  { name: 'Tour', value: 'tour' },
-  { name: 'Review', value: 'review' }];
+  pages: any = [{ name: 'Quảng cáo trang chủ', value: 'Homepage' },
+  { name: 'Quảng cáo trang Tàu vịnh', value: 'TourCruisePage' },
+  { name: 'Quảng cáo trang trọn gói', value: 'TourAllPage' },
+  { name: 'Quảng cáo trang di chuyển', value: 'TransferPage' },
+  { name: 'Quảng cáo trang tour hạ long', value: 'TourHalongPage' },
+  { name: 'Quảng cáo trang Lịch trình', value: 'SchedulePage' },
+  { name: 'Quảng cáo trang Ăn gì', value: 'FoodPage' },
+  { name: 'Quảng cáo trang Khách sạn', value: 'HotelPage' },
+  { name: 'Quảng cáo trang Homestay', value: 'HomestayPage' },
+  { name: 'Quảng cáo trang Villa', value: 'VillaPage' }
+  ];
   categories: any[];
   isEdit = false;
   dataEdit: any;
@@ -38,7 +41,7 @@ export class AdvertiseDialogComponent implements OnInit {
       link: [''],
       description: [''],
       category: [''],
-      position: [''],
+      page: [''],
       keywords: [''],
       isPopular: [false],
       status: [false, Validators.required]
@@ -48,10 +51,15 @@ export class AdvertiseDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.id) {
       this.categories = this.data.category.data;
-      this.api.getData(this.data.id, 'blogs').subscribe(res => {
+      this.api.getData(this.data.id, 'advertises').subscribe(res => {
         this.dataEdit = res;
-        console.log(this.dataEdit);
         this.isEdit = true;
+        this.detailForm.get('title').setValue(res.data.title);
+        this.detailForm.get('image').setValue(res.data.image);
+        this.detailForm.get('description').setValue(res.data.description);
+        this.detailForm.get('page').setValue(res.data.page);
+        this.detailForm.get('isPopular').setValue(res.data.isPopular);
+        this.detailForm.get('status').setValue(res.data.status);
       });
     } else {
       this.categories = this.data;
