@@ -13,10 +13,10 @@ import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 })
 export class AdvertiseCategoryDialogComponent implements OnInit {
   detailForm: FormGroup;
-  positions: any = [{ name: 'Slider Homepage', value: 'slider' },
-  { name: 'Banner video homepage', value: 'video' },
-  { name: 'Banner Advertise homepage', value: 'bannerAdvertise' },
-  { name: 'Banner page', value: 'bannerPage' }];
+  positions: any = [{ name: 'Quảng cáo silder', value: 'slider' },
+  { name: 'Quảng cáo video', value: 'video' },
+  { name: 'Quảng cáo cho homepage', value: 'HomepageAdvertise' },
+  { name: 'Quảng cáo cho trang', value: 'AdvertisePage' }];
   isEdit = false;
   dataEdit: any;
   apiPath = 'advertises/category';
@@ -32,18 +32,26 @@ export class AdvertiseCategoryDialogComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       position: [''],
-      keywords: ['']
+      keywords: [''],
+      isPopular: [false],
+      status: [false, Validators.required]
     });
   }
 
   ngOnInit(): void {
-    if (this.data !== null) {
+    if (this.data) {
+      console.log(this.data)
       this.api.getData(this.data.id, this.apiPath).subscribe(res => {
         this.dataEdit = res;
-        console.log(this.dataEdit);
         this.isEdit = true;
+        this.detailForm.get('name').setValue(res.data.title);
+        this.detailForm.get('description').setValue(res.data.description);
+        this.detailForm.get('position').setValue(res.data.page);
+        this.detailForm.get('isPopular').setValue(res.data.isPopular);
+        this.detailForm.get('status').setValue(res.data.status);
       });
     }
+
   }
 
   createOrUpdate(val?) {

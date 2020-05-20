@@ -54,6 +54,7 @@ export class AdvertiseDialogComponent implements OnInit {
       this.api.getData(this.data.id, 'advertises').subscribe(res => {
         this.dataEdit = res;
         this.isEdit = true;
+        this.detailForm.get('category').setValue(res.data.category.name);
         this.detailForm.get('title').setValue(res.data.title);
         this.detailForm.get('image').setValue(res.data.image);
         this.detailForm.get('description').setValue(res.data.description);

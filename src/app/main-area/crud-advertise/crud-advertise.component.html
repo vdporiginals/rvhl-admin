@@ -43,7 +43,13 @@
     <ng-container matColumnDef="createdAt">
       <th mat-header-cell *matHeaderCellDef>Ngày tạo</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.createdAt }}
+        {{ element.createdAt | date: "full" }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="page">
+      <th mat-header-cell *matHeaderCellDef>vị trí trang qc</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.page }}
       </td>
     </ng-container>
     <ng-container matColumnDef="actions">

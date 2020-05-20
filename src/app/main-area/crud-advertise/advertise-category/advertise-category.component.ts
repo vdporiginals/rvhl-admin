@@ -57,7 +57,13 @@ export class AdvertiseCategoryComponent implements OnInit, AfterViewInit {
   }
 
   update(id: any) {
-    this.dialog.open(AdvertiseCategoryDialogComponent, id).afterClosed()
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      id
+    };
+    console.log(id)
+    this.dialog.open(AdvertiseCategoryDialogComponent, dialogConfig).afterClosed()
       .subscribe(() => this.loadDatasPage());
   }
 

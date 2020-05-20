@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { AdvertiseDialogComponent } from './detail-dialog/advertise-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-crud-advertise',
@@ -14,18 +15,18 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
   styleUrls: ['./crud-advertise.component.scss']
 })
 export class CrudAdvertiseComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['status', 'title', 'description', 'createdAt', 'actions'];
+  displayedColumns: string[] = ['status', 'title', 'description', 'createdAt', 'page', 'actions'];
   tbData: DataSourceService;
   dataSource: any;
   count: number;
   private apiName = 'advertises';
-  constructor(private api: ApiService, private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private api: ApiService, private noti: NotificationService, private route: ActivatedRoute, private dialog: MatDialog) { }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit() {
     this.tbData = new DataSourceService(this.api);
-    this.tbData.loadDatas('advertises', 0, 5, 'title,description,status,createdAt');
+    this.tbData.loadDatas('advertises', 0, 5, 'title,description,status,page,createdAt');
     this.tbData._dataSubject.subscribe((data: any) => {
       this.count = data.count;
       this.dataSource = new MatTableDataSource<any>(data.data);
@@ -45,26 +46,40 @@ export class CrudAdvertiseComponent implements OnInit, AfterViewInit {
       this.apiName,
       this.paginator.pageIndex,
       this.paginator.pageSize,
-      'title,description,status,createdAt'
+      'title,description,status,page,createdAt'
     );
   }
 
   changeStatus(val?, id?) {
     if (val === true) {
       this.api.updateData({ status: false }, id, this.apiName).pipe(
-        tap(() => this.loadDatasPage())
-      ).subscribe();
+        tap(() => this.loadDatasPage()),
+
+      ).subscribe(res => {
+        this.noti.showSuccess('', 'Thay đổi trạng thái thành công!');
+      }, err => {
+        this.noti.showError(err, 'Thay đổi trạng thái thất bại');
+      });
     } else {
       this.api.updateData({ status: true }, id, this.apiName).pipe(
         tap(() => this.loadDatasPage())
-      ).subscribe();
+      ).subscribe(res => {
+        this.noti.showSuccess('', 'Thay đổi trạng thái thành công!');
+      }, err => {
+        this.noti.showError(err, 'Thay đổi trạng thái thất bại');
+      });
     }
   }
 
   delete(id) {
     this.api.deleteData(id, this.apiName).pipe(
       tap(() => this.loadDatasPage())
-    ).subscribe();
+    ).subscribe(res => {
+      this.noti.showSuccess('', 'Xóa bản ghi thành công!');
+
+    }, err => {
+      this.noti.showError(err, 'Xóa bản ghi  thất bại');
+    });
   }
 
   update(id: any) {

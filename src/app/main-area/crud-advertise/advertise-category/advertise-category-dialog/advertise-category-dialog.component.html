@@ -1,30 +1,64 @@
 <form [formGroup]="detailForm" (ngSubmit)="createOrUpdate()">
   <mat-card-content fxLayout="column" fxLayoutAlign="center">
     <mat-form-field class="detail_full_width">
-      <input matInput formControlName="name" color="warn" [value]="dataEdit?.data?.name" [placeholder]="'Thêm tên quảng cáo'
-                  " />
+      <input
+        matInput
+        formControlName="name"
+        color="warn"
+        [value]="dataEdit?.data?.name"
+        [placeholder]="'Thêm tên quảng cáo'"
+      />
     </mat-form-field>
     <mat-form-field class="detail_full_width">
-      <input matInput type="text" formControlName="description" [value]="dataEdit?.data?.description" [placeholder]="'Thêm mô tả'
-                  " />
+      <input
+        matInput
+        type="text"
+        formControlName="description"
+        [value]="dataEdit?.data?.description"
+        [placeholder]="'Thêm mô tả'"
+      />
     </mat-form-field>
     <div fxLayout="row" fxLayoutGap="10px">
       <mat-form-field>
-        <mat-label>Chọn vị trí</mat-label>
+        <mat-label *ngIf="!dataEdit?.data?.position">Chọn vị trí</mat-label>
+        <mat-label *ngIf="dataEdit?.data?.position">{{
+          dataEdit?.data?.position
+        }}</mat-label>
         <mat-select formControlName="position">
           <mat-option>--</mat-option>
-          <mat-option *ngFor="let position of positions">
+          <mat-option
+            *ngFor="let position of positions"
+            [value]="position?.value"
+          >
             {{ position?.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="detail_full_width">
-        <input matInput type="text" formControlName="keywords" [value]="dataEdit?.data?.keywords" [placeholder]="'Thêm từ khóa'
-                    " />
+        <input
+          matInput
+          type="text"
+          formControlName="keywords"
+          [value]="dataEdit?.data?.keywords"
+          [placeholder]="'Thêm từ khóa'"
+        />
       </mat-form-field>
     </div>
   </mat-card-content>
+  <div fxLayoutGap="10px">
+    <mat-slide-toggle
+      formControlName="status"
+      [checked]="dataEdit?.data?.status"
+    >
+      Bật/tắt trạng thái</mat-slide-toggle
+    >
+    <mat-checkbox
+      formControlName="isPopular"
+      [checked]="dataEdit?.data?.isPopular"
+      >Quảng cáo nổi bật</mat-checkbox
+    >
+  </div>
   <button mat-stroked-button color="warn" class="btn-block">
-    Submit category
+    Submit
   </button>
 </form>
