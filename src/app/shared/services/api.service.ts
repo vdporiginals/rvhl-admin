@@ -23,6 +23,19 @@ export class ApiService {
     );
   }
 
+  getDataWithPosition(apiName, page, limit, select = '', sort = '', position?): Observable<any[]> {
+    return this.http.get(`${this.apiurl}/${apiName}`, {
+      params: new HttpParams()
+        .set('select', select.toString())
+        .set('sort', sort)
+        .set('page', page.toString())
+        .set('limit', limit.toString())
+        .set('position', position.toString())
+    }).pipe(
+      map((res: any) => res)
+    );
+  }
+
   getData(id, apiName) {
     const data = this.http.get(`${this.apiurl}/${apiName}/${id}`).pipe(
       map((res: any) => res)

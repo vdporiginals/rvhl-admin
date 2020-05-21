@@ -1,1 +1,208 @@
-<p>homestay-dialog works!</p>
+<div class="box">
+  <form [formGroup]="detailForm" (ngSubmit)="createOrUpdate()">
+    <mat-card-content fxLayout="column" fxLayoutAlign="center">
+      <div class="name_area" fxLayout="row" fxLayoutGap="10px">
+        <div fxFlex="80" fxLayout="column">
+          <div fxLayout="row" fxLayoutGap="10px">
+            <mat-form-field class="name">
+              <input
+                matInput
+                formControlName="name"
+                [value]="dataEdit?.data.name"
+                color="warn"
+                [placeholder]="'Thêm tên homestay'"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Chọn loại homestay</mat-label>
+              <mat-select formControlName="category" required>
+                <mat-option>--</mat-option>
+                <mat-option
+                  *ngFor="let category of categories"
+                  [value]="category._id"
+                >
+                  {{ category.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutGap="10px">
+            <mat-form-field class="detail_full_width" fxFlex="50">
+              <input
+                matInput
+                type="text"
+                formControlName="keywords"
+                [value]="dataEdit?.data?.keywords"
+                [placeholder]="'Thêm từ khóa'"
+              />
+            </mat-form-field>
+            <mat-form-field class="image detail_full_width" fxFlex>
+              <mat-chip-list
+                #chipList
+                aria-label="img selection"
+                formControlName="images"
+              >
+                <mat-chip
+                  *ngFor="let img of arrImage.value"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="removeImg(img)"
+                >
+                  {{ img | Overflow: ["5", "..."] }}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  [placeholder]="'Thêm ảnh'"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="addImg($event)"
+                />
+              </mat-chip-list>
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxFlex>
+          <mat-form-field class="detail_full_width">
+            <input
+              OnlyNumber="true"
+              class="price"
+              matInput
+              type="number"
+              formControlName="price"
+              [value]="dataEdit?.data?.price"
+              [placeholder]="'Thêm giá homestay'"
+            />
+          </mat-form-field>
+          <mat-form-field class="detail_full_width">
+            <input
+              OnlyNumber="true"
+              matInput
+              class="phone"
+              type="text"
+              [value]="dataEdit?.data?.phone"
+              formControlName="phone"
+              [placeholder]="'Thêm sđt'"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="body_area" fxLayout="column">
+        <div fxLayout="row" fxLayoutGap="10px">
+          <mat-form-field class="detail_full_width" fxFlex="80">
+            <input
+              matInput
+              type="text"
+              class="description"
+              [value]="dataEdit?.data?.description"
+              formControlName="description"
+              [placeholder]="'Thêm mô tả'"
+            />
+          </mat-form-field>
+          <mat-form-field class="detail_full_width" fxFlex="20">
+            <input
+              matInput
+              type="number"
+              class="customer_num"
+              [value]="dataEdit?.data?.roomNum"
+              formControlName="roomNum"
+              [placeholder]="'Nhập số lượng phòng'"
+            />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="10px">
+          <mat-form-field class="detail_full_width" fxFlex="50">
+            <input
+              matInput
+              type="text"
+              class="address"
+              formControlName="address"
+              [value]="dataEdit?.data?.address"
+              [placeholder]="'Thêm địa chỉ'"
+            />
+          </mat-form-field>
+          <mat-form-field class="detail_full_width" fxFlex="50">
+            <input
+              matInput
+              type="text"
+              formControlName="views"
+              [value]="dataEdit?.data?.views"
+              [placeholder]="'Thêm views homestay'"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div>
+        <angular-editor formControlName="content" [config]="editorConfig">
+        </angular-editor>
+      </div>
+      <div
+        fxLayout="row"
+        fxLayoutGap="10px"
+        fxLayoutALign="center center"
+        formGroupName="facilities"
+        [style.margin-top.px]="10"
+      >
+        <mat-checkbox
+          formControlName="pool"
+          fxFlex="20"
+          [checked]="dataEdit?.data?.facilities.pool"
+          >Bể bơi</mat-checkbox
+        >
+        <mat-checkbox
+          formControlName="oceanViews"
+          fxFlex="20"
+          [checked]="dataEdit?.data?.facilities.oceanViews"
+          >View biển</mat-checkbox
+        >
+        <mat-checkbox
+          formControlName="kitchen"
+          fxFlex="20"
+          [checked]="dataEdit?.data?.facilities.kitchen"
+          >Bếp nấu ăn</mat-checkbox
+        >
+        <mat-form-field class="detail_full_width" fxFlex="20">
+          <mat-label>Diện tích</mat-label>
+          <input
+            [placeholder]="'Thêm diện tích'"
+            matInput
+            formControlName="square"
+            color="warn"
+          />
+        </mat-form-field>
+        <mat-form-field class="detail_full_width" fxFlex="20">
+          <mat-label>Khác</mat-label>
+          <input
+            [placeholder]="'Thêm cơ sở vật chất khác'"
+            matInput
+            formControlName="other"
+            color="warn"
+          />
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <div fxLayoutGap="10px">
+      <mat-slide-toggle
+        formControlName="status"
+        [checked]="dataEdit?.data?.status"
+      >
+        Bật/tắt trạng thái</mat-slide-toggle
+      >
+      <mat-checkbox
+        formControlName="isPopular"
+        [checked]="dataEdit?.data?.isPopular"
+        >Tour nổi bật</mat-checkbox
+      >
+    </div>
+
+    <button
+      type="submit"
+      mat-stroked-button
+      color="warn"
+      [disabled]="detailForm.invalid"
+      class="btn-block"
+    >
+      Submit
+    </button>
+  </form>
+</div>

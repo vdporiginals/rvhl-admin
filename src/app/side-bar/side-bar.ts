@@ -60,7 +60,7 @@ export const SideBar = [
                 link: 'customer-request/comment',
             },
             {
-                text: 'Danh mục blog',
+                text: 'Quản lý yêu cầu xem phòng',
                 link: 'customer-request/check-room',
             }
         ]

@@ -111,9 +111,9 @@ export class TourDialogComponent implements OnInit {
         this.dataEdit = res;
         res.data.schedule.forEach(val => {
           const control = this.detailForm.get('schedule') as FormArray;
-          this.arrImage.value = res.data.images;
           control.push(this.getScheduleVal(val.timeStart, val.timeEnd, val.location, val.service));
         });
+        this.arrImage.value = res.data.images;
         this.isEdit = true;
         this.detailForm.get('title').setValue(res.data.title);
         this.detailForm.get('price').setValue(res.data.price);

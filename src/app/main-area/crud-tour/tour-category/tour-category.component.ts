@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { tap } from 'rxjs/operators';
 import { TourCategoryDialogComponent } from './tour-category-dialog/tour-category-dialog.component';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-tour-category',
@@ -14,12 +15,12 @@ import { TourCategoryDialogComponent } from './tour-category-dialog/tour-categor
   styleUrls: ['./tour-category.component.scss']
 })
 export class TourCategoryComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['position', 'title', 'description', 'createdAt', 'actions'];
+  displayedColumns: string[] = ['title', 'description', 'createdAt', 'actions'];
   tbData: DataSourceService;
   dataSource: any;
   count: number;
   private apiName = 'tours/category';
-  constructor(private api: ApiService, private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private api: ApiService, private noti: NotificationService, private route: ActivatedRoute, private dialog: MatDialog) { }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -53,7 +54,12 @@ export class TourCategoryComponent implements OnInit, AfterViewInit {
   delete(id) {
     this.api.deleteData(id, this.apiName).pipe(
       tap(() => this.loadDatasPage())
-    ).subscribe();
+    ).subscribe(res => {
+      this.noti.showSuccess('', 'Xóa bản ghi thành công!');
+
+    }, err => {
+      this.noti.showError(err, 'Xóa bản ghi thất bại');
+    });
   }
 
   update(data: any) {

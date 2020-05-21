@@ -1,1 +1,42 @@
-<p>category-dialog works!</p>
+<form [formGroup]="detailForm" (ngSubmit)="createOrUpdate()">
+  <mat-card-content fxLayout="column" fxLayoutAlign="center">
+    <mat-form-field class="detail_full_width">
+      <input
+        matInput
+        formControlName="name"
+        color="warn"
+        [placeholder]="'Thêm tên danh mục'"
+      />
+    </mat-form-field>
+    <mat-form-field class="detail_full_width">
+      <input
+        matInput
+        type="text"
+        formControlName="description"
+        [placeholder]="'Thêm mô tả'"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Chọn vị trí</mat-label>
+      <mat-select formControlName="position">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let position of positions" [value]="position.val">
+          {{ position?.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field class="detail_full_width">
+        <input
+          matInput
+          type="text"
+          formControlName="keywords"
+          [placeholder]="'Thêm từ khóa'"
+        />
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+  <button mat-stroked-button color="warn" class="btn-block">
+    Submit category
+  </button>
+</form>
