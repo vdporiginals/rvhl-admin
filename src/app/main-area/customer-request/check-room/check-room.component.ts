@@ -13,6 +13,7 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./check-room.component.scss']
 })
 export class CheckRoomComponent implements OnInit, AfterViewInit {
+  // tslint:disable-next-line:max-line-length
   displayedColumns: string[] = ['checkHandle', 'checkInDay', 'checkOutDay', 'roomCategory', 'night', 'peopleNum', 'roomId', 'phone', 'actions'];
   tbData: DataSourceService;
   dataSource: any;
