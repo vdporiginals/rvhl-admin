@@ -42,6 +42,10 @@ export const SideBar = [
             {
                 text: 'Danh mục quảng cáo',
                 link: 'advertise/category',
+            },
+            {
+                text: 'Danh mục review',
+                link: 'review/category',
             }
         ]
     },
@@ -89,6 +93,11 @@ export const SideBar = [
     {
         text: 'Quản lý Nhà hàng',
         link: 'restaurant',
+        queryParams: { category: 'bannerTour' },
+    },
+    {
+        text: 'Quản lý reviews',
+        link: 'review',
         queryParams: { category: 'bannerTour' },
     },
     {

@@ -61,6 +61,14 @@ const routes: Routes = [
         }
       },
       {
+        path: 'review',
+        loadChildren: () => import('./crud-entertain/crud-entertain.module').then(m => m.CrudEntertainModule),
+        data: {
+          breadcrumb: 'review',
+          count: ''
+        }
+      },
+      {
         path: 'restaurant',
         loadChildren: () => import('./crud-restaurant/crud-restaurant.module').then(m => m.CrudRestaurantModule),
         data: {
