@@ -91,12 +91,14 @@ export class TourDialogComponent implements OnInit {
       images: this.arrImage,
       schedule: this.fb.array([]),
       time: [''],
+      image: [''],
       content: [''],
       price: ['', Validators.compose([Validators.required])],
       address: [''],
       category: [''],
       position: [''],
       keywords: [''],
+      video: [''],
       isPopular: [false],
       status: [false, Validators.required]
     });
@@ -118,7 +120,9 @@ export class TourDialogComponent implements OnInit {
         this.detailForm.get('title').setValue(res.data.title);
         this.detailForm.get('price').setValue(res.data.price);
         this.detailForm.get('phone').setValue(res.data.phone);
+        this.detailForm.get('image').setValue(res.data.image);
         this.detailForm.get('content').setValue(this.sanitize.transform(res.data.content));
+        this.detailForm.get('video').setValue(res.data.video);
         this.detailForm.get('description').setValue(res.data.description);
         this.detailForm.get('address').setValue(res.data.address);
         this.detailForm.get('customerNum').setValue(res.data.customerNum);

@@ -53,6 +53,22 @@ const routes: Routes = [
         }
       },
       {
+        path: 'entertain',
+        loadChildren: () => import('./crud-entertain/crud-entertain.module').then(m => m.CrudEntertainModule),
+        data: {
+          breadcrumb: 'Giải trí',
+          count: ''
+        }
+      },
+      {
+        path: 'restaurant',
+        loadChildren: () => import('./crud-restaurant/crud-restaurant.module').then(m => m.CrudRestaurantModule),
+        data: {
+          breadcrumb: 'Nhà hàng',
+          count: ''
+        }
+      },
+      {
         path: 'customer-request',
         loadChildren: () => import('./customer-request/customer-request.module').then(m => m.CustomerRequestModule),
         data: {

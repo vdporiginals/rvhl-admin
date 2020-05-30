@@ -8,7 +8,7 @@ export const SideBar = [
         link: 'tour',
     },
     {
-        text: 'Quản lý Blogs',
+        text: 'Quản lý lịch trình',
         link: 'blog',
     },
     {
@@ -20,11 +20,15 @@ export const SideBar = [
                 link: 'tour/category',
             },
             {
-                text: 'Danh mục blog',
+                text: 'Danh mục entertain',
+                link: 'entertain/category',
+            },
+            {
+                text: 'Danh mục lịch trình',
                 link: 'blog/category',
             },
             {
-                text: 'Danh mục advertise',
+                text: 'Danh mục quảng cáo',
                 link: 'advertise/category',
             }
         ]
@@ -64,6 +68,16 @@ export const SideBar = [
                 link: 'customer-request/check-room',
             }
         ]
+    },
+    {
+        text: 'Quản lý Entertain',
+        link: 'entertain',
+        queryParams: { category: 'bannerTour' },
+    },
+    {
+        text: 'Quản lý Nhà hàng',
+        link: 'restaurant',
+        queryParams: { category: 'bannerTour' },
     },
     {
         text: 'Quản lý user',

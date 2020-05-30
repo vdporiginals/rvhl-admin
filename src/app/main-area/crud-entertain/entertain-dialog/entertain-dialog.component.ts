@@ -1,21 +1,21 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { DataSourceService } from 'src/app/shared/services/data-source.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { DataSourceService } from 'src/app/shared/services/data-source.service';
 import { SanitizeHtmlPipe } from 'src/app/shared/pipe/html-sanitize.pipe';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
-  selector: 'app-blog-dialog',
-  templateUrl: './blog-dialog.component.html',
-  styleUrls: ['./blog-dialog.component.scss']
+  selector: 'app-entertain-dialog',
+  templateUrl: './entertain-dialog.component.html',
+  styleUrls: ['./entertain-dialog.component.scss']
 })
-export class BlogDialogComponent implements OnInit {
+export class EntertainDialogComponent implements OnInit {
   detailForm: FormGroup; visible = true;
   selectable = true;
   removable = true;
@@ -25,13 +25,7 @@ export class BlogDialogComponent implements OnInit {
   categories: any[];
   isEdit = false;
   dataEdit: any;
-  positions = [{
-    name: 'Lịch trình',
-    val: 'Schedule'
-  }, {
-    name: 'Ăn uống',
-    val: 'Food'
-  }];
+
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -84,7 +78,7 @@ export class BlogDialogComponent implements OnInit {
     private noti: NotificationService,
     private api: ApiService,
     private dialog: MatDialog,
-    private dialogRef: MatDialogRef<BlogDialogComponent>,
+    private dialogRef: MatDialogRef<EntertainDialogComponent>,
     private sharedData: SharedDataService,
     private sanitize: SanitizeHtmlPipe,
     @Inject(MAT_DIALOG_DATA) public data,
@@ -92,12 +86,15 @@ export class BlogDialogComponent implements OnInit {
   ) {
     this.arrImage = new FormControl([]);
     this.detailForm = this.fb.group({
-      title: ['', Validators.required],
+      name: ['', Validators.required],
       category: [''],
       content: [''],
       description: [''],
+      video: [''],
+      price: [''],
       images: this.arrImage,
       address: [''],
+      phone: ['', Validators.required],
       isPopular: [false],
       image: [''],
       keywords: [''],
@@ -108,13 +105,16 @@ export class BlogDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.id) {
       this.categories = this.data.category.data;
-      this.api.getData(this.data.id, 'blogs').subscribe(res => {
+      this.api.getData(this.data.id, 'entertains').subscribe(res => {
         this.dataEdit = res;
         this.arrImage.value = res.data.images;
         this.isEdit = true;
-        this.detailForm.get('title').setValue(res.data.title);
+        this.detailForm.get('name').setValue(res.data.name);
         this.detailForm.get('content').setValue(this.sanitize.transform(res.data.content));
         this.detailForm.get('image').setValue(res.data.image);
+        this.detailForm.get('video').setValue(res.data.video);
+        this.detailForm.get('price').setValue(res.data.price);
+        this.detailForm.get('phone').setValue(res.data.phone);
         this.detailForm.get('description').setValue(res.data.description);
         this.detailForm.get('address').setValue(res.data.address);
         this.detailForm.get('category').setValue(res.data.category);
@@ -157,22 +157,22 @@ export class BlogDialogComponent implements OnInit {
   createOrUpdate(val?) {
     console.log(this.data.id);
     if (!this.data.id) {
-      this.api.postData(this.detailForm.value, 'blogs').subscribe((res) => { }, (err: any) => {
-        this.noti.showError('Tạo reviews thất bại', err);
+      this.api.postData(this.detailForm.value, 'entertains').subscribe((res) => { }, (err: any) => {
+        this.noti.showError('Tạo entertain thất bại', err);
         console.log(err);
       }, () => {
-        this.noti.showSuccess('Tạo reviews Thành công', '');
+        this.noti.showSuccess('Tạo entertain Thành công', '');
         this.dialogRef.close();
       });
 
     } else {
       console.log(this.detailForm.value);
-      this.api.updateData(this.detailForm.value, this.data.id, 'blogs').subscribe((res) => {
+      this.api.updateData(this.detailForm.value, this.data.id, 'entertains').subscribe((res) => {
       }, (err) => {
         console.log(err);
-        this.noti.showError('Sửa reviews thất bại', err);
+        this.noti.showError('Sửa entertain thất bại', err);
       }, () => {
-        this.noti.showSuccess('Sửa reviews Thành công', '');
+        this.noti.showSuccess('Sửa entertain Thành công', '');
         this.dialogRef.close();
       });
 

@@ -89,7 +89,7 @@
       </div>
       <div class="body_area" fxLayout="column">
         <div fxLayout="row" fxLayoutGap="10px">
-          <mat-form-field class="detail_full_width" fxFlex="80">
+          <mat-form-field class="detail_full_width" fxFlex="60">
             <input
               matInput
               type="text"
@@ -97,6 +97,15 @@
               [value]="dataEdit?.data?.description"
               formControlName="description"
               [placeholder]="'Thêm mô tả'"
+            />
+          </mat-form-field>
+          <mat-form-field class="detail_full_width" fxFlex="20">
+            <input
+              matInput
+              type="text"
+              formControlName="keywords"
+              [value]="dataEdit?.data?.keywords"
+              [placeholder]="'Thêm từ khóa'"
             />
           </mat-form-field>
           <mat-form-field class="detail_full_width" fxFlex="20">

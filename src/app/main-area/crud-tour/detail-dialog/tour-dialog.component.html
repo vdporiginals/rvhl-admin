@@ -62,6 +62,7 @@
             </mat-form-field>
           </div>
         </div>
+
         <div fxFlex>
           <mat-form-field class="detail_full_width">
             <input
@@ -132,22 +133,46 @@
             />
           </mat-form-field>
         </div>
-        <mat-form-field>
-          <mat-label *ngIf="!dataEdit?.data.position"
-            >Chọn vị trí tours</mat-label
-          >
-          <mat-label *ngIf="dataEdit?.data.position !== undefined">{{
-            dataEdit?.data.position
-          }}</mat-label>
-          <mat-select formControlName="position" required>
-            <mat-option>--</mat-option>
-            <mat-option
-              *ngFor="let position of positions"
-              [value]="position.val"
+        <div>
+          <mat-form-field>
+            <mat-label *ngIf="!dataEdit?.data.position"
+              >Chọn vị trí tours</mat-label
             >
-              {{ position.name }}
-            </mat-option>
-          </mat-select>
+            <mat-label *ngIf="dataEdit?.data.position !== undefined">{{
+              dataEdit?.data.position
+            }}</mat-label>
+            <mat-select formControlName="position" required>
+              <mat-option>--</mat-option>
+              <mat-option
+                *ngFor="let position of positions"
+                [value]="position.val"
+              >
+                {{ position.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              class="customer_num"
+              [value]="dataEdit?.data?.video"
+              formControlName="video"
+              [placeholder]="'Nhập Id video youtube'"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxFlex="100">
+        <mat-form-field class="full_width">
+          <input
+            matInput
+            class="full_width"
+            type="text"
+            formControlName="image"
+            [value]="dataEdit?.data?.image"
+            [placeholder]="'Thêm ảnh bìa'"
+          />
         </mat-form-field>
       </div>
       <div>

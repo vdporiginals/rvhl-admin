@@ -3,25 +3,24 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TourDialogComponent } from 'src/app/main-area/crud-tour/detail-dialog/tour-dialog.component';
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
-  selector: 'app-blog-category-dialog',
-  templateUrl: './blog-category-dialog.component.html',
-  styleUrls: ['./blog-category-dialog.component.scss']
+  selector: 'app-entertain-category-dialog',
+  templateUrl: './entertain-category-dialog.component.html',
+  styleUrls: ['./entertain-category-dialog.component.scss']
 })
-export class BlogCategoryDialogComponent implements OnInit {
+export class EntertainCategoryDialogComponent implements OnInit {
   detailForm: FormGroup;
   positions: any = [];
   isEdit = false;
   dataEdit: any;
-  apiPath = 'blogs/category';
+  apiPath = 'entertains/category';
   constructor(
     private noti: NotificationService,
     private api: ApiService,
     private dialog: MatDialog,
-    private dialogRef: MatDialogRef<BlogCategoryDialogComponent>,
+    private dialogRef: MatDialogRef<EntertainCategoryDialogComponent>,
     private sharedData: SharedDataService,
     @Inject(MAT_DIALOG_DATA) public data,
     public fb: FormBuilder) {
@@ -59,4 +58,5 @@ export class BlogCategoryDialogComponent implements OnInit {
       });
     }
   }
+
 }

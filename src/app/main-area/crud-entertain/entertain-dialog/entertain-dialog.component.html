@@ -1,15 +1,27 @@
 <form [formGroup]="detailForm" (ngSubmit)="createOrUpdate()" fxLayout="column">
-  <div>
+  <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field class="detail_full_width">
       <input
         matInput
-        formControlName="title"
+        formControlName="name"
         color="warn"
-        [value]="dataEdit?.data?.title"
+        [value]="dataEdit?.data?.name"
         [placeholder]="'Thêm tiêu đề'"
       />
       <mat-error *ngIf="detailForm.hasError('required')"
         >Please add a title</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="detail_full_width">
+      <input
+        matInput
+        formControlName="phone"
+        color="warn"
+        [value]="dataEdit?.data?.phone"
+        [placeholder]="'Thêm số điện thoại'"
+      />
+      <mat-error *ngIf="detailForm.hasError('required')"
+        >Please add a phone</mat-error
       >
     </mat-form-field>
   </div>
@@ -69,7 +81,7 @@
     </angular-editor>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
-    <mat-form-field class="detail_full_width" fxFlex="70">
+    <mat-form-field class="detail_full_width" fxFlex="50">
       <input
         matInput
         type="text"
@@ -78,7 +90,17 @@
         [placeholder]="'Thêm mô tả'"
       />
     </mat-form-field>
-    <mat-form-field class="detail_full_width" fxFlex="30">
+    <mat-form-field class="detail_full_width" fxFlex="25">
+      <input
+        matInput
+        type="text"
+        OnlyNumber="true"
+        [value]="dataEdit?.data?.price"
+        formControlName="price"
+        [placeholder]="'Thêm giá từ'"
+      />
+    </mat-form-field>
+    <mat-form-field class="detail_full_width" fxFlex="25">
       <input
         matInput
         [placeholder]="'Thêm hình ảnh(bìa)'"
@@ -88,7 +110,7 @@
     </mat-form-field>
   </div>
 
-  <div>
+  <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field class="detail_full_width">
       <input
         matInput
@@ -96,6 +118,15 @@
         formControlName="address"
         [value]="dataEdit?.data?.address"
         [placeholder]="'Thêm địa chỉ'"
+      />
+    </mat-form-field>
+    <mat-form-field class="detail_full_width">
+      <input
+        matInput
+        type="text"
+        formControlName="video"
+        [value]="dataEdit?.data?.video"
+        [placeholder]="'Thêm id video youtute'"
       />
     </mat-form-field>
   </div>
@@ -110,7 +141,7 @@
     <mat-checkbox
       formControlName="isPopular"
       [checked]="dataEdit?.data?.isPopular"
-      >Lịch trình nổi bật</mat-checkbox
+      >Entertain nổi bật</mat-checkbox
     >
     <button
       type="submit"
