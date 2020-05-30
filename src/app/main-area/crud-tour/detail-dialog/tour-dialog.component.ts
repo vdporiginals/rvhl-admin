@@ -127,7 +127,7 @@ export class TourDialogComponent implements OnInit {
         this.detailForm.get('address').setValue(res.data.address);
         this.detailForm.get('customerNum').setValue(res.data.customerNum);
         this.detailForm.get('time').setValue(res.data.time);
-        this.detailForm.get('category').setValue(res.data.category);
+        this.detailForm.get('category').setValue(res.data.category._id);
         this.detailForm.get('position').setValue(res.data.position);
         this.detailForm.get('keywords').setValue(res.data.keywords);
         this.detailForm.get('isPopular').setValue(res.data.isPopular);

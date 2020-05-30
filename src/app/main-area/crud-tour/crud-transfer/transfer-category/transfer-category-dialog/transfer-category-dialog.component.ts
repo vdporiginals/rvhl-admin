@@ -6,21 +6,21 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
-  selector: 'app-restaurant-category-dialog',
-  templateUrl: './restaurant-category-dialog.component.html',
-  styleUrls: ['./restaurant-category-dialog.component.scss']
+  selector: 'app-transfer-category-dialog',
+  templateUrl: './transfer-category-dialog.component.html',
+  styleUrls: ['./transfer-category-dialog.component.scss']
 })
-export class RestaurantCategoryDialogComponent implements OnInit {
+export class TransferCategoryDialogComponent implements OnInit {
   detailForm: FormGroup;
   positions: any[] = [];
   isEdit = false;
   dataEdit: any;
-  apiPath = 'restaurants/category';
+  apiPath = 'transfers/category';
   constructor(
     private noti: NotificationService,
     private api: ApiService,
     private dialog: MatDialog,
-    private dialogRef: MatDialogRef<RestaurantCategoryDialogComponent>,
+    private dialogRef: MatDialogRef<TransferCategoryDialogComponent>,
     private sharedData: SharedDataService,
     @Inject(MAT_DIALOG_DATA) public data,
     public fb: FormBuilder) {

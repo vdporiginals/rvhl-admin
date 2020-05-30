@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { TransferCategoryDialogComponent } from './transfer-category-dialog/transfer-category-dialog.component';
 import { DataSourceService } from 'src/app/shared/services/data-source.service';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -7,19 +8,18 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { tap } from 'rxjs/operators';
-import { RestaurantCategoryDialogComponent } from './restaurant-category-dialog/restaurant-category-dialog.component';
 
 @Component({
-  selector: 'app-restaurant-category',
-  templateUrl: './restaurant-category.component.html',
-  styleUrls: ['./restaurant-category.component.scss']
+  selector: 'app-transfer-category',
+  templateUrl: './transfer-category.component.html',
+  styleUrls: ['./transfer-category.component.scss']
 })
-export class RestaurantCategoryComponent implements OnInit, AfterViewInit {
+export class TransferCategoryComponent implements OnInit {
   displayedColumns: string[] = ['title', 'description', 'createdAt', 'actions'];
   tbData: DataSourceService;
   dataSource: any;
   count: number;
-  private apiName = 'restaurants/category';
+  private apiName = 'transfers/category';
   constructor(private api: ApiService, private noti: NotificationService, private route: ActivatedRoute, private dialog: MatDialog) { }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -67,12 +67,12 @@ export class RestaurantCategoryComponent implements OnInit, AfterViewInit {
     dialogConfig.data = {
       data
     };
-    this.dialog.open(RestaurantCategoryDialogComponent, dialogConfig).afterClosed()
+    this.dialog.open(TransferCategoryDialogComponent, dialogConfig).afterClosed()
       .subscribe(() => this.loadDatasPage());
   }
 
   create() {
-    this.dialog.open(RestaurantCategoryDialogComponent).afterClosed()
+    this.dialog.open(TransferCategoryDialogComponent).afterClosed()
       .subscribe(() => this.loadDatasPage());
   }
 }

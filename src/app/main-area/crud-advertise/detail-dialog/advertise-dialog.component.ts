@@ -18,8 +18,10 @@ export class AdvertiseDialogComponent implements OnInit {
   { name: 'Quảng cáo trang trọn gói', value: 'TourAllPage' },
   { name: 'Quảng cáo trang di chuyển', value: 'TransferPage' },
   { name: 'Quảng cáo trang tour hạ long', value: 'TourHalongPage' },
+  { name: 'Quảng cáo trang Chơi gì', value: 'EntertainPage' },
   { name: 'Quảng cáo trang Lịch trình', value: 'SchedulePage' },
   { name: 'Quảng cáo trang Ăn gì', value: 'FoodPage' },
+  { name: 'Quảng cáo trang Review', value: 'ReviewPage' },
   { name: 'Quảng cáo trang Khách sạn', value: 'HotelPage' },
   { name: 'Quảng cáo trang Homestay', value: 'HomestayPage' },
   { name: 'Quảng cáo trang Villa', value: 'VillaPage' }
@@ -54,7 +56,7 @@ export class AdvertiseDialogComponent implements OnInit {
       this.api.getData(this.data.id, 'advertises').subscribe(res => {
         this.dataEdit = res;
         this.isEdit = true;
-        this.detailForm.get('category').setValue(res.data.category.name);
+        this.detailForm.get('category').setValue(res.data.category._id);
         this.detailForm.get('title').setValue(res.data.title);
         this.detailForm.get('image').setValue(res.data.image);
         this.detailForm.get('description').setValue(res.data.description);

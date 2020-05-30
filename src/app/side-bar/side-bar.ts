@@ -8,6 +8,10 @@ export const SideBar = [
         link: 'tour',
     },
     {
+        text: 'Quản lý Transfer',
+        link: 'tour/transfer',
+    },
+    {
         text: 'Quản lý lịch trình',
         link: 'blog',
     },
@@ -20,12 +24,20 @@ export const SideBar = [
                 link: 'tour/category',
             },
             {
+                text: 'Danh mục transfer',
+                link: 'tour/transfer/category',
+            },
+            {
                 text: 'Danh mục entertain',
                 link: 'entertain/category',
             },
             {
                 text: 'Danh mục lịch trình',
                 link: 'blog/category',
+            },
+            {
+                text: 'Danh mục nhà hàng',
+                link: 'restaurant/category',
             },
             {
                 text: 'Danh mục quảng cáo',

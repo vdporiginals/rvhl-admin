@@ -73,6 +73,7 @@ export class VillaDialogComponent implements OnInit {
       content: [''],
       price: [''],
       address: [''],
+      image: [''],
       category: ['', Validators.required],
       facilities: new FormGroup({
         square: new FormControl(0),
@@ -101,12 +102,13 @@ export class VillaDialogComponent implements OnInit {
         this.detailForm.get('name').setValue(res.data.name);
         this.detailForm.get('price').setValue(res.data.price);
         this.detailForm.get('phone').setValue(res.data.phone);
+        this.detailForm.get('image').setValue(res.data.image);
         this.detailForm.get('content').setValue(this.sanitize.transform(res.data.content));
         this.detailForm.get('description').setValue(res.data.description);
         this.detailForm.get('address').setValue(res.data.address);
         this.detailForm.get('roomNum').setValue(res.data.roomNum);
         this.detailForm.get('views').setValue(res.data.views);
-        this.detailForm.get('category').setValue(res.data.category);
+        this.detailForm.get('category').setValue(res.data.category._id);
         this.detailForm.get('keywords').setValue(res.data.keywords);
         this.detailForm.get('isPopular').setValue(res.data.isPopular);
         this.detailForm.get('status').setValue(res.data.status);

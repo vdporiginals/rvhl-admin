@@ -1,1 +1,215 @@
-<p>restaurant-dialog works!</p>
+<form [formGroup]="detailForm" (ngSubmit)="createOrUpdate()" fxLayout="column">
+  <div fxLayout="column">
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field class="detail_full_width" fxFlex="70">
+        <input
+          matInput
+          formControlName="name"
+          color="warn"
+          [value]="dataEdit?.data?.name"
+          [placeholder]="'Thêm tiêu đề'"
+        />
+        <mat-error *ngIf="detailForm.hasError('required')"
+          >Please add a title</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="detail_full_width" fxFlex>
+        <input
+          matInput
+          formControlName="views"
+          color="warn"
+          [value]="dataEdit?.data?.views"
+          [placeholder]="'Thêm views nhà hàng'"
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field class="detail_full_width" fxFlex="33">
+        <mat-label *ngIf="!dataEdit?.data.category.name"
+          >Chọn danh mục</mat-label
+        >
+        <mat-label *ngIf="dataEdit?.data.category.name !== undefined">{{
+          dataEdit?.data.category.name
+        }}</mat-label>
+        <mat-select formControlName="category">
+          <mat-option>--</mat-option>
+          <mat-option
+            *ngFor="let category of categories"
+            [value]="category._id"
+          >
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="detail_full_width" fxFlex>
+        <input
+          matInput
+          [placeholder]="'Thêm địa chỉ'"
+          [value]="dataEdit?.data?.address"
+          formControlName="address"
+        />
+      </mat-form-field>
+      <mat-form-field class="detail_full_width" fxFlex>
+        <input
+          matInput
+          formControlName="keywords"
+          color="warn"
+          [value]="dataEdit?.data?.keywords"
+          [placeholder]="'Thêm từ khóa'"
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field class="detail_full_width" fxFlex="75">
+        <mat-chip-list
+          #chipList
+          aria-label="img selection"
+          formControlName="gallery"
+        >
+          <mat-chip
+            *ngFor="let img of arrImage.value"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="removeImg(img)"
+          >
+            {{ img | Overflow: ["5", "..."] }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            [placeholder]="'Thêm list hình ảnh'"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addImg($event)"
+          />
+        </mat-chip-list>
+      </mat-form-field>
+      <mat-form-field class="detail_full_width" fxFlex="25">
+        <input
+          OnlyNumber="true"
+          matInput
+          [placeholder]="'Thêm giá từ'"
+          [value]="dataEdit?.data?.price"
+          formControlName="price"
+        />
+      </mat-form-field>
+    </div>
+    <div>
+      <angular-editor formControlName="content" [config]="editorConfig">
+      </angular-editor>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field class="detail_full_width" fxFlex="40">
+        <input
+          matInput
+          type="text"
+          [value]="dataEdit?.data?.description"
+          formControlName="description"
+          [placeholder]="'Thêm mô tả'"
+        />
+      </mat-form-field>
+      <mat-form-field class="detail_full_width" fxFlex="30">
+        <input
+          matInput
+          type="text"
+          [value]="dataEdit?.data?.phone"
+          formControlName="phone"
+          [placeholder]="'Thêm số điện thoại'"
+        />
+      </mat-form-field>
+      <mat-form-field class="detail_full_width" fxFlex="30">
+        <input
+          matInput
+          [placeholder]="'Thêm hình ảnh(bìa)'"
+          [value]="dataEdit?.data?.image"
+          formControlName="image"
+        />
+      </mat-form-field>
+    </div>
+    <div formArrayName="menu">
+      <div *ngFor="let child of formData.controls; let i = index">
+        <h3>
+          Món ăn {{ i + 1 }}
+          <button
+            type="button"
+            color="primary"
+            mat-raised-button
+            fxFlexOffset="15px"
+            (click)="getFormMenu()"
+            fxFlex="20"
+          >
+            Thêm món ăn mới
+          </button>
+        </h3>
+
+        <div
+          [formGroupName]="i"
+          fxLayout="row"
+          fxLayoutGap="10px"
+          class="service_area"
+        >
+          <mat-form-field fxFlex="25" class="detail_full_width">
+            <mat-label>Tên món ăn</mat-label>
+            <input
+              matInput
+              [placeholder]="'Thêm tên món ăn'"
+              formControlName="name"
+              color="warn"
+            />
+          </mat-form-field>
+          <mat-form-field fxFlex="25" class="detail_full_width">
+            <mat-label>Mô tả món ăn</mat-label>
+            <input
+              matInput
+              [placeholder]="'Thêm Mô tả món ăn'"
+              formControlName="description"
+              color="warn"
+            />
+          </mat-form-field>
+          <mat-form-field fxFlex="25" class="detail_full_width">
+            <mat-label>Giá món ăn</mat-label>
+            <input
+              matInput
+              OnlyNumber="true"
+              [placeholder]="'Thêm giá món ăn'"
+              formControlName="price"
+              color="warn"
+            />
+          </mat-form-field>
+          <mat-form-field fxFlex="25" class="detail_full_width">
+            <mat-label>Ảnh món ăn</mat-label>
+            <input
+              matInput
+              [placeholder]="'Thêm Ảnh món ăn'"
+              formControlName="image"
+              color="warn"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayoutGap="10px">
+    <mat-slide-toggle
+      formControlName="status"
+      [checked]="dataEdit?.data?.status"
+    >
+      Bật/tắt trạng thái</mat-slide-toggle
+    >
+    <mat-checkbox
+      formControlName="isPopular"
+      [checked]="dataEdit?.data?.isPopular"
+      >Nhà hàng nổi bật</mat-checkbox
+    >
+    <button
+      type="submit"
+      [disabled]="detailForm.invalid"
+      mat-stroked-button
+      color="warn"
+      class="btn-block"
+    >
+      Submit
+    </button>
+  </div>
+</form>

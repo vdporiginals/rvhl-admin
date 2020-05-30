@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -28,6 +29,8 @@ import { TourCategoryComponent } from './tour-category/tour-category.component';
 import { TourCategoryDialogComponent } from './tour-category/tour-category-dialog/tour-category-dialog.component';
 import { CrudTransferComponent } from './crud-transfer/crud-transfer.component';
 import { TransferDialogComponent } from './crud-transfer/transfer-dialog/transfer-dialog.component';
+import { TransferCategoryComponent } from './crud-transfer/transfer-category/transfer-category.component';
+import { TransferCategoryDialogComponent } from './crud-transfer/transfer-category/transfer-category-dialog/transfer-category-dialog.component';
 
 const routes: Routes = [
   {
@@ -47,6 +50,23 @@ const routes: Routes = [
       },
     ]
   },
+  {
+    path: 'transfer',
+    children: [
+      {
+        path: '',
+        component: CrudTransferComponent
+      },
+      {
+        path: 'category',
+        component: TransferCategoryComponent,
+        data: {
+          breadcrumb: 'Danh mục',
+          count: ''
+        }
+      },
+    ]
+  },
 ];
 
 @NgModule({
@@ -59,6 +79,7 @@ const routes: Routes = [
     AngularEditorModule,
     MatCheckboxModule,
     MatToolbarModule,
+    NgxMaterialTimepickerModule,
     MatChipsModule,
     MatSelectModule,
     MatIconModule,
@@ -83,6 +104,8 @@ const routes: Routes = [
     TourCategoryDialogComponent,
     CrudTransferComponent,
     TransferDialogComponent,
+    TransferCategoryComponent,
+    TransferCategoryDialogComponent,
   ],
   exports: [FlexLayoutModule, RouterModule],
   providers: []

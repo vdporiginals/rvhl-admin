@@ -25,13 +25,6 @@ export class BlogDialogComponent implements OnInit {
   categories: any[];
   isEdit = false;
   dataEdit: any;
-  positions = [{
-    name: 'Lịch trình',
-    val: 'Schedule'
-  }, {
-    name: 'Ăn uống',
-    val: 'Food'
-  }];
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -117,7 +110,7 @@ export class BlogDialogComponent implements OnInit {
         this.detailForm.get('image').setValue(res.data.image);
         this.detailForm.get('description').setValue(res.data.description);
         this.detailForm.get('address').setValue(res.data.address);
-        this.detailForm.get('category').setValue(res.data.category);
+        this.detailForm.get('category').setValue(res.data.category._id);
         this.detailForm.get('keywords').setValue(res.data.keywords);
         this.detailForm.get('isPopular').setValue(res.data.isPopular);
         this.detailForm.get('status').setValue(res.data.status);

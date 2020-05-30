@@ -1,0 +1,27 @@
+@import "../../../../scss/varriable";
+@import "../../../../scss/mixins";
+@import "../../../../scss/responsive";
+
+::ng-deep .mat-dialog-container {
+  /*change color of label*/
+  width: 800px;
+  height: auto;
+}
+.btn-block {
+  float: right;
+}
+
+.detail_full_width {
+  width: 100%;
+}
+
+.name {
+  width: 100%;
+}
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
