@@ -86,7 +86,7 @@ export class ReviewDialogComponent implements OnInit {
     this.arrImage = new FormControl([]);
     this.detailForm = this.fb.group({
       title: ['', Validators.required],
-      category: [''],
+      category: ['', Validators.required],
       content: [''],
       description: [''],
       images: this.arrImage,
@@ -148,7 +148,6 @@ export class ReviewDialogComponent implements OnInit {
   }
 
   createOrUpdate(val?) {
-    console.log(this.data.id);
     if (!this.data.id) {
       this.api.postData(this.detailForm.value, 'user-reviews').subscribe((res) => { }, (err: any) => {
         this.noti.showError('Tạo reviews thất bại', err);
@@ -159,7 +158,6 @@ export class ReviewDialogComponent implements OnInit {
       });
 
     } else {
-      console.log(this.detailForm.value);
       this.api.updateData(this.detailForm.value, this.data.id, 'user-reviews').subscribe((res) => {
       }, (err) => {
         console.log(err);

@@ -1,52 +1,58 @@
 export const SideBar = [
     {
         text: 'Quản lý quảng cáo',
-        link: 'advertise'
-    },
-    {
-        text: 'Quản lý Tour',
-        link: 'tour',
-    },
-    {
-        text: 'Quản lý Transfer',
-        link: 'tour/transfer',
-    },
-    {
-        text: 'Quản lý lịch trình',
-        link: 'blog',
-    },
-    {
-        text: 'Quản lý danh mục',
-        link: null,
+        link: 'advertise',
         subItems: [
+
             {
-                text: 'Danh mục tour',
-                link: 'tour/category',
-            },
-            {
-                text: 'Danh mục transfer',
-                link: 'tour/transfer/category',
-            },
-            {
-                text: 'Danh mục entertain',
-                link: 'entertain/category',
-            },
-            {
-                text: 'Danh mục lịch trình',
-                link: 'blog/category',
-            },
-            {
-                text: 'Danh mục nhà hàng',
-                link: 'restaurant/category',
+                text: 'Quản lý quảng cáo',
+                link: 'advertise',
             },
             {
                 text: 'Danh mục quảng cáo',
                 link: 'advertise/category',
             },
+        ]
+    },
+    {
+        text: 'Quản lý Tour',
+        link: 'tour',
+        subItems: [
             {
-                text: 'Danh mục review',
-                link: 'review/category',
-            }
+                text: 'Quản lý Tour',
+                link: 'tour',
+            },
+            {
+                text: 'Danh mục tour',
+                link: 'tour/category',
+            },
+        ]
+    },
+    {
+        text: 'Quản lý Transfer',
+        link: 'tour/transfer',
+        subItems: [
+            {
+                text: 'Quản lý Transfer',
+                link: 'tour/transfer',
+            },
+            {
+                text: 'Danh mục transfer',
+                link: 'tour/transfer/category',
+            },
+        ]
+    },
+    {
+        text: 'Quản lý lịch trình',
+        link: 'blog',
+        subItems: [
+            {
+                text: 'Quản lý lịch trình',
+                link: 'blog',
+            }, {
+                text: 'Danh mục lịch trình',
+                link: 'blog/category',
+            },
         ]
     },
     {
@@ -88,16 +94,45 @@ export const SideBar = [
     {
         text: 'Quản lý Entertain',
         link: 'entertain',
-        queryParams: { category: 'bannerTour' },
+        subItems: [
+
+            {
+                text: 'Quản lý Entertain',
+                link: 'entertain',
+            },
+            {
+                text: 'Danh mục entertain',
+                link: 'entertain/category',
+            },
+        ]
     },
     {
         text: 'Quản lý Nhà hàng',
         link: 'restaurant',
-        queryParams: { category: 'bannerTour' },
+        subItems: [
+            {
+                text: 'Quản lý Nhà hàng',
+                link: 'restaurant',
+            }, {
+                text: 'Danh mục nhà hàng',
+                link: 'restaurant/category',
+            },
+        ]
     },
     {
         text: 'Quản lý reviews',
         link: 'review',
+        subItems: [
+
+            {
+                text: 'Quản lý reviews',
+                link: 'review',
+            },
+            {
+                text: 'Danh mục review',
+                link: 'review/category',
+            }
+        ],
         queryParams: { category: 'bannerTour' },
     },
     {

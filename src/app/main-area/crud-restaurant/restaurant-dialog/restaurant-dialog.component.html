@@ -25,11 +25,11 @@
     </div>
     <div fxLayout="row" fxLayoutGap="10px">
       <mat-form-field class="detail_full_width" fxFlex="33">
-        <mat-label *ngIf="!dataEdit?.data.category.name"
+        <mat-label *ngIf="!dataEdit?.data?.category?.name"
           >Chọn danh mục</mat-label
         >
-        <mat-label *ngIf="dataEdit?.data.category.name !== undefined">{{
-          dataEdit?.data.category.name
+        <mat-label *ngIf="dataEdit?.data?.category?.name !== undefined">{{
+          dataEdit?.data?.category?.name
         }}</mat-label>
         <mat-select formControlName="category">
           <mat-option>--</mat-option>

@@ -106,9 +106,14 @@ export class EntertainDialogComponent implements OnInit {
     if (this.data.id) {
       this.categories = this.data.category.data;
       this.api.getData(this.data.id, 'entertains').subscribe(res => {
+
         this.dataEdit = res;
         this.arrImage.value = res.data.images;
         this.isEdit = true;
+        if (res.data.category !== undefined) {
+
+          this.detailForm.get('category').setValue(res.data.category._id);
+        }
         this.detailForm.get('name').setValue(res.data.name);
         this.detailForm.get('content').setValue(this.sanitize.transform(res.data.content));
         this.detailForm.get('image').setValue(res.data.image);
@@ -117,7 +122,6 @@ export class EntertainDialogComponent implements OnInit {
         this.detailForm.get('phone').setValue(res.data.phone);
         this.detailForm.get('description').setValue(res.data.description);
         this.detailForm.get('address').setValue(res.data.address);
-        this.detailForm.get('category').setValue(res.data.category._id);
         this.detailForm.get('keywords').setValue(res.data.keywords);
         this.detailForm.get('isPopular').setValue(res.data.isPopular);
         this.detailForm.get('status').setValue(res.data.status);

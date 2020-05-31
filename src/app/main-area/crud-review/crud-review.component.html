@@ -37,7 +37,7 @@
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef>Mô tả</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.description }}
+        {{ element.description | Overflow: ["35", "..."] }}
       </td>
     </ng-container>
     <ng-container matColumnDef="createdAt">

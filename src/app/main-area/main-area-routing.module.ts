@@ -62,7 +62,7 @@ const routes: Routes = [
       },
       {
         path: 'review',
-        loadChildren: () => import('./crud-entertain/crud-entertain.module').then(m => m.CrudEntertainModule),
+        loadChildren: () => import('./crud-review/crud-review.module').then(m => m.CrudReviewModule),
         data: {
           breadcrumb: 'review',
           count: ''

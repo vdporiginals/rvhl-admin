@@ -14,11 +14,11 @@
               />
             </mat-form-field>
             <mat-form-field>
-              <mat-label *ngIf="!dataEdit?.data.category.name"
+              <mat-label *ngIf="!dataEdit?.data?.category?.name"
                 >Chọn danh mục</mat-label
               >
-              <mat-label *ngIf="dataEdit?.data.category.name !== undefined">{{
-                dataEdit?.data.category.name
+              <mat-label *ngIf="dataEdit?.data?.category?.name !== undefined">{{
+                dataEdit?.data?.category?.name
               }}</mat-label>
               <mat-select formControlName="category" required>
                 <mat-option>--</mat-option>
