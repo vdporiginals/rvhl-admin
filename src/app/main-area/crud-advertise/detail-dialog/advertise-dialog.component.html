@@ -63,7 +63,7 @@
     <div fxLayout="row" fxLayoutGap="10px">
       <mat-form-field fxFlex="50">
         <mat-label>Chọn vị trí trang quảng cáo</mat-label>
-        <mat-select formControlName="page">
+        <mat-select formControlName="pagePosition">
           <mat-option>--</mat-option>
           <mat-option *ngFor="let page of pages" [value]="page.value">
             {{ page.name }}

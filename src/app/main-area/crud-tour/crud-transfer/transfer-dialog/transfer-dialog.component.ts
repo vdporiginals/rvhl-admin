@@ -87,8 +87,9 @@ export class TransferDialogComponent implements OnInit {
   ) {
     this.scheduleData = [
       {
-        time: '',
-        location: '',
+        locationStart: '',
+        locationEnd: '',
+        price: ''
       }
     ];
 
@@ -124,7 +125,7 @@ export class TransferDialogComponent implements OnInit {
         this.arrImage.value = res.data.images;
         res.data.schedule.forEach(val => {
           const control = this.detailForm.get('schedule') as FormArray;
-          control.push(this.getScheduleVal(val.time, val.location));
+          control.push(this.getScheduleVal(val.locationStart, val.locationEnd, val.price));
         });
         this.isEdit = true;
         this.detailForm.get('name').setValue(res.data.name);
@@ -152,15 +153,15 @@ export class TransferDialogComponent implements OnInit {
   getFormSchedule() {
     const control = this.detailForm.get('schedule') as FormArray;
     this.scheduleData.forEach(res => {
-      control.push(this.getScheduleVal(res.time, res.location));
+      control.push(this.getScheduleVal(res.locationStart, res.locationEnd, res.price));
     });
   }
 
-  getScheduleVal(time, location) {
+  getScheduleVal(locationStart, locationEnd, price) {
     return this.fb.group({
-      time,
-
-      location,
+      locationStart,
+      locationEnd,
+      price,
     });
   }
 

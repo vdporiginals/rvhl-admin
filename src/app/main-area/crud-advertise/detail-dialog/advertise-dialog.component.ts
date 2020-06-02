@@ -43,7 +43,7 @@ export class AdvertiseDialogComponent implements OnInit {
       link: [''],
       description: [''],
       category: [''],
-      page: [''],
+      pagePosition: [''],
       keywords: [''],
       isPopular: [false],
       status: [false, Validators.required]
@@ -60,7 +60,7 @@ export class AdvertiseDialogComponent implements OnInit {
         this.detailForm.get('title').setValue(res.data.title);
         this.detailForm.get('image').setValue(res.data.image);
         this.detailForm.get('description').setValue(res.data.description);
-        this.detailForm.get('page').setValue(res.data.page);
+        this.detailForm.get('pagePosition').setValue(res.data.pagePosition);
         this.detailForm.get('isPopular').setValue(res.data.isPopular);
         this.detailForm.get('status').setValue(res.data.status);
       });

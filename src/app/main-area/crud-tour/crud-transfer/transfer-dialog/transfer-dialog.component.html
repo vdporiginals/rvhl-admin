@@ -141,7 +141,6 @@
       <mat-form-field class="detail_full_width" fxFlex="25">
         <input
           matInput
-          OnlyNumber="true"
           [placeholder]="'Thêm Số chỗ ngồi'"
           [value]="dataEdit?.data?.chairNum"
           formControlName="chairNum"
@@ -151,7 +150,7 @@
         <input
           OnlyNumber="true"
           matInput
-          [placeholder]="'Thêm Số chỗ ngồi'"
+          [placeholder]="'Thêm giá từ'"
           [value]="dataEdit?.data?.price"
           formControlName="price"
         />
@@ -169,7 +168,7 @@
             (click)="getFormSchedule()"
             fxFlex="20"
           >
-            Thêm lịch trình mới
+            Thêm lịch trình
           </button>
         </h3>
 
@@ -179,26 +178,35 @@
           fxLayoutGap="10px"
           class="service_area"
         >
-          <div fxFlex="50" fxLayout="column">
-            <mat-form-field>
-              <mat-label>chọn thời gian Khởi hành</mat-label>
+          <div fxFlex="33" fxLayout="column">
+            <mat-form-field class="detail_full_width">
+              <mat-label>Thêm địa điểm đi</mat-label>
               <input
                 matInput
-                [format]="12"
-                readonly
-                [ngxTimepicker]="time"
-                formControlName="time"
+                [placeholder]="'Thêm địa điểm dịch vụ'"
+                formControlName="locationStart"
+                color="warn"
               />
-              <ngx-material-timepicker #time></ngx-material-timepicker>
             </mat-form-field>
           </div>
           <div fxFlex fxLayout="column">
             <mat-form-field class="detail_full_width">
-              <mat-label>chọn địa điểm</mat-label>
+              <mat-label>Thêm địa điểm đến</mat-label>
               <input
                 matInput
                 [placeholder]="'Thêm địa điểm dịch vụ'"
-                formControlName="location"
+                formControlName="locationEnd"
+                color="warn"
+              />
+            </mat-form-field>
+          </div>
+          <div fxFlex="33" fxLayout="column">
+            <mat-form-field class="detail_full_width">
+              <mat-label>Thêm giá</mat-label>
+              <input
+                matInput
+                [placeholder]="'Thêm địa điểm dịch vụ'"
+                formControlName="price"
                 color="warn"
               />
             </mat-form-field>

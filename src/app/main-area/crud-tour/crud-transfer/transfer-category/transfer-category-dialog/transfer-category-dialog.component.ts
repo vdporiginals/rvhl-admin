@@ -27,7 +27,6 @@ export class TransferCategoryDialogComponent implements OnInit {
     this.detailForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      position: [''],
       keywords: ['']
     });
   }
@@ -38,7 +37,6 @@ export class TransferCategoryDialogComponent implements OnInit {
       this.isEdit = true;
       this.detailForm.get('name').setValue(this.dataEdit.name);
       this.detailForm.get('description').setValue(this.dataEdit.description);
-      this.detailForm.get('position').setValue(this.dataEdit.position);
       this.detailForm.get('keywords').setValue(this.dataEdit.keywords);
     } else {
       this.isEdit = false;
@@ -46,7 +44,6 @@ export class TransferCategoryDialogComponent implements OnInit {
   }
 
   createOrUpdate(val?) {
-    console.log(this.detailForm.value);
     if (this.data !== null) {
       this.api.updateData(this.detailForm.value, this.dataEdit._id, this.apiPath).subscribe(() => { }, (err: any) => {
         this.noti.showError('Sửa category thất bại', err);
