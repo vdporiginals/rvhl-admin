@@ -6,9 +6,14 @@ export class SharedDataService {
   private blogId: string;
   private storageName = 'BlogId';
   private categoryId: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private imageLink: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
   private isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private signature: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  signatureParams = this.signature.asObservable();
   isLogged = this.isLoggedIn.asObservable();
   categoryIdd = this.categoryId.asObservable();
+  imageLinkPub = this.imageLink.asObservable();
   constructor() { }
 
   setCategoryId = (val: string) => {
@@ -18,7 +23,9 @@ export class SharedDataService {
   setLogged = (val: boolean) => {
     this.isLoggedIn.next(val);
   }
-
+  setSignature = (val: string) => {
+    this.signature.next(val);
+  }
   setBlogId(value) {
     this.blogId = value;
   }
@@ -33,5 +40,9 @@ export class SharedDataService {
 
   clearBlogId() {
     localStorage.removeItem(this.storageName);
+  }
+
+  setImageLink(val: string) {
+    this.imageLink.next(val);
   }
 }

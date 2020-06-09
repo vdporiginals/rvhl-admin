@@ -77,6 +77,14 @@ const routes: Routes = [
         }
       },
       {
+        path: 'image',
+        loadChildren: () => import('./image-control/image-control.module').then(m => m.ImageControlModule),
+        data: {
+          breadcrumb: 'Image',
+          count: ''
+        }
+      },
+      {
         path: 'customer-request',
         loadChildren: () => import('./customer-request/customer-request.module').then(m => m.CustomerRequestModule),
         data: {

@@ -12,7 +12,7 @@
       </mat-form-field>
       <mat-form-field fxFlex="50">
         <mat-label *ngIf="!dataEdit?.data.category.name"
-          >Chọn loại quảng cáo</mat-label
+          >Chọn Danh mục quảng cáo</mat-label
         >
         <mat-label *ngIf="dataEdit?.data.category.name !== undefined">{{
           dataEdit?.data.category.name
@@ -61,7 +61,19 @@
       />
     </mat-form-field>
     <div fxLayout="row" fxLayoutGap="10px">
-      <mat-form-field fxFlex="50">
+      <mat-form-field fxFlex="33">
+        <mat-label>Chọn Loại quảng cáo</mat-label>
+        <mat-select formControlName="typeAdvertise">
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let type of types" [value]="type.value">
+            {{ type.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="detailForm.hasError('required')"
+          >Please choose an page</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field fxFlex="33">
         <mat-label>Chọn vị trí trang quảng cáo</mat-label>
         <mat-select formControlName="pagePosition">
           <mat-option>--</mat-option>
@@ -73,7 +85,7 @@
           >Please choose an page</mat-error
         >
       </mat-form-field>
-      <mat-form-field class="detail_full_width" fxFlex="50">
+      <mat-form-field class="detail_full_width" fxFlex="33">
         <input
           matInput
           formControlName="keywords"

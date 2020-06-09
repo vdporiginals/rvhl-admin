@@ -26,6 +26,9 @@ export class AdvertiseDialogComponent implements OnInit {
   { name: 'Quảng cáo trang Homestay', value: 'HomestayPage' },
   { name: 'Quảng cáo trang Villa', value: 'VillaPage' }
   ];
+  types: any = [{ name: 'Banner Trang', value: 'BannerPage' }, {
+    name: 'Quảng cáo trang', value: 'Advertise'
+  }]
   categories: any[];
   isEdit = false;
   dataEdit: any;
@@ -43,6 +46,7 @@ export class AdvertiseDialogComponent implements OnInit {
       link: [''],
       description: [''],
       category: [''],
+      typeAdvertise: [''],
       pagePosition: [''],
       keywords: [''],
       isPopular: [false],
@@ -61,6 +65,7 @@ export class AdvertiseDialogComponent implements OnInit {
         this.detailForm.get('image').setValue(res.data.image);
         this.detailForm.get('description').setValue(res.data.description);
         this.detailForm.get('pagePosition').setValue(res.data.pagePosition);
+        this.detailForm.get('typeAdvertise').setValue(res.data.typeAdvertise);
         this.detailForm.get('isPopular').setValue(res.data.isPopular);
         this.detailForm.get('status').setValue(res.data.status);
       });
@@ -70,7 +75,6 @@ export class AdvertiseDialogComponent implements OnInit {
   }
 
   createOrUpdate(val?) {
-    console.log(this.detailForm.value);
     if (this.data.id) {
       this.api.updateData(this.detailForm.value, this.data.id, 'advertises').subscribe(() => { }, (err: any) => {
         this.noti.showError('Sửa advertises thất bại', err);

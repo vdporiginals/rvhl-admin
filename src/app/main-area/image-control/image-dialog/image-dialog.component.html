@@ -1,0 +1,111 @@
+<mat-drawer-container class="image_dialog">
+  <mat-drawer mode="side" opened class="left_side">
+    <a (click)="openFolder()"
+      ><mat-icon aria-hidden="false" aria-label="folder icon">{{
+        isOpen == true && folderIndex == "default" ? "folder_open" : "folder"
+      }}</mat-icon
+      ><span>Thư mục gốc</span></a
+    >
+    <div
+      class="folder_gallery"
+      *ngFor="let gallery of galleries; let i = index"
+    >
+      <a (click)="openFolder(i)"
+        ><mat-icon aria-hidden="false" aria-label="folder icon">{{
+          folderGalleryOpen == true && folderIndex == i
+            ? "folder_open"
+            : "folder"
+        }}</mat-icon
+        ><span>{{ gallery?.title }}</span></a
+      >
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
+      <div
+        *cdkVirtualFor="
+          let item of imageList
+            | paginate
+              : {
+                  itemsPerPage: limit,
+                  currentPage: currentPage,
+                  totalItems: count
+                }
+        "
+        class="image_item"
+      >
+        <div>
+          <a (dblclick)="chooseImage(item.id)"
+            ><img [src]="item.link" [alt]=""
+          /></a>
+        </div>
+      </div>
+      <pagination-template
+        class="blog-pagination justify-content-center"
+        #p="paginationApi"
+        (pageChange)="pageChange.emit($event)"
+      >
+        <ul class="pagination" fxLayout="row" fxLayoutAlign="center center">
+          <div>
+            <li class="page-item">
+              <a
+                class="page-link"
+                aria-label="Previous"
+                (click)="getPhotosDefault(currentPage - 1)"
+                *ngIf="!isFirstPage"
+              >
+                <fa-icon [icon]="faAngleLeft"></fa-icon>
+              </a>
+              <a
+                class="page-link disabled"
+                aria-label="Previous"
+                *ngIf="isFirstPage"
+              >
+                <fa-icon [icon]="faAngleLeft"></fa-icon>
+              </a>
+            </li>
+          </div>
+
+          <div
+            *ngFor="let page of p.pages"
+            [class.current]="p.getCurrent() === page.value"
+          >
+            <li class="page-item">
+              <a
+                class="page-link"
+                [class.disabled]="p.getCurrent() === page.value"
+                *ngIf="p.getCurrent() === page.value"
+                >{{ page.label }}</a
+              >
+              <a
+                class="page-link"
+                (click)="getPhotosDefault(page.value)"
+                *ngIf="p.getCurrent() !== page.value"
+                >{{ page.label }}</a
+              >
+            </li>
+          </div>
+          <div>
+            <li class="page-item">
+              <a
+                class="page-link"
+                aria-label="Next"
+                (click)="getPhotosDefault(currentPage + 1)"
+                *ngIf="!isLastPage"
+              >
+                <fa-icon [icon]="faAngleRight"></fa-icon>
+              </a>
+              <a
+                class="page-link disabled"
+                aria-label="Next"
+                *ngIf="isLastPage"
+              >
+                <fa-icon [icon]="faAngleRight"></fa-icon>
+              </a>
+            </li>
+          </div>
+        </ul>
+      </pagination-template>
+    </cdk-virtual-scroll-viewport>
+  </mat-drawer-content>
+</mat-drawer-container>

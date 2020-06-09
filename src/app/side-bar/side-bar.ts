@@ -136,6 +136,11 @@ export const SideBar = [
         queryParams: { category: 'bannerTour' },
     },
     {
+        text: 'Quản lý hình ảnh',
+        link: 'image',
+        queryParams: { category: 'image' },
+    },
+    {
         text: 'Quản lý user',
         link: 'user',
         queryParams: { category: 'bannerTour' },

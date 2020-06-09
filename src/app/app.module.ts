@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -41,6 +41,7 @@ import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/
   ],
   imports: [
     BrowserModule,
+    HttpClientJsonpModule,
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -64,7 +65,8 @@ import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/
       multi: true
     },
     { provide: APP_BASE_HREF, useValue: '/' },
-    { provide: LocationStrategy, useClass: HashLocationStrategy }],
+    // { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
